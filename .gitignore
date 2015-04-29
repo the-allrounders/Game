@@ -1,3 +1,14 @@
+# SERIOUS GAME BUILD FILES
+
+src/SeriousGame/bin
+src/SeriousGame/obj
+
+
+
+
+
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
