@@ -3,6 +3,7 @@
 src/SeriousGame/bin
 src/SeriousGame/obj
 *.suo
+*.userprefs
 
 
 
