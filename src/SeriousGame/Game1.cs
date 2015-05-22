@@ -62,7 +62,7 @@ namespace SeriousGame
         {
           
             // TODO: Add your update logic here
-
+			System.Console.WriteLine ("pizza");
             base.Update(gameTime);
         }
 
