@@ -30,7 +30,7 @@ namespace SeriousGame
 
         public ScreenManager()
         {
-            Dimensions = new Vector2(1920, 1080);
+            Dimensions = new Vector2(1240, 720);
         }
         
         public void LoadContent(ContentManager Content)
@@ -52,7 +52,7 @@ namespace SeriousGame
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Bob, new Vector2(0,0));
-            spriteBatch.Draw(Bob, new Vector2(1900, 1000));
+            spriteBatch.Draw(Bob, new Vector2(1350, 650));
         }
 
 

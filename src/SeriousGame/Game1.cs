@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace SeriousGame
 {
@@ -29,7 +30,14 @@ namespace SeriousGame
         {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
-            graphics.IsFullScreen = true;
+
+			if (Environment.OSVersion.ToString ().Substring (0, 4) == "Unix") {
+				graphics.IsFullScreen = false;
+			} 
+			else {
+				graphics.IsFullScreen = true;
+			}
+				
             graphics.ApplyChanges();
             base.Initialize();
         }
