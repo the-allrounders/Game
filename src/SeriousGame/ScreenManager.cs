@@ -14,7 +14,9 @@ namespace SeriousGame
         private static ScreenManager _instance;
         public Vector2 Dimensions { private set; get; }
 
-        public Texture2D Bob;
+        public ContentManager Content { private set; get; }
+
+        public GameScreen currentScreen;
 
         public static ScreenManager Instance
         {
@@ -30,29 +32,29 @@ namespace SeriousGame
 
         public ScreenManager()
         {
-            Dimensions = new Vector2(1240, 720);
+            Dimensions = new Vector2(1280, 720);
+            currentScreen = new JumpScreen();
         }
         
         public void LoadContent(ContentManager Content)
         {
-            Bob = Content.Load<Texture2D>("bob");
+            this.Content = new ContentManager(Content.ServiceProvider, "Content");
+            currentScreen.LoadContent();
         }
 
         public void UnloadContent()
         {
-
+            currentScreen.UnloadContent();
         }
 
         public void Update(GameTime gameTime, Game1 game)
         {
-            System.Console.WriteLine("pizza");
-            System.Console.WriteLine(game.GraphicsDevice.Viewport.Width);
+            currentScreen.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Bob, new Vector2(0,0));
-            spriteBatch.Draw(Bob, new Vector2(1350, 650));
+            currentScreen.Draw(spriteBatch);
         }
 
 
