@@ -16,7 +16,18 @@ namespace SeriousGame
 
         public ContentManager Content { private set; get; }
 
-        public GameScreen currentScreen;
+        private GameScreen currentScreen;
+        public GameScreen CurrentScreen
+        {
+            set
+            {
+                this.currentScreen = value;
+            }
+            get
+            {
+                return this.currentScreen;
+            }
+        }
 
         public static ScreenManager Instance
         {
@@ -33,28 +44,29 @@ namespace SeriousGame
         public ScreenManager()
         {
             Dimensions = new Vector2(1280, 720);
-            currentScreen = new JumpScreen();
+            CurrentScreen = new JumpScreen();
         }
         
         public void LoadContent(ContentManager Content)
         {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
-            currentScreen.LoadContent();
+            CurrentScreen.LoadContent();
+            TextureManager.Instance.Load();
         }
 
         public void UnloadContent()
         {
-            currentScreen.UnloadContent();
+            CurrentScreen.UnloadContent();
         }
 
         public void Update(GameTime gameTime, Game1 game)
         {
-            currentScreen.Update(gameTime);
+            CurrentScreen.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            currentScreen.Draw(spriteBatch);
+            CurrentScreen.Draw(spriteBatch);
         }
 
 

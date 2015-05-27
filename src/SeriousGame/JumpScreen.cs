@@ -9,13 +9,11 @@ namespace SeriousGame
 {
     class JumpScreen : GameScreen
     {
-        Texture2D image;
         int offset = 0;
         
         public override void LoadContent()
         {
             base.LoadContent();
-            image = content.Load<Texture2D>("bob");
         }
 
         public override void UnloadContent()
@@ -30,8 +28,9 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(image, new Vector2(0, 0+offset));
-            spriteBatch.Draw(image, new Vector2(1050, 650+offset));
+            spriteBatch.Draw(TextureManager.Instance.Vlieg, new Vector2(0, 0+offset));
+            spriteBatch.Draw(TextureManager.Instance.Vlieg, new Vector2(1050, 650 + offset));
+
         }
     }
 }
