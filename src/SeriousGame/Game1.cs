@@ -31,7 +31,7 @@ namespace SeriousGame
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
 
-			if (Environment.OSVersion.ToString ().Substring (0, 4) == "Unix") {
+			if (true || Environment.OSVersion.ToString ().Substring (0, 4) == "Unix") {
 				graphics.IsFullScreen = false;
 			} 
 			else {
@@ -51,7 +51,8 @@ namespace SeriousGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ScreenManager.Instance.LoadContent(Content);
+            TextureManager.Instance.Load(Content);
+            ScreenManager.Instance.Load();
         }
 
         /// <summary>

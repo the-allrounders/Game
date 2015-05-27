@@ -11,14 +11,14 @@ namespace SeriousGame
     {
         int offset = 0;
         
-        public override void LoadContent()
+        public override void Load()
         {
-            base.LoadContent();
+            // START THE JUMPING
         }
 
-        public override void UnloadContent()
+        public override void Unload()
         {
-            base.UnloadContent();
+            // END THE JUMPING
         }
 
         public override void Update(GameTime gameTime)
@@ -28,8 +28,8 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.Instance.Vlieg, new Vector2(0, 0+offset));
-            spriteBatch.Draw(TextureManager.Instance.Vlieg, new Vector2(1050, 650 + offset));
+            spriteBatch.Draw(TextureManager.Instance.Fly, new Vector2(0, 0 + offset));
+            spriteBatch.Draw(TextureManager.Instance.Fly, new Vector2(1050, 650 + offset));
 
         }
     }

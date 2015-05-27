@@ -88,9 +88,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ScreenManager.cs" />
+    <Compile Include="GameScreen.cs" />
+    <Compile Include="JumpScreen.cs" />
+    <Compile Include="TextureManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <BundleResource Include="Content\bob.jpg" />
+    <BundleResource Include="Content\fly.png" />
+  </ItemGroup>
 </Project>

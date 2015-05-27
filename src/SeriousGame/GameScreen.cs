@@ -10,18 +10,15 @@ namespace SeriousGame
 {
     class GameScreen
     {
-        protected ContentManager content;
         
-        public virtual void LoadContent()
+        public virtual void Load()
         {
-            content = new ContentManager(
-                ScreenManager.Instance.Content.ServiceProvider,
-                "Content");
+            
         }
 
-        public virtual void UnloadContent()
+        public virtual void Unload()
         {
-            content.Unload();
+            
         }
 
         public virtual void Update(GameTime gameTime)

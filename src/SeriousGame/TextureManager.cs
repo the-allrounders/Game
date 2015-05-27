@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,12 @@ namespace SeriousGame
         }
 
 
-        public Texture2D Vlieg;
+        public Texture2D Fly;
 
 
-        public void Load()
+        public void Load(ContentManager Content)
         {
-            this.Vlieg = ScreenManager.Instance.Content.Load<Texture2D>("vlieg");
+            this.Fly = Content.Load<Texture2D>("fly");
         }
     }
 }
