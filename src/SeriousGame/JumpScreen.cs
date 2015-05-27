@@ -28,8 +28,8 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.Instance.Vlieg, new Vector2(0, 0+offset));
-            spriteBatch.Draw(TextureManager.Instance.Vlieg, new Vector2(1050, 650 + offset));
+            spriteBatch.Draw(TextureManager.Instance.Fly, new Vector2(0, 0 + offset));
+            spriteBatch.Draw(TextureManager.Instance.Fly, new Vector2(1050, 650 + offset));
 
         }
     }

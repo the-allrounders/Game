@@ -22,12 +22,12 @@ namespace SeriousGame
         }
 
 
-        public Texture2D Vlieg;
+        public Texture2D Fly;
 
 
         public void Load()
         {
-            this.Vlieg = ScreenManager.Instance.Content.Load<Texture2D>("vlieg");
+            this.Fly = ScreenManager.Instance.Content.Load<Texture2D>("fly");
         }
     }
 }
