@@ -91,6 +91,8 @@
     <Compile Include="GameScreen.cs" />
     <Compile Include="JumpScreen.cs" />
     <Compile Include="TextureManager.cs" />
+    <Compile Include="Obstacle.cs" />
+    <Compile Include="Platform.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -99,5 +101,6 @@
   <ItemGroup>
     <BundleResource Include="Content\bob.jpg" />
     <BundleResource Include="Content\fly.png" />
+    <BundleResource Include="Content\platform.png" />
   </ItemGroup>
 </Project>

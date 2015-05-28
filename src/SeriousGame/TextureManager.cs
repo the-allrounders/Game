@@ -24,11 +24,13 @@ namespace SeriousGame
 
 
         public Texture2D Fly;
+		public Texture2D Platform;
 
 
         public void Load(ContentManager Content)
         {
             this.Fly = Content.Load<Texture2D>("fly");
+			this.Platform = Content.Load<Texture2D>("platform");
         }
     }
 }
