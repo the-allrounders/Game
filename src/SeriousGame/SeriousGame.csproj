@@ -42,6 +42,7 @@
     <Compile Include="GameScreen.cs" />
     <Compile Include="JumpScreen.cs" />
     <Compile Include="Obstacle.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenManager.cs" />
@@ -58,7 +59,10 @@
     <Content Include="Content\bob.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\vlieg.png">
+    <Content Include="Content\fly.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\platform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />

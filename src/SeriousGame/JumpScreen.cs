@@ -15,7 +15,7 @@ namespace SeriousGame
         public override void Load()
         {
             // START THE JUMPING
-			addPlatform (new Vector2 (0, 0), new Vector2 (10, 100));
+			addPlatform (new Vector2 (100, offset + 100), new Vector2 (10, 100));
         }
 
         public override void Unload()
@@ -44,8 +44,6 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.Instance.Fly, new Vector2(0, 0 + offset));
-            spriteBatch.Draw(TextureManager.Instance.Fly, new Vector2(1050, 650 + offset));
 			foreach (var platform in _platforms) {
 				platform.Draw (spriteBatch, offset);
 			}
