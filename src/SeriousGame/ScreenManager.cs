@@ -12,6 +12,8 @@ namespace SeriousGame
     class ScreenManager
     {
         public Vector2 Dimensions { private set; get; }
+        public float leftBound { private set; get; }
+        public float rightBound { private set; get; }
 
         public ContentManager Content { private set; get; }
 
@@ -49,6 +51,8 @@ namespace SeriousGame
         public ScreenManager()
         {
             Dimensions = new Vector2(1280, 720);
+            leftBound = 100;
+            rightBound = Dimensions.X - 100;
         }
         
         public void Load()
