@@ -53,7 +53,7 @@ namespace SeriousGame
         
         public void Load()
         {
-            CurrentScreen = new JumpScreen();
+            CurrentScreen = new SplashScreen();
         }
 
         public void UnloadContent()

@@ -46,6 +46,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenManager.cs" />
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="StartScreen.cs" />
     <Compile Include="TextureManager.cs" />
   </ItemGroup>
   <ItemGroup>
