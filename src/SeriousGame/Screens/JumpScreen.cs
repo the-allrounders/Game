@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,11 @@ namespace SeriousGame
 
         public override void Update(GameTime gameTime)
         {
-			Rectangle frogPosition = _player.getRectangle();
+            if (InputManager.IsPressing(Keys.Escape))
+            {
+                ScreenManager.Instance.CurrentScreen = new StartScreen();
+            }
+            Rectangle frogPosition = _player.getRectangle();
 			int newOffset = (int)ScreenManager.Instance.Dimensions.Y - frogPosition.Bottom - 500;
 			if (newOffset > offset)
 				offset = newOffset;
