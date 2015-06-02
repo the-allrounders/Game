@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="Managers\SettingsManager.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\JumpScreen.cs" />
     <Compile Include="Objects\Obstacle.cs" />
