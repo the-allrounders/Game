@@ -19,7 +19,7 @@ namespace SeriousGame
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
-            ScreenManager.Instance.Game = this;
+            ScreenManager.Game = this;
         }
 
         /// <summary>
@@ -30,10 +30,10 @@ namespace SeriousGame
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
-            graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
+            graphics.PreferredBackBufferWidth = (int)ScreenManager.Dimensions.X;
+            graphics.PreferredBackBufferHeight = (int)ScreenManager.Dimensions.Y;
 
-            setFullScreen(SettingsManager.Instance.Fullscreen);
+            setFullScreen(SettingsManager.Fullscreen);
 				
             graphics.ApplyChanges();
             base.Initialize();
@@ -54,9 +54,9 @@ namespace SeriousGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            TextureManager.Instance.Load(Content);
-            FontManager.Instance.Load(Content);
-            ScreenManager.Instance.Load(this);
+            TextureManager.Load(Content);
+            FontManager.Load(Content);
+            ScreenManager.Load(this);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SeriousGame
         /// </summary>
         protected override void UnloadContent()
         {
-            ScreenManager.Instance.UnloadContent();
+            ScreenManager.UnloadContent();
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace SeriousGame
         protected override void Update(GameTime gameTime)
         {
             InputManager.Update();
-            ScreenManager.Instance.Update(gameTime);
+            ScreenManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -89,7 +89,7 @@ namespace SeriousGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            ScreenManager.Instance.Draw(spriteBatch);
+            ScreenManager.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

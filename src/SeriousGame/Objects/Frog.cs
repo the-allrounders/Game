@@ -21,7 +21,7 @@ namespace SeriousGame
 
 		public Frog (Vector2 charPos, int spd)
 		{
-			_frogTexture = TextureManager.Instance.Frog;
+			_frogTexture = TextureManager.Frog;
 			_frogPosition = charPos;
 			_startY = _frogPosition.Y;
 			_speed = new Vector2(0, spd);
@@ -57,7 +57,7 @@ namespace SeriousGame
 
 		public void left(){
 
-			if (_frogPosition.X > ScreenManager.Instance.leftBound) {
+			if (_frogPosition.X > ScreenManager.leftBound) {
 				_frogPosition -= _speedlr;
 			}
 
@@ -65,7 +65,7 @@ namespace SeriousGame
 
 		public void right() 
 		{
-			if (_frogPosition.X + _frogTexture.Width < ScreenManager.Instance.rightBound) {
+			if (_frogPosition.X + _frogTexture.Width < ScreenManager.rightBound) {
 				_frogPosition += _speedlr;
 
 			}

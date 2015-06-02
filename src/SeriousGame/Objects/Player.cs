@@ -16,7 +16,7 @@ namespace SeriousGame
 
 		public Player ()
 		{
-			_frog = new Frog (new Vector2((ScreenManager.Instance.Dimensions.X / 2) - (TextureManager.Instance.Frog.Width / 2), ScreenManager.Instance.Dimensions.Y - TextureManager.Instance.Frog.Height), 5);	
+			_frog = new Frog (new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);	
 		}
 
 		public Rectangle getRectangle () {

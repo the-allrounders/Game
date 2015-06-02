@@ -17,7 +17,7 @@ namespace SeriousGame
 		{
 			_platformPosition = pos;
 			_platformSize = size;
-			_platformTexture = TextureManager.Instance.Platform;
+			_platformTexture = TextureManager.Platform;
 		}
 
 		public static float calculateDistance(List<Platform> _platforms, Random rnd)
@@ -27,22 +27,22 @@ namespace SeriousGame
 			{
 				Rectangle highestPlatform = _platforms[_platforms.Count - 1].boundingBox;
 
-				if (highestPlatform.Left > ScreenManager.Instance.Dimensions.X / 2)
+				if (highestPlatform.Left > ScreenManager.Dimensions.X / 2)
 				{
 					// highestPlatform is right from center
 					_distance = highestPlatform.Left - highestPlatform.Width - rnd.Next(150, 300);
-					if (_distance < ScreenManager.Instance.leftBound)
+					if (_distance < ScreenManager.leftBound)
 					{
-						_distance = ScreenManager.Instance.leftBound;
+						_distance = ScreenManager.leftBound;
 					}
 				}
 				else
 				{
 					// highestPlatform is left from center
 					_distance = highestPlatform.Left + highestPlatform.Width + rnd.Next(100, 250);
-					if (_distance + highestPlatform.Width > ScreenManager.Instance.rightBound)
+					if (_distance + highestPlatform.Width > ScreenManager.rightBound)
 					{
-						_distance = ScreenManager.Instance.rightBound - highestPlatform.Width;
+						_distance = ScreenManager.rightBound - highestPlatform.Width;
 					}
 				}
 			}

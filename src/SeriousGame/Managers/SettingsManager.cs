@@ -7,25 +7,12 @@ namespace SeriousGame
 {
     class SettingsManager
     {
-        private static SettingsManager _instance;
-        public static SettingsManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new SettingsManager();
-                }
-                return _instance;
-            }
-        }
+        public static int Difficulty = 1;
+        public static bool Music = true;
+        public static bool Sound = true;
 
-        public int Difficulty = 1;
-        public bool Music = true;
-        public bool Sound = true;
-
-        private bool fullscreen = false;
-        public bool Fullscreen
+        private static bool fullscreen = false;
+        public static bool Fullscreen
         {
             get
             {
@@ -34,7 +21,7 @@ namespace SeriousGame
             set
             {
                 fullscreen = value;
-                ScreenManager.Instance.Game.setFullScreen(value);
+                ScreenManager.Game.setFullScreen(value);
             }
         }
     }

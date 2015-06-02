@@ -18,21 +18,21 @@ namespace SeriousGame
         {
             if (InputManager.IsPressing(Keys.Space))
             {
-                ScreenManager.Instance.CurrentScreen = new JumpScreen();
+                ScreenManager.CurrentScreen = new JumpScreen();
             }
             else if (InputManager.IsPressing(Keys.S))
             {
-                ScreenManager.Instance.CurrentScreen = new SettingsScreen();
+                ScreenManager.CurrentScreen = new SettingsScreen();
             }
             else if (InputManager.IsPressing(Keys.Escape))
             {
-                ScreenManager.Instance.Game.Exit();
+                ScreenManager.Game.Exit();
             }
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.Instance.Start, new Vector2(0, 0));
+            spriteBatch.Draw(TextureManager.Start, new Vector2(0, 0));
         }
     }
 }

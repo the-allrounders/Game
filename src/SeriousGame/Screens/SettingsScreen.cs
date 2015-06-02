@@ -19,31 +19,31 @@ namespace SeriousGame
         {
             if (InputManager.IsPressing(Keys.Escape) || InputManager.IsClicking(backButton))
             {
-                ScreenManager.Instance.CurrentScreen = new StartScreen();
+                ScreenManager.CurrentScreen = new StartScreen();
             }
             else if (InputManager.IsClicking(difficultyButton))
             {
-                SettingsManager.Instance.Difficulty += 1;
-                if (SettingsManager.Instance.Difficulty == 4) 
-                    SettingsManager.Instance.Difficulty = 1;
+                SettingsManager.Difficulty += 1;
+                if (SettingsManager.Difficulty == 4) 
+                    SettingsManager.Difficulty = 1;
             }
             else if (InputManager.IsClicking(musicButton))
             {
-                SettingsManager.Instance.Music = !SettingsManager.Instance.Music;
+                SettingsManager.Music = !SettingsManager.Music;
             }
             else if (InputManager.IsClicking(soundButton))
             {
-                SettingsManager.Instance.Sound = !SettingsManager.Instance.Sound;
+                SettingsManager.Sound = !SettingsManager.Sound;
             }
             else if (InputManager.IsClicking(new Rectangle(340, 610, 650, 100)))
             {
-                SettingsManager.Instance.Fullscreen = !SettingsManager.Instance.Fullscreen;
+                SettingsManager.Fullscreen = !SettingsManager.Fullscreen;
             }
         }
         
         private void DrawSetting(SpriteBatch spriteBatch, string text, Vector2 position){
             spriteBatch.DrawString(
-                FontManager.Instance.Verdana, 
+                FontManager.Verdana, 
                 text,
                 position, 
                 Color.Black, 
@@ -57,25 +57,25 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.Instance.Settings, new Vector2(0, 0));
-            DrawSetting(spriteBatch, SettingsManager.Instance.Difficulty.ToString(), new Vector2(702, 128));
+            spriteBatch.Draw(TextureManager.Settings, new Vector2(0, 0));
+            DrawSetting(spriteBatch, SettingsManager.Difficulty.ToString(), new Vector2(702, 128));
 
             string music = "on";
-            if(!SettingsManager.Instance.Music)
+            if(!SettingsManager.Music)
             {
                 music = "off";
             }
             DrawSetting(spriteBatch, music, new Vector2(702, 300));
 
             string sound = "on";
-            if (!SettingsManager.Instance.Sound)
+            if (!SettingsManager.Sound)
             {
                 sound = "off";
             }
             DrawSetting(spriteBatch, sound, new Vector2(702, 470));
 
             string fullscreen = "on";
-            if (!SettingsManager.Instance.Fullscreen)
+            if (!SettingsManager.Fullscreen)
             {
                 fullscreen = "off";
             }

@@ -26,9 +26,9 @@ namespace SeriousGame
             _position = position;
             _size = size;
             _color = color;
-            _texture = TextureManager.Instance.Platform;
-            _font = FontManager.Instance.Verdana;
-            _fontBold = FontManager.Instance.VerdanaBold;
+            _texture = TextureManager.Platform;
+            _font = FontManager.Verdana;
+            _fontBold = FontManager.VerdanaBold;
         }
 
         public void Update()

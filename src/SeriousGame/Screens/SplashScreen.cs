@@ -14,13 +14,13 @@ namespace SeriousGame
         {
             if (gameTime.TotalGameTime.Seconds >= 3 || InputManager.IsPressing(Keys.Escape) || InputManager.IsPressing(Keys.Space) || InputManager.IsPressing(Keys.Enter))
             {
-                ScreenManager.Instance.CurrentScreen = new StartScreen();
+                ScreenManager.CurrentScreen = new StartScreen();
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.Instance.Splash, new Vector2(0,0));
+            spriteBatch.Draw(TextureManager.Splash, new Vector2(0,0));
         }
     }
 }

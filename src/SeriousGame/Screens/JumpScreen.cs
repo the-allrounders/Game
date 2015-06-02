@@ -53,7 +53,7 @@ namespace SeriousGame
 		{
 			Rectangle frogPosition = _player.getRectangle ();
 			foreach (var platform in _platforms) {
-				if (platform.boundingBox.Bottom + offset > 0 && platform.boundingBox.Top + offset < ScreenManager.Instance.Dimensions.Y)
+				if (platform.boundingBox.Bottom + offset > 0 && platform.boundingBox.Top + offset < ScreenManager.Dimensions.Y)
 				{
 					Console.WriteLine (_player.getSpeed().Y);
 					if(_player.getSpeed().Y < 0 && frogPosition.Intersects(platform.boundingBox) && frogPosition.Bottom >= platform.boundingBox.Top) {
@@ -68,10 +68,10 @@ namespace SeriousGame
         {
             if (InputManager.IsPressing(Keys.Escape))
             {
-                ScreenManager.Instance.CurrentScreen = new StartScreen();
+                ScreenManager.CurrentScreen = new StartScreen();
             }
             Rectangle frogPosition = _player.getRectangle();
-			int newOffset = (int)ScreenManager.Instance.Dimensions.Y - frogPosition.Bottom - 500;
+			int newOffset = (int)ScreenManager.Dimensions.Y - frogPosition.Bottom - 500;
 			if (newOffset > offset)
 				offset = newOffset;
 			_player.Update ();
@@ -81,14 +81,14 @@ namespace SeriousGame
         public override void Draw(SpriteBatch spriteBatch)
         {
 			foreach (var platform in _platforms) {
-                if (platform.boundingBox.Bottom + offset > 0 && platform.boundingBox.Top + offset < ScreenManager.Instance.Dimensions.Y)
+                if (platform.boundingBox.Bottom + offset > 0 && platform.boundingBox.Top + offset < ScreenManager.Dimensions.Y)
                 {
                     platform.Draw(spriteBatch, offset);
                 }
 			}
             foreach (var obstacle in _obstacles)
             {
-                if (obstacle.boundingBox.Bottom + offset > 0 && obstacle.boundingBox.Top + offset < ScreenManager.Instance.Dimensions.Y)
+                if (obstacle.boundingBox.Bottom + offset > 0 && obstacle.boundingBox.Top + offset < ScreenManager.Dimensions.Y)
                 {
                     obstacle.Draw(spriteBatch, offset);
                 }

@@ -11,14 +11,24 @@ namespace SeriousGame
 {
     class ScreenManager
     {
-        public Vector2 Dimensions { private set; get; }
-        public float leftBound { private set; get; }
-        public float rightBound { private set; get; }
+        private static Vector2 dimensions = new Vector2(1280, 720);
+        public static Vector2 Dimensions { 
+            private set
+            {
+                dimensions = value;
+            }
+            get
+            {
+                return dimensions;
+            }
+        }
+        public static float leftBound { private set; get; }
+        public static float rightBound { private set; get; }
 
-        public ContentManager Content { private set; get; }
+        public static ContentManager Content { private set; get; }
 
-        private GameScreen _currentScreen;
-        public GameScreen CurrentScreen
+        private static GameScreen _currentScreen;
+        public static GameScreen CurrentScreen
         {
             set
             {
@@ -31,49 +41,31 @@ namespace SeriousGame
             }
             get
             {
-                return this._currentScreen;
+                return _currentScreen;
             }
         }
 
-        public Game1 Game;
-
-        private static ScreenManager _instance;
-        public static ScreenManager Instance
+        public static Game1 Game;
+        
+        public static void Load(Game1 game)
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new ScreenManager();
-                }
-                return _instance;
-            }
-        }
-
-        public ScreenManager()
-        {
-            Dimensions = new Vector2(1280, 720);
             leftBound = 200;
             rightBound = Dimensions.X - 200;
-        }
-        
-        public void Load(Game1 game)
-        {
             CurrentScreen = new SplashScreen();
             Game = game;
         }
 
-        public void UnloadContent()
+        public static void UnloadContent()
         {
             
         }
 
-        public void Update(GameTime gameTime)
+        public static void Update(GameTime gameTime)
         {
             CurrentScreen.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public static void Draw(SpriteBatch spriteBatch)
         {
             CurrentScreen.Draw(spriteBatch);
         }
