@@ -74,6 +74,7 @@ namespace SeriousGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            InputManager.Update();
             ScreenManager.Instance.Update(gameTime, this);
             base.Update(gameTime);
         }
