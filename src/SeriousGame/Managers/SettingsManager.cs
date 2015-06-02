@@ -23,5 +23,19 @@ namespace SeriousGame
         public int Difficulty = 1;
         public bool Music = true;
         public bool Sound = true;
+
+        private bool fullscreen = false;
+        public bool Fullscreen
+        {
+            get
+            {
+                return fullscreen;
+            }
+            set
+            {
+                fullscreen = value;
+                ScreenManager.Instance.Game.setFullScreen(value);
+            }
+        }
     }
 }

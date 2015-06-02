@@ -33,15 +33,16 @@ namespace SeriousGame
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
 
-			if (true || Environment.OSVersion.ToString ().Substring (0, 4) == "Unix") {
-				graphics.IsFullScreen = false;
-			} 
-			else {
-				graphics.IsFullScreen = true;
-			}
+            setFullScreen(SettingsManager.Instance.Fullscreen);
 				
             graphics.ApplyChanges();
             base.Initialize();
+        }
+
+        public void setFullScreen(bool fullscreen)
+        {
+            graphics.IsFullScreen = fullscreen;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace SeriousGame
 
             TextureManager.Instance.Load(Content);
             FontManager.Instance.Load(Content);
-            ScreenManager.Instance.Load();
+            ScreenManager.Instance.Load(this);
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace SeriousGame
         protected override void Update(GameTime gameTime)
         {
             InputManager.Update();
-            ScreenManager.Instance.Update(gameTime, this);
+            ScreenManager.Instance.Update(gameTime);
             base.Update(gameTime);
         }
 

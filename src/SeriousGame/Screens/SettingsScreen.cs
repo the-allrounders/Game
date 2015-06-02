@@ -35,6 +35,10 @@ namespace SeriousGame
             {
                 SettingsManager.Instance.Sound = !SettingsManager.Instance.Sound;
             }
+            else if (InputManager.IsClicking(new Rectangle(340, 610, 650, 100)))
+            {
+                SettingsManager.Instance.Fullscreen = !SettingsManager.Instance.Fullscreen;
+            }
         }
         
         private void DrawSetting(SpriteBatch spriteBatch, string text, Vector2 position){
@@ -69,6 +73,13 @@ namespace SeriousGame
                 sound = "off";
             }
             DrawSetting(spriteBatch, sound, new Vector2(702, 470));
+
+            string fullscreen = "on";
+            if (!SettingsManager.Instance.Fullscreen)
+            {
+                fullscreen = "off";
+            }
+            DrawSetting(spriteBatch, fullscreen, new Vector2(810, 625));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace SeriousGame
             }
         }
 
-        public Game Game;
+        public Game1 Game;
 
         private static ScreenManager _instance;
         public static ScreenManager Instance
@@ -57,9 +57,10 @@ namespace SeriousGame
             rightBound = Dimensions.X - 200;
         }
         
-        public void Load()
+        public void Load(Game1 game)
         {
             CurrentScreen = new SplashScreen();
+            Game = game;
         }
 
         public void UnloadContent()
@@ -67,7 +68,7 @@ namespace SeriousGame
             
         }
 
-        public void Update(GameTime gameTime, Game1 game)
+        public void Update(GameTime gameTime)
         {
             CurrentScreen.Update(gameTime);
         }
