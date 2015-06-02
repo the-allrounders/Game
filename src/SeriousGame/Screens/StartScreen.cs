@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,23 @@ namespace SeriousGame
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            if(Keyboard.GetState().IsKeyDown(Keys.Space)){
+            KeyboardState keyboard = Keyboard.GetState();
+            if(keyboard.IsKeyDown(Keys.Space)){
                 ScreenManager.Instance.CurrentScreen = new JumpScreen();
+            }
+            else if (keyboard.IsKeyDown(Keys.S))
+            {
+                ScreenManager.Instance.CurrentScreen = new SettingsScreen();
+            }
+            else if (keyboard.IsKeyDown(Keys.Escape))
+            {
+                ScreenManager.Instance.Game.Exit();
             }
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            // TODO: Super cool plaatje met <press space to start>
+            spriteBatch.Draw(TextureManager.Instance.Start, new Vector2(0, 0));
         }
     }
 }
