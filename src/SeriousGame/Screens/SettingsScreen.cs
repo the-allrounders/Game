@@ -12,12 +12,13 @@ namespace SeriousGame
     {
         private MouseState previousMouse;
         
-        private Rectangle backButton = new Rectangle(0, 0, 150, 75);
-        private Rectangle difficulty = new Rectangle(340, 115, 500, 100);
+        private Rectangle backButton =          new Rectangle(0, 0, 150, 75);
+        private Rectangle difficultyButton =    new Rectangle(340, 115, 550, 100);
+        private Rectangle musicButton =         new Rectangle(340, 300, 550, 110);
+        private Rectangle soundButton =         new Rectangle(340, 460, 550, 100);
         
         public override void Update(GameTime gameTime)
         {
-            // Doe iets met SettingsManager.Instance.Difficulty ofzo
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
             Rectangle mousePosition = new Rectangle(mouse.Position.X, mouse.Position.Y, 1, 1);
@@ -27,10 +28,19 @@ namespace SeriousGame
             {
                 ScreenManager.Instance.CurrentScreen = new StartScreen();
             }
-            else if (clicked && difficulty.Intersects(mousePosition))
+            else if (clicked && difficultyButton.Intersects(mousePosition))
             {
                 SettingsManager.Instance.Difficulty += 1;
-                if (SettingsManager.Instance.Difficulty == 4) SettingsManager.Instance.Difficulty = 1;
+                if (SettingsManager.Instance.Difficulty == 4) 
+                    SettingsManager.Instance.Difficulty = 1;
+            }
+            else if (clicked && musicButton.Intersects(mousePosition))
+            {
+                SettingsManager.Instance.Music = !SettingsManager.Instance.Music;
+            }
+            else if (clicked && soundButton.Intersects(mousePosition))
+            {
+                SettingsManager.Instance.Sound = !SettingsManager.Instance.Sound;
             }
 
             previousMouse = mouse;
@@ -54,8 +64,20 @@ namespace SeriousGame
         {
             spriteBatch.Draw(TextureManager.Instance.Settings, new Vector2(0, 0));
             DrawSetting(spriteBatch, SettingsManager.Instance.Difficulty.ToString(), new Vector2(702, 128));
-            DrawSetting(spriteBatch, SettingsManager.Instance.Music.ToString(), new Vector2(702, 300));
-            DrawSetting(spriteBatch, SettingsManager.Instance.Sound.ToString(), new Vector2(702, 470));
+
+            string music = "on";
+            if(!SettingsManager.Instance.Music)
+            {
+                music = "off";
+            }
+            DrawSetting(spriteBatch, music, new Vector2(702, 300));
+
+            string sound = "on";
+            if (!SettingsManager.Instance.Sound)
+            {
+                sound = "off";
+            }
+            DrawSetting(spriteBatch, sound, new Vector2(702, 470));
         }
     }
 }
