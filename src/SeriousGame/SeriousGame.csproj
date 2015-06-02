@@ -39,7 +39,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+<<<<<<< HEAD
     <Compile Include="Managers\FontManager.cs" />
+=======
+    <Compile Include="Managers\SettingsManager.cs" />
+>>>>>>> origin/master
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\JumpScreen.cs" />
     <Compile Include="Objects\Obstacle.cs" />
