@@ -33,16 +33,16 @@ namespace SeriousGame
 
 		public void Update(){
 
-			KeyboardState keyboardState = Keyboard.GetState ();
-
 			_frog.Update ();
 
-			if (keyboardState.IsKeyDown (Keys.Left)) {
+            if (InputManager.IsPressing(Keys.Left, false))
+            {
 
 				_frog.left ();
 
 			}
-			if (keyboardState.IsKeyDown (Keys.Right)) {
+            if (InputManager.IsPressing(Keys.Right, false))
+            {
 
 				_frog.right ();
 			}

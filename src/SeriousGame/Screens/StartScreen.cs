@@ -16,15 +16,15 @@ namespace SeriousGame
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            KeyboardState keyboard = Keyboard.GetState();
-            if(keyboard.IsKeyDown(Keys.Space)){
+            if (InputManager.IsPressing(Keys.Space))
+            {
                 ScreenManager.Instance.CurrentScreen = new JumpScreen();
             }
-            else if (keyboard.IsKeyDown(Keys.S))
+            else if (InputManager.IsPressing(Keys.S))
             {
                 ScreenManager.Instance.CurrentScreen = new SettingsScreen();
             }
-            else if (keyboard.IsKeyDown(Keys.Escape))
+            else if (InputManager.IsPressing(Keys.Escape))
             {
                 ScreenManager.Instance.Game.Exit();
             }

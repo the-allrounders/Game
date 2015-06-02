@@ -12,8 +12,8 @@ namespace SeriousGame
     {
         public override void Update(GameTime gameTime)
         {
-            KeyboardState keyboard = Keyboard.GetState();
-            if(gameTime.TotalGameTime.Seconds >= 3 || keyboard.IsKeyDown(Keys.Escape) || keyboard.IsKeyDown(Keys.Space) || keyboard.IsKeyDown(Keys.Enter)){
+            if (gameTime.TotalGameTime.Seconds >= 3 || InputManager.IsPressing(Keys.Escape) || InputManager.IsPressing(Keys.Space) || InputManager.IsPressing(Keys.Enter))
+            {
                 ScreenManager.Instance.CurrentScreen = new StartScreen();
             }
         }

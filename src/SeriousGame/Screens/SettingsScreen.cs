@@ -10,8 +10,6 @@ namespace SeriousGame
 {
     class SettingsScreen : GameScreen
     {
-        private MouseState previousMouse;
-        
         private Rectangle backButton =          new Rectangle(0, 0, 150, 75);
         private Rectangle difficultyButton =    new Rectangle(340, 115, 550, 100);
         private Rectangle musicButton =         new Rectangle(340, 300, 550, 110);
@@ -19,31 +17,24 @@ namespace SeriousGame
         
         public override void Update(GameTime gameTime)
         {
-            KeyboardState keyboard = Keyboard.GetState();
-            MouseState mouse = Mouse.GetState();
-            Rectangle mousePosition = new Rectangle(mouse.Position.X, mouse.Position.Y, 1, 1);
-            bool clicked = (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released);
-
-            if (keyboard.IsKeyDown(Keys.Escape) || (clicked && backButton.Intersects(mousePosition)))
+            if (InputManager.IsPressing(Keys.Escape) || InputManager.IsClicking(backButton))
             {
                 ScreenManager.Instance.CurrentScreen = new StartScreen();
             }
-            else if (clicked && difficultyButton.Intersects(mousePosition))
+            else if (InputManager.IsClicking(difficultyButton))
             {
                 SettingsManager.Instance.Difficulty += 1;
                 if (SettingsManager.Instance.Difficulty == 4) 
                     SettingsManager.Instance.Difficulty = 1;
             }
-            else if (clicked && musicButton.Intersects(mousePosition))
+            else if (InputManager.IsClicking(musicButton))
             {
                 SettingsManager.Instance.Music = !SettingsManager.Instance.Music;
             }
-            else if (clicked && soundButton.Intersects(mousePosition))
+            else if (InputManager.IsClicking(soundButton))
             {
                 SettingsManager.Instance.Sound = !SettingsManager.Instance.Sound;
             }
-
-            previousMouse = mouse;
         }
         
         private void DrawSetting(SpriteBatch spriteBatch, string text, Vector2 position){
