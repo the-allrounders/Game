@@ -24,6 +24,8 @@ namespace SeriousGame
 
         public Texture2D Splash;
         public Texture2D Start;
+        public Texture2D Settings;
+
         public Texture2D Fly;
 		public Texture2D Platform;
         
@@ -33,6 +35,7 @@ namespace SeriousGame
         {
             this.Splash = Content.Load<Texture2D>("splash");
             this.Start = Content.Load<Texture2D>("start");
+            this.Settings = Content.Load<Texture2D>("settings");
             this.Fly = Content.Load<Texture2D>("fly");
 			this.Platform = Content.Load<Texture2D>("platform");
         }

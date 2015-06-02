@@ -67,6 +67,9 @@
     <Content Include="Content\platform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\splash.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
