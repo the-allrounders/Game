@@ -52,6 +52,7 @@ namespace SeriousGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             TextureManager.Instance.Load(Content);
+            FontManager.Instance.Load(Content);
             ScreenManager.Instance.Load();
         }
 
