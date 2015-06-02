@@ -12,11 +12,13 @@ namespace SeriousGame
         int offset = 0;
         const int gameHeight = 10000;
 		private List<Platform> _platforms = new List<Platform>();
+        private List<Obstacle> _obstacles = new List<Obstacle>();
         
         public override void Load()
         {
             // START THE JUMPING
 			addPlatforms ();
+            addObstacle();
         }
 
         public override void Unload()
@@ -33,6 +35,17 @@ namespace SeriousGame
             }
 		}
 
+        public void addObstacle()
+        {
+            Random rnd = new Random();
+            int question = 0;
+            for (int i = 600; i > gameHeight * -1; i -= 1000)
+            {
+                question++;
+                _obstacles.Add(new Obstacle(Color.Red, new Vector2(50, i), new Vector2(400, 50), question));
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             offset += 1;
@@ -46,6 +59,13 @@ namespace SeriousGame
                     platform.Draw(spriteBatch, offset);
                 }
 			}
+            foreach (var obstacle in _obstacles)
+            {
+                if (obstacle.boundingBox.Bottom + offset > 0 && obstacle.boundingBox.Top + offset < ScreenManager.Instance.Dimensions.Y)
+                {
+                    obstacle.Draw(spriteBatch, offset);
+                }
+            }
         }
     }
 }
