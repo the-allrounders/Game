@@ -35,6 +35,8 @@ namespace SeriousGame
             }
         }
 
+        public Game Game;
+
         private static ScreenManager _instance;
         public static ScreenManager Instance
         {

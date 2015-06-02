@@ -19,6 +19,7 @@ namespace SeriousGame
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
+            ScreenManager.Instance.Game = this;
         }
 
         /// <summary>
