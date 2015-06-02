@@ -16,7 +16,7 @@ namespace SeriousGame
         private Vector2         _position;
         private Color           _color;
         private Texture2D       _texture;
-       
+
 
         public Obstacle (Color color, Vector2 position, Texture2D texture, string[] choices, string question)
         {
