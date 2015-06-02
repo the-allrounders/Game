@@ -9,45 +9,49 @@ namespace SeriousGame
 {
     class Obstacle
     {
-        private string          _question;
+        private int             _question;
         private string[]        _choices;
 
-        private Rectangle       _hitBox;
         private Vector2         _position;
+        private Vector2         _size;
         private Color           _color;
         private Texture2D       _texture;
 
+        private SpriteFont      _font;
+        private SpriteFont      _fontBold;
 
-        public Obstacle (Color color, Vector2 position, Texture2D texture, string[] choices, string question)
+        public Obstacle (Color color, Vector2 position, Vector2 size, int question)
         {
             _question = question;
-            for (int i = 0; i <= choices.Length; i++)
-            {
-                _choices[i] = choices[i];
-            }
             _position = position;
+            _size = size;
             _color = color;
-            _texture = texture;
+            _texture = TextureManager.Instance.Platform;
+            _font = FontManager.Instance.Verdana;
+            _fontBold = FontManager.Instance.VerdanaBold;
         }
 
         public void Update()
         {
-
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spritebatch, int offset)
         {
-            spriteBatch.Draw(_texture, _hitBox, _color);
+            spritebatch.Draw(_texture, new Vector2(_position.X, _position.Y + offset), _color);
         }
 
-        public Rectangle getCollision()
+        public Rectangle boundingBox
         {
-            return _hitBox;
+            get
+            {
+                Rectangle rect = new Rectangle((int)_position.X, (int)_position.Y, (int)_size.X, (int)_size.Y); ;
+                return rect;
+            }
         }
 
-        public void openQuestion ()
+        public void openQuestion (SpriteBatch spritebatch)
         {
-
+            spritebatch.DrawString(_font, "Niels is Koning", new Vector2(10, 10), Color.Black);
         }
     }
 }
