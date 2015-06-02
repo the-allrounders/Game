@@ -15,6 +15,8 @@ namespace SeriousGame
 		private List<Platform> _platforms = new List<Platform>();
         private List<Obstacle> _obstacles = new List<Obstacle>();
 		private Player _player;
+
+        public static int Padding = 200;
         
         public override void Load()
         {

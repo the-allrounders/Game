@@ -57,7 +57,7 @@ namespace SeriousGame
 
 		public void left(){
 
-			if (_frogPosition.X > ScreenManager.leftBound) {
+			if (_frogPosition.X > JumpScreen.Padding) {
 				_frogPosition -= _speedlr;
 			}
 
@@ -65,7 +65,8 @@ namespace SeriousGame
 
 		public void right() 
 		{
-			if (_frogPosition.X + _frogTexture.Width < ScreenManager.rightBound) {
+            if (_frogPosition.X + _frogTexture.Width < ScreenManager.Dimensions.X - JumpScreen.Padding)
+            {
 				_frogPosition += _speedlr;
 
 			}

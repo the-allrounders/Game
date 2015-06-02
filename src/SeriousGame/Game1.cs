@@ -56,7 +56,7 @@ namespace SeriousGame
 
             TextureManager.Load(Content);
             FontManager.Load(Content);
-            ScreenManager.Load(this);
+            ScreenManager.CurrentScreen = new SplashScreen();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SeriousGame
         /// </summary>
         protected override void UnloadContent()
         {
-            ScreenManager.UnloadContent();
+
         }
 
         /// <summary>

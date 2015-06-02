@@ -31,18 +31,18 @@ namespace SeriousGame
 				{
 					// highestPlatform is right from center
 					_distance = highestPlatform.Left - highestPlatform.Width - rnd.Next(150, 300);
-					if (_distance < ScreenManager.leftBound)
+					if (_distance < JumpScreen.Padding)
 					{
-						_distance = ScreenManager.leftBound;
+						_distance = JumpScreen.Padding;
 					}
 				}
 				else
 				{
 					// highestPlatform is left from center
 					_distance = highestPlatform.Left + highestPlatform.Width + rnd.Next(100, 250);
-					if (_distance + highestPlatform.Width > ScreenManager.rightBound)
+                    if (_distance + highestPlatform.Width > ScreenManager.Dimensions.X - JumpScreen.Padding)
 					{
-						_distance = ScreenManager.rightBound - highestPlatform.Width;
+                        _distance = ScreenManager.Dimensions.X - JumpScreen.Padding - highestPlatform.Width;
 					}
 				}
 			}

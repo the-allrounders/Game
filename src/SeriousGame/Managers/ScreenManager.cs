@@ -11,60 +11,45 @@ namespace SeriousGame
 {
     class ScreenManager
     {
-        private static Vector2 dimensions = new Vector2(1280, 720);
-        public static Vector2 Dimensions { 
-            private set
-            {
-                dimensions = value;
-            }
-            get
-            {
-                return dimensions;
-            }
-        }
-        public static float leftBound { private set; get; }
-        public static float rightBound { private set; get; }
+        /// <summary>
+        /// The dimensions of the game.
+        /// </summary>
+        public static Vector2 Dimensions = new Vector2(1280, 720);
 
-        public static ContentManager Content { private set; get; }
-
-        private static GameScreen _currentScreen;
+        private static GameScreen currentScreen;
+        /// <summary>
+        /// The screen that gets Updated and Drawn. Also loads oldscreen.Unload() and screen.Load() if changed.
+        /// </summary>
         public static GameScreen CurrentScreen
         {
             set
             {
-                if(_currentScreen != null){
-                    _currentScreen.Unload();
-                }
-                
+                if(currentScreen != null) currentScreen.Unload();
                 value.Load();
-                _currentScreen = value;
+                currentScreen = value;
             }
             get
             {
-                return _currentScreen;
+                return currentScreen;
             }
         }
 
+        /// <summary>
+        /// A reference to the Game object.
+        /// </summary>
         public static Game1 Game;
-        
-        public static void Load(Game1 game)
-        {
-            leftBound = 200;
-            rightBound = Dimensions.X - 200;
-            CurrentScreen = new SplashScreen();
-            Game = game;
-        }
 
-        public static void UnloadContent()
-        {
-            
-        }
-
+        /// <summary>
+        /// Forwarder to the Update function of the CurrentScreen.
+        /// </summary>
         public static void Update(GameTime gameTime)
         {
             CurrentScreen.Update(gameTime);
         }
 
+        /// <summary>
+        /// Forwarder to the Draw function of the CurrentScreen.
+        /// </summary>
         public static void Draw(SpriteBatch spriteBatch)
         {
             CurrentScreen.Draw(spriteBatch);
