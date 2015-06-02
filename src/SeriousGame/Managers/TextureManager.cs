@@ -28,6 +28,7 @@ namespace SeriousGame
 
         public Texture2D Fly;
 		public Texture2D Platform;
+		public Texture2D Frog;
         
 
 
@@ -38,6 +39,7 @@ namespace SeriousGame
             this.Settings = Content.Load<Texture2D>("settings");
             this.Fly = Content.Load<Texture2D>("fly");
 			this.Platform = Content.Load<Texture2D>("platform");
+			this.Frog = Content.Load<Texture2D>("frog");
         }
     }
 }

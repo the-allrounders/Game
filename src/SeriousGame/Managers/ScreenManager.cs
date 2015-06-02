@@ -53,8 +53,8 @@ namespace SeriousGame
         public ScreenManager()
         {
             Dimensions = new Vector2(1280, 720);
-            leftBound = 100;
-            rightBound = Dimensions.X - 100;
+            leftBound = 200;
+            rightBound = Dimensions.X - 200;
         }
         
         public void Load()

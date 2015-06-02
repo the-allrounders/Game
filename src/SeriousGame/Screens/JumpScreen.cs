@@ -10,15 +10,17 @@ namespace SeriousGame
     class JumpScreen : GameScreen
     {
         int offset = 0;
-        const int gameHeight = 10000;
+        const int gameHeight = 100000;
 		private List<Platform> _platforms = new List<Platform>();
         private List<Obstacle> _obstacles = new List<Obstacle>();
+		private Player _player;
         
         public override void Load()
         {
             // START THE JUMPING
 			addPlatforms ();
             addObstacle();
+			_player = new Player ();
         }
 
         public override void Unload()
@@ -46,9 +48,29 @@ namespace SeriousGame
             }
         }
 
+		public void intersectPlatform()
+		{
+			Rectangle frogPosition = _player.getRectangle ();
+			foreach (var platform in _platforms) {
+				if (platform.boundingBox.Bottom + offset > 0 && platform.boundingBox.Top + offset < ScreenManager.Instance.Dimensions.Y)
+				{
+					Console.WriteLine (_player.getSpeed().Y);
+					if(_player.getSpeed().Y < 0 && frogPosition.Intersects(platform.boundingBox) && frogPosition.Bottom >= platform.boundingBox.Top) {
+						Console.WriteLine ("geraakt");
+						_player.jump ();
+					}
+				}
+			}
+		}
+
         public override void Update(GameTime gameTime)
         {
-            offset += 1;
+			Rectangle frogPosition = _player.getRectangle();
+			int newOffset = (int)ScreenManager.Instance.Dimensions.Y - frogPosition.Bottom - 500;
+			if (newOffset > offset)
+				offset = newOffset;
+			_player.Update ();
+			intersectPlatform ();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -66,6 +88,7 @@ namespace SeriousGame
                     obstacle.Draw(spriteBatch, offset);
                 }
             }
+			_player.Draw (spriteBatch, offset);
         }
     }
 }
