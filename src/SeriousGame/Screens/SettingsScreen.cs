@@ -10,31 +10,35 @@ namespace SeriousGame
 {
     class SettingsScreen : GameScreen
     {
-        private Rectangle backButton =          new Rectangle(0, 0, 150, 75);
-        private Rectangle difficultyButton =    new Rectangle(340, 115, 550, 100);
-        private Rectangle musicButton =         new Rectangle(340, 300, 550, 110);
-        private Rectangle soundButton =         new Rectangle(340, 460, 550, 100);
-        
         public override void Update(GameTime gameTime)
         {
-            if (InputManager.IsPressing(Keys.Escape) || InputManager.IsClicking(backButton))
+            // If ESC button is pressed or if back button is clicked
+            if (InputManager.IsPressing(Keys.Escape) || InputManager.IsClicking(new Rectangle(0, 0, 150, 75)))
             {
                 ScreenManager.CurrentScreen = new StartScreen();
             }
-            else if (InputManager.IsClicking(difficultyButton))
+
+            // If difficulty is clicked
+            else if (InputManager.IsClicking(new Rectangle(340, 115, 550, 100)))
             {
                 SettingsManager.Difficulty += 1;
                 if (SettingsManager.Difficulty == 4) 
                     SettingsManager.Difficulty = 1;
             }
-            else if (InputManager.IsClicking(musicButton))
+
+            // If music is clicked
+            else if (InputManager.IsClicking(new Rectangle(340, 300, 550, 110)))
             {
                 SettingsManager.Music = !SettingsManager.Music;
             }
-            else if (InputManager.IsClicking(soundButton))
+
+            // If sound is clicked
+            else if (InputManager.IsClicking(new Rectangle(340, 460, 550, 100)))
             {
                 SettingsManager.Sound = !SettingsManager.Sound;
             }
+
+            // If fullscreen is clicked
             else if (InputManager.IsClicking(new Rectangle(340, 610, 650, 100)))
             {
                 SettingsManager.Fullscreen = !SettingsManager.Fullscreen;
@@ -43,7 +47,7 @@ namespace SeriousGame
         
         private void DrawSetting(SpriteBatch spriteBatch, string text, Vector2 position){
             spriteBatch.DrawString(
-                FontManager.Verdana, 
+                FontManager.Verdana,
                 text,
                 position, 
                 Color.Black, 
@@ -57,29 +61,20 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            // Draw settings background
             spriteBatch.Draw(TextureManager.Settings, new Vector2(0, 0));
+
+            // Draw difficulty
             DrawSetting(spriteBatch, SettingsManager.Difficulty.ToString(), new Vector2(702, 128));
 
-            string music = "on";
-            if(!SettingsManager.Music)
-            {
-                music = "off";
-            }
-            DrawSetting(spriteBatch, music, new Vector2(702, 300));
+            // Draw music
+            DrawSetting(spriteBatch, SettingsManager.Music ? "on" : "off", new Vector2(702, 300));
 
-            string sound = "on";
-            if (!SettingsManager.Sound)
-            {
-                sound = "off";
-            }
-            DrawSetting(spriteBatch, sound, new Vector2(702, 470));
+            // Draw sound
+            DrawSetting(spriteBatch, SettingsManager.Sound ? "on" : "off", new Vector2(702, 470));
 
-            string fullscreen = "on";
-            if (!SettingsManager.Fullscreen)
-            {
-                fullscreen = "off";
-            }
-            DrawSetting(spriteBatch, fullscreen, new Vector2(810, 625));
+            // Draw fullscreen
+            DrawSetting(spriteBatch, SettingsManager.Fullscreen ? "on" : "off", new Vector2(810, 625));
         }
     }
 }
