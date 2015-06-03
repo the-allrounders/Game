@@ -31,6 +31,14 @@ namespace SeriousGame
             _fontBold = FontManager.VerdanaBold;
         }
 
+        public bool IsInViewport(int offset)
+        {
+            return (
+                BoundingBox.Bottom + offset > 0 &&
+                BoundingBox.Top + offset < ScreenManager.Dimensions.Y
+            );
+        }
+
         public void Update()
         {
         }
@@ -40,7 +48,7 @@ namespace SeriousGame
             spritebatch.Draw(_texture, new Vector2(_position.X, _position.Y + offset), _color);
         }
 
-        public Rectangle boundingBox
+        public Rectangle BoundingBox
         {
             get
             {

@@ -15,6 +15,7 @@ namespace SeriousGame
 	{
 		private float 		_startY;
 		private Vector2 	_speed;
+        public Vector2      Speed {get{return _speed;}}
 		private Texture2D   _frogTexture;
 		private Vector2     _frogPosition;
 		private Vector2 	_speedlr;
@@ -34,16 +35,10 @@ namespace SeriousGame
 		}
 
 
-		public Rectangle boundingBox {
+		public Rectangle BoundingBox {
 			get {
 				Rectangle rect = new Rectangle ((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
 				return rect;
-			}
-		}
-
-		public Vector2 getSpeed {
-			get {
-				return _speed;
 			}
 		}
 

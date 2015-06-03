@@ -12,46 +12,44 @@ namespace SeriousGame
 {
 	public class Player
 	{
-		private Frog _frog;
+		public Frog Frog {private set; get;}
 
 		public Player ()
 		{
-			_frog = new Frog (new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);	
+			Frog = new Frog (new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);	
 		}
 
-		public Rectangle getFrogBoundingBox() {
-			return _frog.boundingBox;
-		}
-
-		public Vector2 getSpeed(){
-			return _frog.getSpeed;
-		}
-
-		public void jump () {
-			_frog.jump ();
-		}
+        /// <summary>
+        /// Checks if the player is currently jumping on a platform
+        /// </summary>
+        /// <param name="platform">The platform the player is possibily jumping on</param>
+        /// <returns>If the player is jumping on the platform</returns>
+        public bool IsJumpingOn(Platform platform)
+        {
+            return (
+                Frog.Speed.Y < 0 &&
+                Frog.BoundingBox.Intersects(platform.BoundingBox) &&
+                Frog.BoundingBox.Bottom <= platform.BoundingBox.Top + 10
+                );
+        }
 
 		public void Update(){
 
-			_frog.Update ();
+			Frog.Update ();
 
             if (InputManager.IsPressing(Keys.Left, false))
             {
 
-				_frog.left ();
+				Frog.left ();
 
 			}
             if (InputManager.IsPressing(Keys.Right, false))
             {
 
-				_frog.right ();
+				Frog.right ();
 			}
 
 
-		}
-
-		public void Draw (SpriteBatch spriteBatch, int offset) {
-			_frog.Draw (spriteBatch, offset);
 		}
 	}
 }

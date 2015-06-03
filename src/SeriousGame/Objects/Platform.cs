@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SeriousGame
 {
-	class Platform
+	public class Platform
 	{
 		private Vector2 _platformPosition;
 		private Vector2 _platformSize;
@@ -20,12 +20,20 @@ namespace SeriousGame
 			_platformTexture = TextureManager.Platform;
 		}
 
+        public bool IsInViewport(int offset)
+        {
+            return (
+                BoundingBox.Bottom + offset > 0 && 
+                BoundingBox.Top + offset < ScreenManager.Dimensions.Y
+            );
+        }
+
 		public static float calculateDistance(List<Platform> _platforms, Random rnd)
 		{
 			float _distance;
 			if (_platforms.Count > 0)
 			{
-				Rectangle highestPlatform = _platforms[_platforms.Count - 1].boundingBox;
+				Rectangle highestPlatform = _platforms[_platforms.Count - 1].BoundingBox;
 
 				if (highestPlatform.Left > ScreenManager.Dimensions.X / 2)
 				{
@@ -54,7 +62,7 @@ namespace SeriousGame
 		}
 
 
-		public Rectangle boundingBox {
+		public Rectangle BoundingBox {
 			get {
 				Rectangle rect = new Rectangle ((int)_platformPosition.X, (int)_platformPosition.Y, (int)_platformTexture.Width, (int)_platformTexture.Height);
 				return rect;
