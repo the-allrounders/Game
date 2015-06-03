@@ -19,7 +19,7 @@ namespace SeriousGame
 			_frog = new Frog (new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);	
 		}
 
-		public Rectangle getRectangle () {
+		public Rectangle getFrogBoundingBox() {
 			return _frog.boundingBox;
 		}
 

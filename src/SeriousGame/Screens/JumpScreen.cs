@@ -53,12 +53,11 @@ namespace SeriousGame
 
 		public void intersectPlatform()
 		{
-			Rectangle frogPosition = _player.getRectangle ();
+			Rectangle frogPosition = _player.getFrogBoundingBox ();
 			foreach (var platform in _platforms) {
 				if (platform.boundingBox.Bottom + offset > 0 && platform.boundingBox.Top + offset < ScreenManager.Dimensions.Y)
 				{
-					Console.WriteLine (_player.getSpeed().Y);
-					if(_player.getSpeed().Y < 0 && frogPosition.Intersects(platform.boundingBox) && frogPosition.Bottom >= platform.boundingBox.Top) {
+					if (_player.getSpeed().Y < 0 && frogPosition.Intersects(platform.boundingBox) && frogPosition.Bottom <= platform.boundingBox.Top + 10) {
 						Console.WriteLine ("geraakt");
 						_player.jump ();
 					}
@@ -72,7 +71,7 @@ namespace SeriousGame
             {
                 ScreenManager.CurrentScreen = new StartScreen();
             }
-            Rectangle frogPosition = _player.getRectangle();
+            Rectangle frogPosition = _player.getFrogBoundingBox();
 			int newOffset = (int)ScreenManager.Dimensions.Y - frogPosition.Bottom - 500;
 			if (newOffset > offset)
 				offset = newOffset;
