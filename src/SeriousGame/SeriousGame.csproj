@@ -43,6 +43,8 @@
     <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\SettingsManager.cs" />
+    <Compile Include="Objects\Collectable.cs" />
+    <Compile Include="Objects\Fly.cs" />
     <Compile Include="Objects\Frog.cs" />
     <Compile Include="Objects\Player.cs" />
     <Compile Include="Screens\GameScreen.cs" />

@@ -27,9 +27,7 @@ namespace SeriousGame
         public bool IsJumpingOn(Platform platform)
         {
             return (
-                //Frog.Speed.Y < 0 &&
-                Frog.BoundingBox.Intersects(platform.BoundingBox)// &&
-                //Frog.BoundingBox.Bottom <= platform.BoundingBox.Top + 10
+                Frog.isDescending && Frog.BoundingBox.Intersects(platform.BoundingBox) && Frog.BoundingBox.Bottom <= platform.BoundingBox.Top + 30
                 );
         }
 

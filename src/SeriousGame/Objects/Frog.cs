@@ -16,6 +16,7 @@ namespace SeriousGame
 		private Texture2D   _frogTexture;
 		private Vector2     _frogPosition;
 		private Vector2 	_speedlr;
+        public bool isDescending { get; private set; }
 
 		public Frog (Vector2 charPos, int spd)
 		{
@@ -34,8 +35,9 @@ namespace SeriousGame
 		}
 
         float jumpFrom = 0;
-        double vi, t = 0;
-        double g = 520;
+        public double vi { get; private set; }
+        double t = 0;
+        double g = 720;
 
         public void Jump()
         {
@@ -48,8 +50,18 @@ namespace SeriousGame
 
 		public void Update(GameTime gameTime)
 		{
+            float oldJumpHeight = (float)(vi * t + g * t * t / 2);
             t = t + gameTime.ElapsedGameTime.TotalSeconds;
-            _frogPosition.Y = (float)(vi * t + g * t * t / 2) + jumpFrom;
+            float newJumpHeight = (float)(vi * t + g * t * t / 2);
+            if (newJumpHeight >= oldJumpHeight)
+            {
+                isDescending = true;
+            }
+            else
+            {
+                isDescending = false;
+            }
+            _frogPosition.Y = newJumpHeight + jumpFrom;
 		}
 
 		public void Left(){
