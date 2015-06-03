@@ -70,7 +70,8 @@ namespace SeriousGame
                 }
             }
 
-            player.Frog.Update(gameTime);
+            // Apply gravity to Frog
+            player.Frog.ApplyGravity(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -26,69 +26,69 @@ namespace SeriousGame
             Jump();
 		}
 
-
 		public Rectangle BoundingBox {
 			get {
-				Rectangle rect = new Rectangle ((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
-				return rect;
+				return new Rectangle ((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
 			}
 		}
 
         float jumpFrom = 0;
-        public double vi { get; private set; }
-        double t = 0;
-        double g = 720;
+        double initialVelocity;
+        double time = 0;
+        double gravity = 3000;
 
+        /// <summary>
+        /// Resets the gravity to default values
+        /// </summary>
         public void Jump()
         {
-            vi = -820;
-            t = 0;
+            initialVelocity = -1640;
+            time = 0;
             jumpFrom = _frogPosition.Y;
         }
-
         
-
-		public void Update(GameTime gameTime)
+        /// <summary>
+        /// Needs to be run once every update cycle
+        /// </summary>
+        /// <param name="gameTime">The gameTime from the Game</param>
+		public void ApplyGravity(GameTime gameTime)
 		{
-            float oldJumpHeight = (float)(vi * t + g * t * t / 2);
-            t = t + gameTime.ElapsedGameTime.TotalSeconds;
-            float newJumpHeight = (float)(vi * t + g * t * t / 2);
-            if (newJumpHeight >= oldJumpHeight)
-            {
-                isDescending = true;
-            }
-            else
-            {
-                isDescending = false;
-            }
-            _frogPosition.Y = newJumpHeight + jumpFrom;
+            // Update t variable with new time
+            time = time + gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Calculate new position
+            float newPosition = (float)(initialVelocity * time + gravity * time * time / 2) + jumpFrom;
+
+            // Check if is descending
+            isDescending = (_frogPosition.Y <= newPosition);
+
+            // Apply new position
+            _frogPosition.Y = newPosition;
 		}
 
+        /// <summary>
+        /// Moves the frog to the left
+        /// </summary>
 		public void Left(){
-
 			if (_frogPosition.X > JumpScreen.Padding) {
 				_frogPosition -= _speedlr;
 			}
-
 		}
 
+        /// <summary>
+        /// Moves the frog to the right
+        /// </summary>
 		public void Right() 
 		{
             if (_frogPosition.X + _frogTexture.Width < ScreenManager.Dimensions.X - JumpScreen.Padding)
             {
 				_frogPosition += _speedlr;
-
 			}
-
 		}
 
 		public void Draw(SpriteBatch spriteBatch, int offset)
 		{
-			spriteBatch.Draw (_frogTexture, new Vector2 (_frogPosition.X, _frogPosition.Y + offset));
-
+			spriteBatch.Draw(_frogTexture, new Vector2 (_frogPosition.X, _frogPosition.Y + offset));
 		}
-
-
-
 	}
 }

@@ -33,8 +33,6 @@ namespace SeriousGame
 
 		public void Update(GameTime gameTime){
 
-			Frog.Update(gameTime);
-
             if (InputManager.IsPressing(Keys.Left, false))
             {
 
