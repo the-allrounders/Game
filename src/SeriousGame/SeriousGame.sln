@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeriousGame", "SeriousGame.csproj", "{7E5F3663-70C3-4439-ADBB-A1F97865A8BB}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "..\Setup\Setup.vdproj", "{0D0C3DD0-7AEB-4327-A9E6-CC03E9D7546D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,12 @@ Global
 		{7E5F3663-70C3-4439-ADBB-A1F97865A8BB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{7E5F3663-70C3-4439-ADBB-A1F97865A8BB}.Release|x86.ActiveCfg = Release|x86
 		{7E5F3663-70C3-4439-ADBB-A1F97865A8BB}.Release|x86.Build.0 = Release|x86
+		{0D0C3DD0-7AEB-4327-A9E6-CC03E9D7546D}.Debug|Any CPU.ActiveCfg = Debug
+		{0D0C3DD0-7AEB-4327-A9E6-CC03E9D7546D}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{0D0C3DD0-7AEB-4327-A9E6-CC03E9D7546D}.Debug|x86.ActiveCfg = Debug
+		{0D0C3DD0-7AEB-4327-A9E6-CC03E9D7546D}.Release|Any CPU.ActiveCfg = Release
+		{0D0C3DD0-7AEB-4327-A9E6-CC03E9D7546D}.Release|Mixed Platforms.ActiveCfg = Release
+		{0D0C3DD0-7AEB-4327-A9E6-CC03E9D7546D}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
