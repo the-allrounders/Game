@@ -53,7 +53,7 @@ namespace SeriousGame
             }
 
             // Update the player
-            player.Update();
+            player.Update(gameTime);
 
             // Calculate new offset
             int newOffset = (int)ScreenManager.Dimensions.Y - player.Frog.BoundingBox.Bottom - 500;
@@ -66,9 +66,11 @@ namespace SeriousGame
             {
                 if (platform.IsInViewport(offset) && player.IsJumpingOn(platform))
                 {
-                    player.Frog.jump();
+                    player.Frog.Jump();
                 }
             }
+
+            player.Frog.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

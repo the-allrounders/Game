@@ -13,9 +13,6 @@ namespace SeriousGame
 {
 	public class Frog
 	{
-		private float 		_startY;
-		private Vector2 	_speed;
-        public Vector2      Speed {get{return _speed;}}
 		private Texture2D   _frogTexture;
 		private Vector2     _frogPosition;
 		private Vector2 	_speedlr;
@@ -24,14 +21,8 @@ namespace SeriousGame
 		{
 			_frogTexture = TextureManager.Frog;
 			_frogPosition = charPos;
-			_startY = _frogPosition.Y;
-			_speed = new Vector2(0, spd);
 			_speedlr = new Vector2 (10, 0);
-		}
-
-		public void jump(){
-			_startY = _frogPosition.Y;
-			_speed.Y *= -1;
+            Jump();
 		}
 
 
@@ -42,15 +33,26 @@ namespace SeriousGame
 			}
 		}
 
-		public void Update()
+        float jumpFrom = 0;
+        double vi, t = 0;
+        double g = 520;
+
+        public void Jump()
+        {
+            vi = -820;
+            t = 0;
+            jumpFrom = _frogPosition.Y;
+        }
+
+        
+
+		public void Update(GameTime gameTime)
 		{
-			_frogPosition.Y -= _speed.Y;
-			if (_frogPosition.Y < _startY - 300) {
-				_speed.Y *= -1;
-			}
+            t = t + gameTime.ElapsedGameTime.TotalSeconds;
+            _frogPosition.Y = (float)(vi * t + g * t * t / 2) + jumpFrom;
 		}
 
-		public void left(){
+		public void Left(){
 
 			if (_frogPosition.X > JumpScreen.Padding) {
 				_frogPosition -= _speedlr;
@@ -58,7 +60,7 @@ namespace SeriousGame
 
 		}
 
-		public void right() 
+		public void Right() 
 		{
             if (_frogPosition.X + _frogTexture.Width < ScreenManager.Dimensions.X - JumpScreen.Padding)
             {

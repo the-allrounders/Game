@@ -27,26 +27,26 @@ namespace SeriousGame
         public bool IsJumpingOn(Platform platform)
         {
             return (
-                Frog.Speed.Y < 0 &&
-                Frog.BoundingBox.Intersects(platform.BoundingBox) &&
-                Frog.BoundingBox.Bottom <= platform.BoundingBox.Top + 10
+                //Frog.Speed.Y < 0 &&
+                Frog.BoundingBox.Intersects(platform.BoundingBox)// &&
+                //Frog.BoundingBox.Bottom <= platform.BoundingBox.Top + 10
                 );
         }
 
-		public void Update(){
+		public void Update(GameTime gameTime){
 
-			Frog.Update ();
+			Frog.Update(gameTime);
 
             if (InputManager.IsPressing(Keys.Left, false))
             {
 
-				Frog.left ();
+				Frog.Left ();
 
 			}
             if (InputManager.IsPressing(Keys.Right, false))
             {
 
-				Frog.right ();
+				Frog.Right ();
 			}
 
 
