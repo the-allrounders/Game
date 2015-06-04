@@ -46,7 +46,6 @@
     <Compile Include="Objects\Collectable.cs" />
     <Compile Include="Objects\Fly.cs" />
     <Compile Include="Objects\Frog.cs" />
-    <Compile Include="Objects\Player.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\JumpScreen.cs" />
     <Compile Include="Objects\Obstacle.cs" />

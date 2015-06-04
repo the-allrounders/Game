@@ -14,7 +14,7 @@ namespace SeriousGame
         private int gameHeight = 100000;
 		private List<Platform> platforms = new List<Platform>();
         private List<Obstacle> obstacles = new List<Obstacle>();
-		private Player player;
+        private Frog frog;
 
         public static int Padding = 200;
         
@@ -22,7 +22,7 @@ namespace SeriousGame
         {
 			addPlatforms ();
             addObstacles();
-			player = new Player ();
+            frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
         }
 
 		private void addPlatforms ()
@@ -52,11 +52,18 @@ namespace SeriousGame
                 ScreenManager.CurrentScreen = new StartScreen();
             }
 
-            // Update the player
-            player.Update(gameTime);
+            // If user is pressing Left, go left. Same for Right.
+            if (InputManager.IsPressing(Keys.Left, false))
+            {
+                frog.Left();
+            }
+            if (InputManager.IsPressing(Keys.Right, false))
+            {
+                frog.Right();
+            }
 
             // Calculate new offset
-            int newOffset = (int)ScreenManager.Dimensions.Y - player.Frog.BoundingBox.Bottom - 500;
+            int newOffset = (int)ScreenManager.Dimensions.Y - frog.BoundingBox.Bottom - 500;
 
             // If new offset is bigger, apply
 			if (newOffset > offset) offset = newOffset;
@@ -64,14 +71,14 @@ namespace SeriousGame
             // Check if jumping on platform
             foreach (Platform platform in platforms)
             {
-                if (platform.IsInViewport(offset) && player.IsJumpingOn(platform))
+                if (platform.IsInViewport(offset) && frog.IsJumpingOn(platform))
                 {
-                    player.Frog.Jump();
+                    frog.Jump();
                 }
             }
 
             // Apply gravity to Frog
-            player.Frog.ApplyGravity(gameTime);
+            frog.ApplyGravity(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -94,7 +101,7 @@ namespace SeriousGame
             }
 
             // Draw frog
-			player.Frog.Draw(spriteBatch, offset);
+			frog.Draw(spriteBatch, offset);
         }
     }
 }

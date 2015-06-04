@@ -32,6 +32,16 @@ namespace SeriousGame
 			}
 		}
 
+        /// <summary>
+        /// Checks if the frog is currently jumping on a platform
+        /// </summary>
+        /// <param name="platform">The platform the frog is possibily jumping on</param>
+        /// <returns>True if the frog is jumping on the platform</returns>
+        public bool IsJumpingOn(Platform platform)
+        {
+            return isDescending && BoundingBox.Intersects(platform.BoundingBox) && BoundingBox.Bottom <= platform.BoundingBox.Top + 30;
+        }
+
         float jumpFrom = 0;
         double initialVelocity;
         double time = 0;
