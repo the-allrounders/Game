@@ -30,7 +30,7 @@ namespace SeriousGame
             Random rnd = new Random();
             for (int i = 600; i > gameHeight * -1; i -= 200)
             {
-                platforms.Add(new Platform(new Vector2(Platform.calculateDistance(platforms, rnd), i + rnd.Next(-30, 30)), new Vector2(150, 50)));
+                platforms.Add(new Platform(new Vector2(rnd.Next(JumpScreen.Padding, (int)ScreenManager.Dimensions.X - JumpScreen.Padding - TextureManager.Platform.Width), i + rnd.Next(-30, 30)), new Vector2(150, 50)));
             }
 		}
 

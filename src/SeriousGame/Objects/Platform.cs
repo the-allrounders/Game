@@ -23,44 +23,10 @@ namespace SeriousGame
         public bool IsInViewport(int offset)
         {
             return (
-                BoundingBox.Bottom + offset > 0 && 
+                BoundingBox.Bottom + offset > 0 &&
                 BoundingBox.Top + offset < ScreenManager.Dimensions.Y
             );
         }
-
-		public static float calculateDistance(List<Platform> _platforms, Random rnd)
-		{
-			float _distance;
-			if (_platforms.Count > 0)
-			{
-				Rectangle highestPlatform = _platforms[_platforms.Count - 1].BoundingBox;
-
-				if (highestPlatform.Left > ScreenManager.Dimensions.X / 2)
-				{
-					// highestPlatform is right from center
-					_distance = highestPlatform.Left - highestPlatform.Width - rnd.Next(150, 300);
-					if (_distance < JumpScreen.Padding)
-					{
-						_distance = JumpScreen.Padding;
-					}
-				}
-				else
-				{
-					// highestPlatform is left from center
-					_distance = highestPlatform.Left + highestPlatform.Width + rnd.Next(100, 250);
-                    if (_distance + highestPlatform.Width > ScreenManager.Dimensions.X - JumpScreen.Padding)
-					{
-                        _distance = ScreenManager.Dimensions.X - JumpScreen.Padding - highestPlatform.Width;
-					}
-				}
-			}
-			else
-			{
-				_distance = 400;
-			}
-			return _distance;
-		}
-
 
 		public Rectangle BoundingBox {
 			get {
