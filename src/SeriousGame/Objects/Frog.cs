@@ -11,12 +11,13 @@ using System;
 
 namespace SeriousGame
 {
-	public class Frog
-	{
-		private Texture2D   _frogTexture;
-		private Vector2     _frogPosition;
-		private Vector2 	_speedlr;
+    public class Frog
+    {
+        private Texture2D _frogTexture;
+        private Vector2 _frogPosition;
+        private Vector2 _speedlr;
         public bool isDescending { get; private set; }
+        public int gameScore { get; private set; }
 
 		public Frog (Vector2 charPos, int spd)
 		{
@@ -26,11 +27,26 @@ namespace SeriousGame
             Jump();
 		}
 
+        public void addScore (int scrWrth)
+        {
+            gameScore += scrWrth;
+        }
+
 		public Rectangle BoundingBox {
 			get {
 				return new Rectangle ((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
 			}
 		}
+
+        /// <summary>
+        /// Checks if the frog is currently jumping on a platform
+        /// </summary>
+        /// <param name="platform">The platform the frog is possibily jumping on</param>
+        /// <returns>True if the frog is jumping on the platform</returns>
+        public bool IsJumpingOn(Platform platform)
+        {
+            return isDescending && BoundingBox.Intersects(platform.BoundingBox) && BoundingBox.Bottom <= platform.BoundingBox.Top + 30;
+        }
 
         float jumpFrom = 0;
         double initialVelocity;

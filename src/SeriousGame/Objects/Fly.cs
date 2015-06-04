@@ -9,9 +9,9 @@ namespace SeriousGame
 {
     class Fly : Collectable
     {
-        public Fly (Vector2 pos) : base(pos)
+        public Fly (Vector2 pos, int scrWrth) : base(pos, TextureManager.Fly, scrWrth)
         {
-            base._collectableTexture = TextureManager.Fly;
+
         }
     }
 }

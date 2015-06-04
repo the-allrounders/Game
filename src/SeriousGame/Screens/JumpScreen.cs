@@ -13,8 +13,8 @@ namespace SeriousGame
         private int offset = 0;
         private int gameHeight = 100000;
 		private List<Platform> platforms = new List<Platform>();
-        private List<Obstacle> obstacles = new List<Obstacle>();
-		private Player player;
+        private List<Obstacle> obstacles = new List<Obstacle>();private List<Fly> flies = new List<Fly>();
+        private Frog frog;
 
         public static int Padding = 200;
         
@@ -22,7 +22,8 @@ namespace SeriousGame
         {
 			addPlatforms ();
             addObstacles();
-			player = new Player ();
+            addFlies();
+	frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
         }
 
 		private void addPlatforms ()
@@ -44,6 +45,29 @@ namespace SeriousGame
             }
         }
 
+        private void addFlies()
+        {
+            Random rnd = new Random();
+            for (int i = 300; i > gameHeight * -1; i -= TextureManager.Fly.Height + 200)
+            {
+                int fliesThisLine = rnd.Next(-1, 4);
+                for (int n = 0; n < fliesThisLine; n++)
+                {
+                    int distance = (int)((ScreenManager.Dimensions.X - (Padding * 2)) / fliesThisLine * n) + Padding + rnd.Next(-30, 30);
+                    if (distance < Padding)
+                        distance = Padding;
+                    else if (distance > ScreenManager.Dimensions.X - Padding)
+                        distance = (int)ScreenManager.Dimensions.X - Padding - TextureManager.Fly.Width;
+                    flies.Add(new Fly(new Vector2(distance, i + rnd.Next(-50, 50)), 100));
+                }
+            }
+        }
+
+        public void endGame (bool win)
+        {
+            ScreenManager.CurrentScreen = new JumpScreen();
+        }
+
         public override void Update(GameTime gameTime)
         {
             // If user is pressing ESC, return to StartScreen
@@ -52,11 +76,18 @@ namespace SeriousGame
                 ScreenManager.CurrentScreen = new StartScreen();
             }
 
-            // Update the player
-            player.Update(gameTime);
+            // If user is pressing Left, go left. Same for Right.
+            if (InputManager.IsPressing(Keys.Left, false))
+            {
+                frog.Left();
+            }
+            if (InputManager.IsPressing(Keys.Right, false))
+            {
+                frog.Right();
+            }
 
             // Calculate new offset
-            int newOffset = (int)ScreenManager.Dimensions.Y - player.Frog.BoundingBox.Bottom - 500;
+            int newOffset = (int)ScreenManager.Dimensions.Y - frog.BoundingBox.Bottom - 500;
 
             // If new offset is bigger, apply
 			if (newOffset > offset) offset = newOffset;
@@ -64,14 +95,35 @@ namespace SeriousGame
             // Check if jumping on platform
             foreach (Platform platform in platforms)
             {
-                if (platform.IsInViewport(offset) && player.IsJumpingOn(platform))
+                if (platform.IsInViewport(offset) && frog.IsJumpingOn(platform))
                 {
-                    player.Frog.Jump();
+                    frog.Jump();
                 }
             }
 
+            // Check if frog is catching any flies
+            List<Fly> copyFlies = new List<Fly>();
+            copyFlies = flies;
+            for (int i = 0; i < copyFlies.Count; i++)
+            {
+                if (flies[i].IsInViewport(offset) && flies[i].IsCatching(frog))
+                {
+                    frog.addScore(flies[i].collectableScoreWorth);
+                    flies.RemoveAt(i);
+                }
+            }
+
+            Console.WriteLine(frog.gameScore);
+
+            if (frog.BoundingBox.Top > offset + ScreenManager.Dimensions.Y)
+            {
+                endGame(false);
+            }
+            else
+            {
             // Apply gravity to Frog
-            player.Frog.ApplyGravity(gameTime);
+            frog.ApplyGravity(gameTime);
+        }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -93,8 +145,17 @@ namespace SeriousGame
                 }
             }
 
+            // Draw flies
+            foreach (Fly fly in flies)
+            {
+                if (fly.IsInViewport(offset))
+                {
+                    fly.Draw(spriteBatch, offset);
+                }
+            }
+
             // Draw frog
-			player.Frog.Draw(spriteBatch, offset);
+			frog.Draw(spriteBatch, offset);
         }
     }
 }
