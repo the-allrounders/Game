@@ -117,15 +117,15 @@ namespace SeriousGame
 
             Console.WriteLine(frog.gameScore);
 
-            if (frog.BoundingBox.Top > offset + ScreenManager.Dimensions.Y)
+            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0)
             {
                 endGame(false);
             }
             else
             {
-            // Apply gravity to Frog
-            frog.ApplyGravity(gameTime);
-        }
+                // Apply gravity to Frog
+                frog.ApplyGravity(gameTime);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
