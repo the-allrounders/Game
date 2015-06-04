@@ -13,7 +13,8 @@ namespace SeriousGame
         private int offset = 0;
         private int gameHeight = 100000;
 		private List<Platform> platforms = new List<Platform>();
-        private List<Obstacle> obstacles = new List<Obstacle>();private List<Fly> flies = new List<Fly>();
+        private List<Obstacle> obstacles = new List<Obstacle>();
+        private List<Fly> flies = new List<Fly>();
         private Frog frog;
 
         public static int Padding = 200;
@@ -24,6 +25,7 @@ namespace SeriousGame
             addObstacles();
             addFlies();
 	frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
+            frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
         }
 
 		private void addPlatforms ()
