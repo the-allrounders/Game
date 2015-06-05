@@ -82,7 +82,7 @@ namespace SeriousGame
             float newPosition = (float)(initialVelocity * time + gravity * time * time / 2) + jumpFrom;
 
             // Check if is descending
-            isDescending = (_frogPosition.Y <= newPosition);
+            isDescending = (_frogPosition.Y < newPosition);
 
             // Apply new position
             _frogPosition.Y = newPosition;

@@ -96,9 +96,13 @@ namespace SeriousGame
             int newOffset = (int)ScreenManager.Dimensions.Y - frog.BoundingBox.Bottom - 500;
 
             // If new offset is bigger, apply
-			if (newOffset > offset) offset = newOffset;
-
-
+            if (newOffset > offset)
+            {
+                decimal addPoints = (newOffset - offset) / 10;
+                frog.addScore((int)Math.Ceiling(addPoints));
+                offset = newOffset;
+            }
+            
             // Check if jumping on platform
             foreach (Platform platform in platforms)
             {
@@ -124,7 +128,6 @@ namespace SeriousGame
 
             if (frog.BoundingBox.Bottom + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingMagma(frog))
             {
-
                 frog.makeDead();
                 endGame(false);
             }
@@ -135,9 +138,6 @@ namespace SeriousGame
 
                 // Make the magma rise
                 magma.Update(gameTime, offset);
-
-                // Give points
-                frog.addScore(1);
             }
         }
 
