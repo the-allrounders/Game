@@ -18,6 +18,7 @@ namespace SeriousGame
         private Vector2 _speedlr;
         public bool isDescending { get; private set; }
         public int gameScore { get; private set; }
+        public bool isDead { get; private set; } = false;
 
 		public Frog (Vector2 charPos, int spd)
 		{
@@ -30,6 +31,11 @@ namespace SeriousGame
         public void addScore (int scrWrth)
         {
             gameScore += scrWrth;
+        }
+
+        public void makeDead ()
+        {
+            isDead = true;
         }
 
 		public Rectangle BoundingBox {

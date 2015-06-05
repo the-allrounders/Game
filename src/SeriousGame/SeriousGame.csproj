@@ -46,6 +46,7 @@
     <Compile Include="Objects\Collectable.cs" />
     <Compile Include="Objects\Fly.cs" />
     <Compile Include="Objects\Frog.cs" />
+    <Compile Include="Objects\Magma.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\JumpScreen.cs" />
     <Compile Include="Objects\Obstacle.cs" />
@@ -70,6 +71,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\frog.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\magma.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\platform.png">

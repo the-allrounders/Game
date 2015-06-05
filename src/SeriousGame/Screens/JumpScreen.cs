@@ -16,6 +16,7 @@ namespace SeriousGame
         private List<Obstacle> obstacles = new List<Obstacle>();
         private List<Fly> flies = new List<Fly>();
         private Frog frog;
+        private Magma magma;
 
         public static int Padding = 200;
         
@@ -24,8 +25,8 @@ namespace SeriousGame
 			addPlatforms ();
             addObstacles();
             addFlies();
-	frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
-            frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
+	        frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
+            magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
         }
 
 		private void addPlatforms ()
@@ -67,7 +68,10 @@ namespace SeriousGame
 
         public void endGame (bool win)
         {
-            ScreenManager.CurrentScreen = new JumpScreen();
+            if (InputManager.IsPressing(Keys.Space, true))
+            {
+                ScreenManager.CurrentScreen = new JumpScreen();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -79,11 +83,11 @@ namespace SeriousGame
             }
 
             // If user is pressing Left, go left. Same for Right.
-            if (InputManager.IsPressing(Keys.Left, false))
+            if (!frog.isDead && InputManager.IsPressing(Keys.Left, false))
             {
                 frog.Left();
             }
-            if (InputManager.IsPressing(Keys.Right, false))
+            if (!frog.isDead && InputManager.IsPressing(Keys.Right, false))
             {
                 frog.Right();
             }
@@ -93,6 +97,7 @@ namespace SeriousGame
 
             // If new offset is bigger, apply
 			if (newOffset > offset) offset = newOffset;
+
 
             // Check if jumping on platform
             foreach (Platform platform in platforms)
@@ -117,14 +122,22 @@ namespace SeriousGame
 
             Console.WriteLine(frog.gameScore);
 
-            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0)
+            if (frog.BoundingBox.Bottom + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingMagma(frog))
             {
+
+                frog.makeDead();
                 endGame(false);
             }
             else
             {
                 // Apply gravity to Frog
                 frog.ApplyGravity(gameTime);
+
+                // Make the magma rise
+                magma.Update(gameTime, offset);
+
+                // Give points
+                frog.addScore(1);
             }
         }
 
@@ -158,6 +171,20 @@ namespace SeriousGame
 
             // Draw frog
 			frog.Draw(spriteBatch, offset);
+
+            // Draw magma
+            magma.Draw(spriteBatch, offset);
+
+            if (frog.isDead)
+            {
+                String text = "Helaas, GameOver! Je scoorde " + frog.gameScore + " punten";
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 230, ScreenManager.Dimensions.Y / 2 - 30), Color.White);
+            }
+            else
+            {
+                String text = "Score: " + frog.gameScore;
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
+            }
         }
     }
 }
