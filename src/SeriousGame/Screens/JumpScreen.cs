@@ -124,7 +124,7 @@ namespace SeriousGame
                 }
             }
 
-            if (frog.BoundingBox.Bottom + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingMagma(frog))
+            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingMagma(frog))
             {
                 frog.makeDead();
                 endGame(false);
