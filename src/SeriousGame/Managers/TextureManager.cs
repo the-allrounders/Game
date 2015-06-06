@@ -18,6 +18,8 @@ namespace SeriousGame
 		public static Texture2D Frog;
         public static Texture2D Magma;
         public static Texture2D Wall;
+        public static Texture2D InputMedium;
+        public static Texture2D Caret;
 
         public static void Load(ContentManager Content)
         {
@@ -29,6 +31,8 @@ namespace SeriousGame
             Frog = Content.Load<Texture2D>("frog");
             Magma = Content.Load<Texture2D>("magma");
             Wall = Content.Load<Texture2D>("wall");
+            InputMedium = Content.Load<Texture2D>("input_medium");
+            Caret = Content.Load<Texture2D>("caret");
         }
     }
 }

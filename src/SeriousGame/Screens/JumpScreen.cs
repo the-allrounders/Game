@@ -12,31 +12,31 @@ namespace SeriousGame
     {
         private int offset = 0;
         private int gameHeight = 100000;
-		private List<Platform> platforms = new List<Platform>();
+        private List<Platform> platforms = new List<Platform>();
         private List<Obstacle> obstacles = new List<Obstacle>();
         private List<Fly> flies = new List<Fly>();
         private Frog frog;
         private Magma magma;
 
         public static int Padding = 200;
-        
+
         public override void Load()
         {
-			addPlatforms ();
+            addPlatforms();
             addObstacles();
             addFlies();
-	        frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
+            frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
             magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
         }
 
-		private void addPlatforms ()
+        private void addPlatforms()
         {
             Random rnd = new Random();
             for (int i = 600; i > gameHeight * -1; i -= 200)
             {
                 platforms.Add(new Platform(new Vector2(rnd.Next(JumpScreen.Padding, (int)ScreenManager.Dimensions.X - JumpScreen.Padding - TextureManager.Platform.Width), i + rnd.Next(-30, 30)), new Vector2(150, 50)));
             }
-		}
+        }
 
         private void addObstacles()
         {
@@ -66,7 +66,7 @@ namespace SeriousGame
             }
         }
 
-        public void endGame (bool win)
+        public void endGame(bool win)
         {
             if (InputManager.IsPressing(Keys.Space, true))
             {
@@ -102,7 +102,7 @@ namespace SeriousGame
                 frog.addScore((int)Math.Ceiling(addPoints));
                 offset = newOffset;
             }
-            
+
             // Check if jumping on platform
             foreach (Platform platform in platforms)
             {
@@ -141,13 +141,14 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-			// Draw platforms
-            foreach (Platform platform in platforms) {
+            // Draw platforms
+            foreach (Platform platform in platforms)
+            {
                 if (platform.IsInViewport(offset))
                 {
                     platform.Draw(spriteBatch, offset);
                 }
-			}
+            }
 
             // Draw obstacles
             foreach (Obstacle obstacle in obstacles)
@@ -168,7 +169,7 @@ namespace SeriousGame
             }
 
             // Draw frog
-			frog.Draw(spriteBatch, offset);
+            frog.Draw(spriteBatch, offset);
 
             // Draw magma
             magma.Draw(spriteBatch, offset);
@@ -179,14 +180,43 @@ namespace SeriousGame
 
             if (frog.isDead)
             {
-                String text = "Helaas, GameOver! Je scoorde " + frog.gameScore + " punten";
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 230, ScreenManager.Dimensions.Y / 2 - 30), Color.White);
+                drawScoreScreen(spriteBatch, offset);
             }
             else
             {
                 String text = "Score: " + frog.gameScore;
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
             }
+        }
+
+        public void drawScoreScreen(SpriteBatch spriteBatch, int offset)
+        {
+            String text = "Helaas, GameOver! Je scoorde " + frog.gameScore + " punten";
+            spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 230, ScreenManager.Dimensions.Y / 2 - 100), Color.White);
+            spriteBatch.Draw(TextureManager.InputMedium, new Vector2(ScreenManager.Dimensions.X / 2 - 100, ScreenManager.Dimensions.Y / 2 - 50));
+            String playerName = buildPlayerName();
+            //spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + spriteFont.MeasureString(playerName).X, ScreenManager.Dimensions.Y / 2 - 40));
+            spriteBatch.DrawString(FontManager.Verdana, playerName, new Vector2(ScreenManager.Dimensions.X / 2 - 90, ScreenManager.Dimensions.Y / 2 - 40), Color.Black);
+        }
+
+        public String buildPlayerName()
+        {
+            if (InputManager.IsPressing(Keys.Back))
+            {
+                frog.removeCharFromName();
+            }
+            else
+            {
+                for (Keys key = Keys.A; key <= Keys.Z; key++)
+                {
+                    if (InputManager.IsPressing(key))
+                    {
+                        frog.addCharToName(key);
+                    }
+                }
+            }
+            String playerName = frog.playerName;
+            return playerName;
         }
     }
 }

@@ -19,8 +19,9 @@ namespace SeriousGame
         public bool isDescending { get; private set; }
         public int gameScore { get; private set; }
         public bool isDead { get; private set; } = false;
+        public String playerName { get; private set; } = " ";
 
-		public Frog (Vector2 charPos, int spd)
+        public Frog (Vector2 charPos, int spd)
 		{
 			_frogTexture = TextureManager.Frog;
 			_frogPosition = charPos;
@@ -36,6 +37,17 @@ namespace SeriousGame
         public void makeDead ()
         {
             isDead = true;
+        }
+
+        public void addCharToName (Keys key)
+        {
+            playerName += key;
+        }
+
+        public void removeCharFromName ()
+        {
+            if (playerName.Length > 1)
+                playerName = playerName.Remove(playerName.Length - 1);
         }
 
 		public Rectangle BoundingBox {
