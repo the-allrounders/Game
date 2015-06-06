@@ -56,6 +56,11 @@ namespace SeriousGame
 			}
 		}
 
+        public bool isJumpingOnObstacle(Obstacle obstacle)
+        {
+            return isDescending == false && BoundingBox.Intersects(obstacle.BoundingBox);
+        }
+
         /// <summary>
         /// Checks if the frog is currently jumping on a platform
         /// </summary>
