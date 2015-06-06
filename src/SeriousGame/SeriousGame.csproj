@@ -47,6 +47,7 @@
     <Compile Include="Objects\Fly.cs" />
     <Compile Include="Objects\Frog.cs" />
     <Compile Include="Objects\Magma.cs" />
+    <Compile Include="Objects\PopUp.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\JumpScreen.cs" />
     <Compile Include="Objects\Obstacle.cs" />
@@ -76,9 +77,13 @@
     <Content Include="Content\magma.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\obstacle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\platform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\questionbox.png" />
     <Content Include="Content\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
