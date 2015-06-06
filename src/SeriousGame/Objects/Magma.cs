@@ -45,13 +45,13 @@ namespace SeriousGame
         {
             int bottomScreen = offset * -1 + (int)ScreenManager.Dimensions.Y;
             decimal iterations;
+            int magmaHeight = ((int)_magmaPosition.Y - bottomScreen) * -1;
             if (_magmaPosition.Y < bottomScreen)
             {
-                int magmaHeight = ((int)_magmaPosition.Y - bottomScreen) * -1;
                 if (magmaHeight > ScreenManager.Dimensions.Y)
-                    iterations = (int)ScreenManager.Dimensions.Y / _magmaTexture.Height + 5;
+                    iterations = (int)ScreenManager.Dimensions.Y / _magmaTexture.Height + 6;
                 else
-                    iterations = magmaHeight / _magmaTexture.Height;
+                    iterations = magmaHeight / _magmaTexture.Height + 1;
             }
             else
             {
@@ -60,7 +60,7 @@ namespace SeriousGame
 
             for (int i = 0; i < Math.Ceiling(iterations); i++)
             {
-                spriteBatch.Draw(_magmaTexture, new Vector2(0, bottomScreen + offset - (int)_magmaTexture.Height * i));
+                spriteBatch.Draw(_magmaTexture, new Vector2(JumpScreen.Padding, bottomScreen + offset - magmaHeight + (int)_magmaTexture.Height * i));
             }
         }
     }

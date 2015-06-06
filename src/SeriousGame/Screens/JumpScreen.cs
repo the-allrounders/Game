@@ -124,8 +124,6 @@ namespace SeriousGame
                 }
             }
 
-            Console.WriteLine(frog.gameScore);
-
             if (frog.BoundingBox.Bottom + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingMagma(frog))
             {
                 frog.makeDead();
@@ -174,6 +172,10 @@ namespace SeriousGame
 
             // Draw magma
             magma.Draw(spriteBatch, offset);
+
+            // Draw walls
+            spriteBatch.Draw(TextureManager.Wall, new Vector2(0, offset * -1 + offset));
+            spriteBatch.Draw(TextureManager.Wall, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
 
             if (frog.isDead)
             {
