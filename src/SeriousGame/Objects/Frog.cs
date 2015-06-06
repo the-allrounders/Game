@@ -18,7 +18,7 @@ namespace SeriousGame
         private Vector2 _speedlr;
         public bool isDescending { get; private set; }
         public int gameScore { get; private set; }
-        public bool isDead { get; private set; } = false;
+        public bool isDead { get; private set; }
 
 		public Frog (Vector2 charPos, int spd)
 		{
@@ -43,6 +43,11 @@ namespace SeriousGame
 				return new Rectangle ((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
 			}
 		}
+
+        public bool isJumpingOnObstacle(Obstacle obstacle)
+        {
+            return isDescending == false && BoundingBox.Intersects(obstacle.BoundingBox);
+        }
 
         /// <summary>
         /// Checks if the frog is currently jumping on a platform

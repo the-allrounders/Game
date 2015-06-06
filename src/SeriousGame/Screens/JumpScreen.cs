@@ -17,6 +17,7 @@ namespace SeriousGame
         private List<Fly> flies = new List<Fly>();
         private Frog frog;
         private Magma magma;
+        private Boolean isFrozen;
 
         public static int Padding = 200;
         
@@ -41,10 +42,10 @@ namespace SeriousGame
         private void addObstacles()
         {
             int question = 0;
-            for (int i = 600; i > gameHeight * -1; i -= 1000)
+            for (int i = 1000; i > gameHeight * -1; i -= 1000)
             {
                 question++;
-                obstacles.Add(new Obstacle(Color.Red, new Vector2(50, i), new Vector2(400, 50), question));
+                obstacles.Add(new Obstacle(Color.Red, new Vector2(50, i), question));
             }
         }
 
@@ -82,12 +83,22 @@ namespace SeriousGame
                 ScreenManager.CurrentScreen = new StartScreen();
             }
 
+            // Check if Frog touches obstacle
+            foreach (Obstacle obstacle in obstacles)
+            {
+                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
+                {
+                    isFrozen = true;
+                    obstacle.openQuestion();
+                }
+            }
+
             // If user is pressing Left, go left. Same for Right.
-            if (!frog.isDead && InputManager.IsPressing(Keys.Left, false))
+            if (!isFrozen && !frog.isDead && InputManager.IsPressing(Keys.Left, false))
             {
                 frog.Left();
             }
-            if (!frog.isDead && InputManager.IsPressing(Keys.Right, false))
+            if (!isFrozen && !frog.isDead && InputManager.IsPressing(Keys.Right, false))
             {
                 frog.Right();
             }
@@ -102,7 +113,7 @@ namespace SeriousGame
                 frog.addScore((int)Math.Ceiling(addPoints));
                 offset = newOffset;
             }
-            
+           
             // Check if jumping on platform
             foreach (Platform platform in platforms)
             {
@@ -131,7 +142,7 @@ namespace SeriousGame
                 frog.makeDead();
                 endGame(false);
             }
-            else
+            else if (!isFrozen)
             {
                 // Apply gravity to Frog
                 frog.ApplyGravity(gameTime);
@@ -143,6 +154,14 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            foreach (Obstacle obstacle in obstacles)
+            {
+                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
+                {
+                    obstacle.DrawQuestion(spriteBatch);
+                }
+            }
+
 			// Draw platforms
             foreach (Platform platform in platforms) {
                 if (platform.IsInViewport(offset))

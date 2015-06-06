@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SeriousGame.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,26 +8,23 @@ using System.Text;
 
 namespace SeriousGame
 {
-    class Obstacle
+    public class Obstacle
     {
         private int             _question;
-        private string[]        _choices;
-
         private Vector2         _position;
-        private Vector2         _size;
         private Color           _color;
         private Texture2D       _texture;
 
         private SpriteFont      _font;
         private SpriteFont      _fontBold;
+        private PopUp           _popUp;
 
-        public Obstacle (Color color, Vector2 position, Vector2 size, int question)
+        public Obstacle (Color color, Vector2 position, int question)
         {
             _question = question;
             _position = position;
-            _size = size;
             _color = color;
-            _texture = TextureManager.Platform;
+            _texture = TextureManager.Obstacle;
             _font = FontManager.Verdana;
             _fontBold = FontManager.VerdanaBold;
         }
@@ -45,21 +43,30 @@ namespace SeriousGame
 
         public void Draw(SpriteBatch spritebatch, int offset)
         {
-            spritebatch.Draw(_texture, new Vector2(_position.X, _position.Y + offset), _color);
+            spritebatch.Draw(_texture, new Vector2(200, _position.Y + offset), _color);
         }
 
         public Rectangle BoundingBox
         {
             get
             {
-                Rectangle rect = new Rectangle((int)_position.X, (int)_position.Y, (int)_size.X, (int)_size.Y); ;
+                Rectangle rect = new Rectangle((int)_position.X, (int)_position.Y, (int)_texture.Width, (int)_texture.Height); ;
                 return rect;
             }
         }
 
-        public void openQuestion (SpriteBatch spritebatch)
+        public void openQuestion ()
         {
-            spritebatch.DrawString(_font, "Niels is Koning", new Vector2(10, 10), Color.Black);
+            _popUp = new PopUp(_question);
+        }
+
+        public void DrawQuestion (SpriteBatch spritebatch)
+        {
+            if (_popUp != null)
+            {
+                _popUp.Draw(spritebatch);
+            }
+            
         }
     }
 }
