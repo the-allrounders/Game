@@ -42,7 +42,7 @@ namespace SeriousGame
 
 		public void Draw(SpriteBatch spriteBatch, int offset)
 		{
-			spriteBatch.Draw(_platformTexture, new Vector2 (_platformPosition.X, _platformPosition.Y + offset), Color.Green);
+			spriteBatch.Draw(_platformTexture, new Vector2 (_platformPosition.X, _platformPosition.Y + offset));
 		}
 	}
 }
