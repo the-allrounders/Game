@@ -88,7 +88,7 @@ namespace SeriousGame
             {
                 if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
                 {
-                    isFrozen = true;
+                    
                     obstacle.openQuestion();
                 }
             }
@@ -160,7 +160,7 @@ namespace SeriousGame
                 }
             }
 
-			// Draw platforms
+             // Draw platforms
             foreach (Platform platform in platforms) {
                 if (platform.IsInViewport(offset))
                 {
@@ -195,7 +195,7 @@ namespace SeriousGame
             // Draw walls
             spriteBatch.Draw(TextureManager.Wall, new Vector2(0, offset * -1 + offset));
             spriteBatch.Draw(TextureManager.Wall, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
-
+            
             if (frog.isDead)
             {
                 drawScoreScreen(spriteBatch, offset);
