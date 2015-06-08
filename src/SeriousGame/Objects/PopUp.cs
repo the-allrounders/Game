@@ -1,15 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SeriousGame.Objects
 {
     class PopUp
     {
-        private string[,] _questions = new string[,]{
+        private string[,] _questions = {
                                                     {"Hoe heet het heete rode spul dat van onderen komt?", 
                                                     "A) Mugma","B) Mogma", "C) Magma", "D) Ian"}, 
                                                     {"Hoe heet de vader van Bart", 
@@ -17,13 +14,13 @@ namespace SeriousGame.Objects
                                                     {"het is groen en het kan vliegen", 
                                                     "A) Appels","B) Voetballen", "C) Wortels", "D) Groene vogels"},   
                                                     {"Zijn bananen krom?", 
-                                                    "A) Ja","B) Nee", "C) Misschien", "D) Als je elleboog op tafel doet misschien"},   
+                                                    "A) Ja","B) Nee", "C) Misschien", "D) Als je elleboog op tafel doet misschien"}   
                                             };
-        private int[,] _answers = new int[,] {
+        private int[,] _answers = {
                                                 {3},
                                                 {2},
                                                 {4},
-                                                {1},
+                                                {1}
         };
         private int _questionNumber;
         private string _choices;

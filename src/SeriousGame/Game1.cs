@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace SeriousGame
 {
@@ -14,11 +12,10 @@ namespace SeriousGame
         SpriteBatch spriteBatch;
 
         public Game1()
-            : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            this.IsMouseVisible = true;
+            IsMouseVisible = true;
             ScreenManager.Game = this;
         }
 
@@ -32,10 +29,8 @@ namespace SeriousGame
         {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Dimensions.Y;
-
             setFullScreen(SettingsManager.Fullscreen);
 
-            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -57,15 +52,6 @@ namespace SeriousGame
             TextureManager.Load(Content);
             FontManager.Load(Content);
             ScreenManager.CurrentScreen = new SplashScreen();
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-
         }
 
         /// <summary>

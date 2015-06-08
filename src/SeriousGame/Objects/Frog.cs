@@ -1,13 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
-using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Media;
-using System;
-
 
 namespace SeriousGame
 {
@@ -57,7 +51,7 @@ namespace SeriousGame
         {
             get
             {
-                return new Rectangle((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
+                return new Rectangle((int)_frogPosition.X, (int)_frogPosition.Y, _frogTexture.Width, _frogTexture.Height);
             }
         }
 
@@ -76,9 +70,9 @@ namespace SeriousGame
             return isDescending && BoundingBox.Intersects(platform.BoundingBox) && BoundingBox.Bottom <= platform.BoundingBox.Top + 30;
         }
 
-        float jumpFrom = 0;
+        float jumpFrom;
         double initialVelocity;
-        double time = 0;
+        double time;
         double gravity = 3000;
 
         /// <summary>

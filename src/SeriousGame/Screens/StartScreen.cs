@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SeriousGame
 {
@@ -14,7 +11,7 @@ namespace SeriousGame
             // Startscherm geladen
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (InputManager.IsPressing(Keys.Space))
             {
@@ -30,7 +27,7 @@ namespace SeriousGame
             }
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureManager.Start, new Vector2(0, 0));
         }

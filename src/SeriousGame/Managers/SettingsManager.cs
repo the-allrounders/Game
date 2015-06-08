@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SeriousGame
 {
@@ -12,7 +9,7 @@ namespace SeriousGame
         public static bool Sound = true;
 
         public static readonly bool fullscreenPossible = Environment.OSVersion.ToString().Substring(0, 4) != "Unix";
-        private static bool fullscreen = false;
+        private static bool fullscreen;
         public static bool Fullscreen
         {
             get

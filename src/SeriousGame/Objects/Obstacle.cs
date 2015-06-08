@@ -1,11 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using SeriousGame.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SeriousGame
 {
@@ -19,7 +15,7 @@ namespace SeriousGame
         private SpriteFont _font;
         private SpriteFont _fontBold;
         private PopUp _popUp;
-        private Boolean _done = false;
+        private Boolean _done;
 
         public Obstacle(Color color, Vector2 position, int question)
         {
@@ -52,7 +48,7 @@ namespace SeriousGame
         {
             get
             {
-                Rectangle rect = new Rectangle((int)_position.X, (int)_position.Y, (int)_texture.Width, (int)_texture.Height); ;
+                Rectangle rect = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height); ;
                 return rect;
             }
         }

@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SeriousGame
 {
@@ -32,7 +28,7 @@ namespace SeriousGame
         {
             get
             {
-                Rectangle rect = new Rectangle((int)_platformPosition.X, (int)_platformPosition.Y, (int)_platformTexture.Width, (int)_platformTexture.Height);
+                Rectangle rect = new Rectangle((int)_platformPosition.X, (int)_platformPosition.Y, _platformTexture.Width, _platformTexture.Height);
                 return rect;
             }
         }

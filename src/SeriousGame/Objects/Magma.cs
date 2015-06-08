@@ -1,12 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
-using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Media;
-using System;
 
 namespace SeriousGame
 {
@@ -60,7 +54,7 @@ namespace SeriousGame
 
             for (int i = 0; i < Math.Ceiling(iterations); i++)
             {
-                spriteBatch.Draw(_magmaTexture, new Vector2(JumpScreen.Padding, bottomScreen + offset - magmaHeight + (int)_magmaTexture.Height * i));
+                spriteBatch.Draw(_magmaTexture, new Vector2(JumpScreen.Padding, bottomScreen + offset - magmaHeight + _magmaTexture.Height * i));
             }
         }
     }

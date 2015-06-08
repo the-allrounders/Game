@@ -1,11 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Data;
 using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace SeriousGame
 {
@@ -17,11 +16,11 @@ namespace SeriousGame
         {
             String pathOfFile = "../../../leaderboard.txt";
             values = File.ReadAllLines(pathOfFile);
-            List<string> scores = values.ToList<string>();
+            List<string> scores = values.ToList();
             //Sort<string>(values, 2);
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             // If user is pressing ESC, return to StartScreen
             if (InputManager.IsPressing(Keys.Escape) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 35, (int)ScreenManager.Dimensions.Y / 2 + 200, 100, 20)))
@@ -30,7 +29,7 @@ namespace SeriousGame
             }
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < values.Length && i < 11; i++)
             {

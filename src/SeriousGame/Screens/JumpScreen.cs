@@ -1,17 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 
 namespace SeriousGame
 {
     class JumpScreen : GameScreen
     {
-        private int offset = 0;
+        private int offset;
         private int gameHeight = 100000;
         private List<Platform> platforms = new List<Platform>();
         private List<Obstacle> obstacles = new List<Obstacle>();
@@ -40,7 +38,7 @@ namespace SeriousGame
             Random rnd = new Random();
             for (int i = 600; i > gameHeight * -1; i -= 200)
             {
-                platforms.Add(new Platform(new Vector2(rnd.Next(JumpScreen.Padding, (int)ScreenManager.Dimensions.X - JumpScreen.Padding - TextureManager.Platform.Width), i + rnd.Next(-30, 30)), new Vector2(150, 50)));
+                platforms.Add(new Platform(new Vector2(rnd.Next(Padding, (int)ScreenManager.Dimensions.X - Padding - TextureManager.Platform.Width), i + rnd.Next(-30, 30)), new Vector2(150, 50)));
             }
         }
 
