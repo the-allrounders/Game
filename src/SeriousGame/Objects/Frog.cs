@@ -19,7 +19,7 @@ namespace SeriousGame
         public bool isDescending { get; private set; }
         public int gameScore { get; private set; }
         public bool isDead { get; private set; }
-        public String playerName { get; private set; }
+        public String playerName { get; private set; } = "";
 
         public Frog (Vector2 charPos, int spd)
 		{
