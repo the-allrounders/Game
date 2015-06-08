@@ -26,7 +26,7 @@ namespace SeriousGame
 			_frogTexture = TextureManager.Frog;
 			_frogPosition = charPos;
 			_speedlr = new Vector2 (10, 0);
-            playerName = "";
+            playerName = "<name>";
             isDead = false;
             Jump();
 		}
@@ -43,7 +43,8 @@ namespace SeriousGame
 
         public void addCharToName (Keys key)
         {
-            playerName += key;
+            if (playerName.Length < 12)
+                playerName += key;
         }
 
         public void removeCharFromName ()

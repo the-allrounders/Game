@@ -35,9 +35,9 @@ namespace SeriousGame
                 _speedIncrease = 2;
             _magmaPosition.Y -= 1 + _speedIncrease;
             int bottomScreen = offset * -1 + (int)ScreenManager.Dimensions.Y;
-            if ((bottomScreen - _magmaPosition.Y) * -1 > (int)ScreenManager.Dimensions.Y / 2)
+            if ((bottomScreen - _magmaPosition.Y) * -1 > 0)
             {
-                _magmaPosition.Y = bottomScreen + (int)ScreenManager.Dimensions.Y / 2;
+                _magmaPosition.Y = bottomScreen;
             }
         }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace SeriousGame
 {
@@ -18,6 +19,8 @@ namespace SeriousGame
         private Frog frog;
         private Magma magma;
         private Boolean isFrozen;
+        private bool gameEnded;
+        private bool buttonIsSaveButton;
 
         public static int Padding = 200;
 
@@ -28,6 +31,8 @@ namespace SeriousGame
             addFlies();
             frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
             magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
+            gameEnded = false;
+            buttonIsSaveButton = true;
         }
 
         private void addPlatforms()
@@ -67,11 +72,52 @@ namespace SeriousGame
             }
         }
 
-        public void endGame(bool win)
+        public void endGame(SpriteBatch spriteBatch)
         {
-            if (InputManager.IsPressing(Keys.Space, true))
+            if (frog.isDead)
             {
-                ScreenManager.CurrentScreen = new JumpScreen();
+                drawScoreScreen(spriteBatch, offset, true);
+            }
+            else
+            {
+                String text = "Score: " + frog.gameScore;
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
+            }
+            if (gameEnded)
+            {
+                if (InputManager.IsPressing(Keys.Enter) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 40, (int)ScreenManager.Dimensions.Y / 2, 100, 20)))
+                {
+                    if (buttonIsSaveButton)
+                    {
+                        String pathOfFile = "../../../leaderboard.txt";
+
+                        string[] values = File.ReadAllLines(pathOfFile);
+                        List<string> scores = new List<string>();
+                        bool added = false;
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            string[] score = values[i].Split(',');
+                            if (!added && frog.gameScore > Convert.ToInt32(score[1]))
+                            {
+                                scores.Add(frog.playerName + ", " + frog.gameScore);
+                                added = true;
+                            }
+                            scores.Add(values[i]);
+                        }
+                        if (!added)
+                            scores.Add(frog.playerName + ", " + frog.gameScore);
+                        File.WriteAllLines(pathOfFile, scores);
+                        buttonIsSaveButton = false;
+                    }
+                    else
+                    {
+                        ScreenManager.CurrentScreen = new LeaderboardScreen();
+                    }
+                }
+                else if (InputManager.IsPressing(Keys.Space) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 45, (int)ScreenManager.Dimensions.Y / 2 + 35, 100, 20)))
+                {
+                    ScreenManager.CurrentScreen = new JumpScreen();
+                }
             }
         }
 
@@ -170,7 +216,7 @@ namespace SeriousGame
             if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingMagma(frog))
             {
                 frog.makeDead();
-                endGame(false);
+                gameEnded = true;
             }
             else if (!isFrozen)
             {
@@ -223,26 +269,24 @@ namespace SeriousGame
             // Draw walls
             spriteBatch.Draw(TextureManager.Wall, new Vector2(0, offset * -1 + offset));
             spriteBatch.Draw(TextureManager.Wall, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
-            
-            if (frog.isDead)
-            {
-                drawScoreScreen(spriteBatch, offset);
-            }
-            else
-            {
-                String text = "Score: " + frog.gameScore;
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
-            }
+            endGame(spriteBatch);
         }
 
-        public void drawScoreScreen(SpriteBatch spriteBatch, int offset)
+        public void drawScoreScreen(SpriteBatch spriteBatch, int offset, bool isDead)
         {
-            String text = "Helaas, GameOver! Je scoorde " + frog.gameScore + " punten";
+            String winText = "Hoera, gewonnen! Je scoorde " + frog.gameScore + " punten";
+            String loseText = "Helaas, GameOver! Je scoorde " + frog.gameScore + " punten";
+            String text = isDead ? loseText : winText;
             spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 230, ScreenManager.Dimensions.Y / 2 - 100), Color.White);
             spriteBatch.Draw(TextureManager.InputMedium, new Vector2(ScreenManager.Dimensions.X / 2 - 100, ScreenManager.Dimensions.Y / 2 - 50));
             String playerName = buildPlayerName();
             //spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + spriteFont.MeasureString(playerName).X, ScreenManager.Dimensions.Y / 2 - 40));
             spriteBatch.DrawString(FontManager.Verdana, playerName, new Vector2(ScreenManager.Dimensions.X / 2 - 90, ScreenManager.Dimensions.Y / 2 - 40), Color.Black);
+            if (buttonIsSaveButton)
+                spriteBatch.DrawString(FontManager.Verdana, "Opslaan", new Vector2(ScreenManager.Dimensions.X / 2 - 40, ScreenManager.Dimensions.Y / 2), Color.Black);
+            else
+                spriteBatch.DrawString(FontManager.Verdana, "Leaderboard", new Vector2(ScreenManager.Dimensions.X / 2 - 60, ScreenManager.Dimensions.Y / 2), Color.Black);
+            spriteBatch.DrawString(FontManager.Verdana, "Opnieuw", new Vector2(ScreenManager.Dimensions.X / 2 - 45, ScreenManager.Dimensions.Y / 2 + 30), Color.Black);
         }
 
         public String buildPlayerName()
