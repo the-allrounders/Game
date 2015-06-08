@@ -292,7 +292,7 @@ namespace SeriousGame
             spriteBatch.Draw(TextureManager.InputMedium, new Vector2(ScreenManager.Dimensions.X / 2 - 100, ScreenManager.Dimensions.Y / 2 - 50));
             String playerName = buildPlayerName();
             //spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + spriteFont.MeasureString(playerName).X, ScreenManager.Dimensions.Y / 2 - 40));
-            spriteBatch.DrawString(FontManager.Verdana, playerName, new Vector2(ScreenManager.Dimensions.X / 2 - 90, ScreenManager.Dimensions.Y / 2 - 40), Color.White);
+            spriteBatch.DrawString(FontManager.Verdana, playerName, new Vector2(ScreenManager.Dimensions.X / 2 - 90, ScreenManager.Dimensions.Y / 2 - 40), Color.Black);
             if (buttonIsSaveButton)
                 spriteBatch.DrawString(FontManager.Verdana, "Opslaan", new Vector2(ScreenManager.Dimensions.X / 2 - 40, ScreenManager.Dimensions.Y / 2), Color.White);
             else
