@@ -11,7 +11,7 @@ namespace SeriousGame
         private Vector2 _frogPosition;
         private Vector2 _speedlr;
         public bool isDescending { get; private set; }
-        public int gameScore { get; private set; }
+
         public bool isDead { get; private set; }
         public String playerName { get; private set; }
 
@@ -23,11 +23,6 @@ namespace SeriousGame
             playerName = "<name>";
             isDead = false;
             Jump();
-        }
-
-        public void addScore(int scrWrth)
-        {
-            gameScore += scrWrth;
         }
 
         public void makeDead()

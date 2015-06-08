@@ -20,6 +20,8 @@ namespace SeriousGame
         private bool gameEnded;
         private bool buttonIsSaveButton;
 
+        private int score;
+
         public static int Padding = 200;
 
         public override void Load()
@@ -78,7 +80,7 @@ namespace SeriousGame
             }
             else
             {
-                String text = "Score: " + frog.gameScore;
+                String text = "Score: " + score;
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
             }
             if (gameEnded)
@@ -94,16 +96,16 @@ namespace SeriousGame
                         bool added = false;
                         for (int i = 0; i < values.Length; i++)
                         {
-                            string[] score = values[i].Split(',');
-                            if (!added && frog.gameScore > Convert.ToInt32(score[1]))
+                            string[] sc = values[i].Split(',');
+                            if (!added && score > Convert.ToInt32(sc[1]))
                             {
-                                scores.Add(frog.playerName + ", " + frog.gameScore);
+                                scores.Add(frog.playerName + ", " + score);
                                 added = true;
                             }
                             scores.Add(values[i]);
                         }
                         if (!added)
-                            scores.Add(frog.playerName + ", " + frog.gameScore);
+                            scores.Add(frog.playerName + ", " + score);
                         File.WriteAllLines(pathOfFile, scores);
                         buttonIsSaveButton = false;
                     }
@@ -186,7 +188,7 @@ namespace SeriousGame
             if (newOffset > offset)
             {
                 decimal addPoints = (newOffset - offset) / 10;
-                frog.addScore((int)Math.Ceiling(addPoints));
+                score += (int)Math.Ceiling(addPoints);
                 offset = newOffset;
             }
 
@@ -206,7 +208,7 @@ namespace SeriousGame
             {
                 if (flies[i].IsInViewport(offset) && flies[i].IsCatching(frog))
                 {
-                    frog.addScore(flies[i].collectableScoreWorth);
+                    score += flies[i].collectableScoreWorth;
                     flies.RemoveAt(i);
                 }
             }
@@ -277,15 +279,15 @@ namespace SeriousGame
             }
             else
             {
-                String text = "Score: " + frog.gameScore;
+                String text = "Score: " + score;
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
             }
         }
 
         public void drawScoreScreen(SpriteBatch spriteBatch, int offset, bool isDead)
         {
-            String winText = "Hoera, gewonnen! Je scoorde " + frog.gameScore + " punten";
-            String loseText = "Helaas, GameOver! Je scoorde " + frog.gameScore + " punten";
+            String winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
+            String loseText = "Helaas, GameOver! Je scoorde " + score + " punten";
             String text = isDead ? loseText : winText;
             spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 230, ScreenManager.Dimensions.Y / 2 - 100), Color.White);
             spriteBatch.Draw(TextureManager.InputMedium, new Vector2(ScreenManager.Dimensions.X / 2 - 100, ScreenManager.Dimensions.Y / 2 - 50));
@@ -323,12 +325,12 @@ namespace SeriousGame
         {
             if (answer == false)
             {
-                frog.addScore(-1000);
+                score -= 1000;
                 isFrozen = false;
             }
             else
             {
-                frog.addScore(1000);
+                score += 1000;
                 isFrozen = false;
             }
             frog.Jump();
