@@ -42,7 +42,7 @@ namespace SeriousGame
         private void addObstacles()
         {
             int question = -2;
-            for (int i = 1000; i > gameHeight * -1; i -= 1000)
+            for (int i = 1000; i > gameHeight * -1; i -= 2000)
             {
                 question++;
                 obstacles.Add(new Obstacle(Color.Red, new Vector2(50, i), question));
@@ -184,15 +184,7 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Obstacle obstacle in obstacles)
-            {
-                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
-                {
-                    obstacle.DrawQuestion(spriteBatch);
-                }
-            }
-
-             // Draw platforms
+            // Draw platforms
             foreach (Platform platform in platforms) {
                 if (platform.IsInViewport(offset))
                 {
@@ -203,9 +195,13 @@ namespace SeriousGame
             // Draw obstacles
             foreach (Obstacle obstacle in obstacles)
             {
-                if (obstacle.IsInViewport(offset))
+                if (obstacle.IsInViewport(offset) && !obstacle.isDone())
                 {
                     obstacle.Draw(spriteBatch, offset);
+                    if (frog.isJumpingOnObstacle(obstacle))
+                    {
+                        obstacle.DrawQuestion(spriteBatch);
+                    }
                 }
             }
 
@@ -281,6 +277,7 @@ namespace SeriousGame
                 frog.addScore(1000);
                 isFrozen = false;
             }
+            frog.Jump();
         }
     }
 }
