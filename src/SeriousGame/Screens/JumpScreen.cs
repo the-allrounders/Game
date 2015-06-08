@@ -48,7 +48,7 @@ namespace SeriousGame
             for (int i = 1000; i > gameHeight * -1; i -= 2000)
             {
                 question++;
-                obstacles.Add(new Obstacle(Color.Red, new Vector2(50, i), question));
+                obstacles.Add(new Obstacle(new Vector2(50, i), question));
             }
         }
 

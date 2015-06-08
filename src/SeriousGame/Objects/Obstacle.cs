@@ -9,7 +9,6 @@ namespace SeriousGame
     {
         private int _question;
         private Vector2 _position;
-        private Color _color;
         private Texture2D _texture;
 
         private SpriteFont _font;
@@ -17,11 +16,10 @@ namespace SeriousGame
         private PopUp _popUp;
         private Boolean _done;
 
-        public Obstacle(Color color, Vector2 position, int question)
+        public Obstacle(Vector2 position, int question)
         {
             _question = question;
             _position = position;
-            _color = color;
             _texture = TextureManager.Obstacle;
             _font = FontManager.Verdana;
             _fontBold = FontManager.VerdanaBold;
@@ -41,7 +39,7 @@ namespace SeriousGame
 
         public void Draw(SpriteBatch spritebatch, int offset)
         {
-            spritebatch.Draw(_texture, new Vector2(200, _position.Y + offset), _color);
+            spritebatch.Draw(_texture, new Vector2(190, _position.Y + offset));
         }
 
         public Rectangle BoundingBox
