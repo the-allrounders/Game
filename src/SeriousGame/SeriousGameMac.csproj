@@ -75,12 +75,16 @@
     <Reference Include="Lidgren.Network">
       <HintPath>packages\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages\MonoMac.dll" />
     <None Include="packages\MonoGame.Framework.dll" />
     <None Include="packages\Lidgren.Network.dll" />
     <None Include="Info.plist" />
+    <None Include="leaderboard.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
@@ -104,6 +108,7 @@
     <Compile Include="Objects\Fly.cs" />
     <Compile Include="Objects\Magma.cs" />
     <Compile Include="Objects\PopUp.cs" />
+    <Compile Include="Screens\LeaderboardScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
