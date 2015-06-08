@@ -41,7 +41,7 @@ namespace SeriousGame
 
         private void addObstacles()
         {
-            int question = 0;
+            int question = -2;
             for (int i = 1000; i > gameHeight * -1; i -= 1000)
             {
                 question++;
@@ -88,8 +88,40 @@ namespace SeriousGame
             {
                 if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
                 {
-                    
-                    obstacle.openQuestion();
+                    if (!obstacle.isDone())
+                    {
+                        isFrozen = true;
+                        obstacle.openQuestion();
+                        Boolean answer;
+                        if (InputManager.IsPressing(Keys.A))
+                        {
+                            answer = obstacle.checkAnswer(1);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                        else if (InputManager.IsPressing(Keys.B))
+                        {
+                            answer = obstacle.checkAnswer(2);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                        else if (InputManager.IsPressing(Keys.C))
+                        {
+                            answer = obstacle.checkAnswer(3);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                        else if (InputManager.IsPressing(Keys.D))
+                        {
+                            answer = obstacle.checkAnswer(4);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                    }
                 }
             }
 
@@ -235,6 +267,20 @@ namespace SeriousGame
             }
             String playerName = frog.playerName;
             return playerName;
+        }
+
+        public void checkAnswer (Boolean answer)
+        {
+            if (answer == false)
+            {
+                frog.addScore(-1000);
+                isFrozen = false;
+            }
+            else
+            {
+                frog.addScore(1000);
+                isFrozen = false;
+            }
         }
     }
 }
