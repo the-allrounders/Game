@@ -222,8 +222,8 @@ namespace SeriousGame
             magma.Draw(spriteBatch, offset);
 
             // Draw walls
-            spriteBatch.Draw(TextureManager.Wall1, new Vector2(0, offset * -1 + offset));
-            spriteBatch.Draw(TextureManager.Wall2, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
+            spriteBatch.Draw(TextureManager.WallLeft, new Vector2(0, offset * -1 + offset));
+            spriteBatch.Draw(TextureManager.WallRight, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
 
             if (frog.isDead)
             {
