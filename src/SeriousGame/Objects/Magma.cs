@@ -16,19 +16,19 @@ namespace SeriousGame
         private Texture2D _magmaTexture;
         private float _speedIncrease;
 
-        public Magma (Vector2 pos)
+        public Magma(Vector2 pos)
         {
             _magmaPosition = pos;
             _magmaTexture = TextureManager.Magma;
             _speedIncrease = 0;
         }
 
-        public bool IsTouchingMagma (Frog frog)
+        public bool IsTouchingMagma(Frog frog)
         {
             return frog.BoundingBox.Bottom > _magmaPosition.Y;
         }
 
-        public void Update (GameTime gameTime, int offset)
+        public void Update(GameTime gameTime, int offset)
         {
             _speedIncrease += 0.01f;
             if (_speedIncrease > 2)
@@ -41,7 +41,7 @@ namespace SeriousGame
             }
         }
 
-        public void Draw (SpriteBatch spriteBatch, int offset)
+        public void Draw(SpriteBatch spriteBatch, int offset)
         {
             int bottomScreen = offset * -1 + (int)ScreenManager.Dimensions.Y;
             decimal iterations;

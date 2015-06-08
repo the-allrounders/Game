@@ -22,7 +22,7 @@ namespace SeriousGame
             else if (InputManager.IsClicking(new Rectangle(340, 115, 550, 100)))
             {
                 SettingsManager.Difficulty += 1;
-                if (SettingsManager.Difficulty == 4) 
+                if (SettingsManager.Difficulty == 4)
                     SettingsManager.Difficulty = 1;
             }
 
@@ -44,17 +44,18 @@ namespace SeriousGame
                 SettingsManager.Fullscreen = !SettingsManager.Fullscreen;
             }
         }
-        
-        private void DrawSetting(SpriteBatch spriteBatch, string text, Vector2 position){
+
+        private void DrawSetting(SpriteBatch spriteBatch, string text, Vector2 position)
+        {
             spriteBatch.DrawString(
                 FontManager.Verdana,
                 text,
-                position, 
-                Color.Black, 
-                new float(), 
-                new Vector2(), 
-                4, 
-                new SpriteEffects(), 
+                position,
+                Color.Black,
+                new float(),
+                new Vector2(),
+                4,
+                new SpriteEffects(),
                 new float()
             );
         }

@@ -20,7 +20,7 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.Splash, new Vector2(0,0));
+            spriteBatch.Draw(TextureManager.Splash, new Vector2(0, 0));
         }
     }
 }

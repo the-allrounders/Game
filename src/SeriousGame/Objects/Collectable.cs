@@ -13,7 +13,7 @@ namespace SeriousGame
         protected Texture2D _collectableTexture;
         public int collectableScoreWorth { get; protected set; }
 
-        public Collectable (Vector2 pos, Texture2D txtur, int scrWrth)
+        public Collectable(Vector2 pos, Texture2D txtur, int scrWrth)
         {
             _collectablePosition = pos;
             _collectableTexture = txtur;

@@ -11,17 +11,17 @@ namespace SeriousGame
 {
     public class Obstacle
     {
-        private int             _question;
-        private Vector2         _position;
-        private Color           _color;
-        private Texture2D       _texture;
+        private int _question;
+        private Vector2 _position;
+        private Color _color;
+        private Texture2D _texture;
 
-        private SpriteFont      _font;
-        private SpriteFont      _fontBold;
-        private PopUp           _popUp;
-        private Boolean         _done = false;
+        private SpriteFont _font;
+        private SpriteFont _fontBold;
+        private PopUp _popUp;
+        private Boolean _done = false;
 
-        public Obstacle (Color color, Vector2 position, int question)
+        public Obstacle(Color color, Vector2 position, int question)
         {
             _question = question;
             _position = position;
@@ -57,12 +57,12 @@ namespace SeriousGame
             }
         }
 
-        public void openQuestion ()
+        public void openQuestion()
         {
             _popUp = new PopUp(_question);
         }
 
-        public void DrawQuestion (SpriteBatch spritebatch)
+        public void DrawQuestion(SpriteBatch spritebatch)
         {
             if (_popUp != null)
             {

@@ -21,43 +21,45 @@ namespace SeriousGame
         public bool isDead { get; private set; }
         public String playerName { get; private set; }
 
-        public Frog (Vector2 charPos, int spd)
-		{
-			_frogTexture = TextureManager.Frog;
-			_frogPosition = charPos;
-			_speedlr = new Vector2 (10, 0);
+        public Frog(Vector2 charPos, int spd)
+        {
+            _frogTexture = TextureManager.Frog;
+            _frogPosition = charPos;
+            _speedlr = new Vector2(10, 0);
             playerName = "<name>";
             isDead = false;
             Jump();
-		}
+        }
 
-        public void addScore (int scrWrth)
+        public void addScore(int scrWrth)
         {
             gameScore += scrWrth;
         }
 
-        public void makeDead ()
+        public void makeDead()
         {
             isDead = true;
         }
 
-        public void addCharToName (Keys key)
+        public void addCharToName(Keys key)
         {
             if (playerName.Length < 12)
                 playerName += key;
         }
 
-        public void removeCharFromName ()
+        public void removeCharFromName()
         {
             if (playerName.Length > 0)
                 playerName = playerName.Remove(playerName.Length - 1);
         }
 
-		public Rectangle BoundingBox {
-			get {
-				return new Rectangle ((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
-			}
-		}
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle((int)_frogPosition.X, (int)_frogPosition.Y, (int)_frogTexture.Width, (int)_frogTexture.Height);
+            }
+        }
 
         public bool isJumpingOnObstacle(Obstacle obstacle)
         {
@@ -88,13 +90,13 @@ namespace SeriousGame
             time = 0;
             jumpFrom = _frogPosition.Y;
         }
-        
+
         /// <summary>
         /// Needs to be run once every update cycle
         /// </summary>
         /// <param name="gameTime">The gameTime from the Game</param>
-		public void ApplyGravity(GameTime gameTime)
-		{
+        public void ApplyGravity(GameTime gameTime)
+        {
             // Update t variable with new time
             time = time + gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -106,31 +108,33 @@ namespace SeriousGame
 
             // Apply new position
             _frogPosition.Y = newPosition;
-		}
+        }
 
         /// <summary>
         /// Moves the frog to the left
         /// </summary>
-		public void Left(){
-			if (_frogPosition.X > JumpScreen.Padding) {
-				_frogPosition -= _speedlr;
-			}
-		}
+        public void Left()
+        {
+            if (_frogPosition.X > JumpScreen.Padding)
+            {
+                _frogPosition -= _speedlr;
+            }
+        }
 
         /// <summary>
         /// Moves the frog to the right
         /// </summary>
-		public void Right() 
-		{
+        public void Right()
+        {
             if (_frogPosition.X + _frogTexture.Width < ScreenManager.Dimensions.X - JumpScreen.Padding)
             {
-				_frogPosition += _speedlr;
-			}
-		}
+                _frogPosition += _speedlr;
+            }
+        }
 
-		public void Draw(SpriteBatch spriteBatch, int offset)
-		{
-			spriteBatch.Draw(_frogTexture, new Vector2 (_frogPosition.X, _frogPosition.Y + offset));
-		}
-	}
+        public void Draw(SpriteBatch spriteBatch, int offset)
+        {
+            spriteBatch.Draw(_frogTexture, new Vector2(_frogPosition.X, _frogPosition.Y + offset));
+        }
+    }
 }

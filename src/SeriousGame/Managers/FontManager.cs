@@ -13,7 +13,6 @@ namespace SeriousGame
         public static SpriteFont VerdanaBold;
         public static SpriteFont VerdanaRegular;
 
-
         public static void Load(ContentManager Content)
         {
             Verdana = Content.Load<SpriteFont>("Verdana");

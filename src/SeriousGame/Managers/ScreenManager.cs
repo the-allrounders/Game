@@ -24,7 +24,7 @@ namespace SeriousGame
         {
             set
             {
-                if(currentScreen != null) currentScreen.Unload();
+                if (currentScreen != null) currentScreen.Unload();
                 value.Load();
                 currentScreen = value;
             }

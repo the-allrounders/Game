@@ -232,7 +232,8 @@ namespace SeriousGame
         {
 
             // Draw platforms
-            foreach (Platform platform in platforms) {
+            foreach (Platform platform in platforms)
+            {
                 if (platform.IsInViewport(offset))
                 {
                     platform.Draw(spriteBatch, offset);
@@ -252,7 +253,7 @@ namespace SeriousGame
                 }
             }
 
-			// Draw flies
+            // Draw flies
             foreach (Fly fly in flies)
             {
                 if (fly.IsInViewport(offset))
@@ -320,7 +321,7 @@ namespace SeriousGame
             return playerName;
         }
 
-        public void checkAnswer (Boolean answer)
+        public void checkAnswer(Boolean answer)
         {
             if (answer == false)
             {

@@ -14,14 +14,14 @@ namespace SeriousGame
         public static Texture2D Settings;
 
         public static Texture2D Fly;
-		public static Texture2D Platform;
-		public static Texture2D Frog;
+        public static Texture2D Platform;
+        public static Texture2D Frog;
         public static Texture2D Magma;
 
         public static Texture2D Obstacle;
 
         public static Texture2D WallLeft;
-		public static Texture2D WallRight;
+        public static Texture2D WallRight;
         public static Texture2D InputMedium;
         public static Texture2D Caret;
 
@@ -36,7 +36,7 @@ namespace SeriousGame
             Magma = Content.Load<Texture2D>("magma");
             Obstacle = Content.Load<Texture2D>("obstacle");
             WallLeft = Content.Load<Texture2D>("wall_left");
-			WallRight = Content.Load<Texture2D>("wall_right");
+            WallRight = Content.Load<Texture2D>("wall_right");
             InputMedium = Content.Load<Texture2D>("input_medium");
             Caret = Content.Load<Texture2D>("caret");
         }

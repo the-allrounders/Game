@@ -28,7 +28,7 @@ namespace SeriousGame.Objects
         private int _questionNumber;
         private string _choices;
         private int _answer;
-        
+
         public PopUp(int questionNumber)
         {
             _questionNumber = questionNumber;
@@ -42,7 +42,7 @@ namespace SeriousGame.Objects
             else
             {
                 _choices = _choices = _questions[0, 1] + "   " + _questions[0, 2] + "   " + _questions[0, 3] + "   " + _questions[0, 4];
-                _answer = _answers[0,0];
+                _answer = _answers[0, 0];
             }
 
         }
@@ -62,13 +62,13 @@ namespace SeriousGame.Objects
             else
             {
                 spritebatch.DrawString(FontManager.Verdana, _questions[0, 0], new Vector2(200, 20), Color.White);
-               
+
             }
         }
 
         public Boolean chooceAnswer(int answer)
         {
-            if (_answer == answer) 
+            if (_answer == answer)
             {
                 return true;
             }

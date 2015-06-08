@@ -18,7 +18,7 @@ namespace SeriousGame
 
         private static MouseState oldMouseState;
         private static MouseState mouseState;
-        
+
         /// <summary>
         /// Must be run at the beginning of every Update cycle, to get the new states.
         /// </summary>
@@ -84,13 +84,13 @@ namespace SeriousGame
             {
                 return false;
             }
-            
+
             // If onlyOnce is true, check if this is the first time the user is clicking this button
             if (onlyOnce && oldKeyboardState.IsKeyDown(key))
             {
                 return false;
             }
-            
+
             // If all checks passed, return true
             return true;
         }
