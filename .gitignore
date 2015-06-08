@@ -2,6 +2,8 @@
 
 src/SeriousGame/bin
 src/SeriousGame/obj
+src/Setup/Debug
+src/Setup/Release
 *.suo
 *.userprefs
 

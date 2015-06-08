@@ -86,7 +86,7 @@ namespace SeriousGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(new Color(46, 37, 7));
 
             spriteBatch.Begin();
             ScreenManager.Draw(spriteBatch);

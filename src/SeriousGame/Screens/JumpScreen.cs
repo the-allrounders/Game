@@ -230,6 +230,7 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+
             // Draw platforms
             foreach (Platform platform in platforms) {
                 if (platform.IsInViewport(offset))
@@ -251,7 +252,7 @@ namespace SeriousGame
                 }
             }
 
-            // Draw flies
+			// Draw flies
             foreach (Fly fly in flies)
             {
                 if (fly.IsInViewport(offset))
@@ -267,9 +268,19 @@ namespace SeriousGame
             magma.Draw(spriteBatch, offset);
 
             // Draw walls
-            spriteBatch.Draw(TextureManager.Wall, new Vector2(0, offset * -1 + offset));
-            spriteBatch.Draw(TextureManager.Wall, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
-            endGame(spriteBatch);
+            spriteBatch.Draw(TextureManager.WallLeft, new Vector2(0, offset * -1 + offset));
+            spriteBatch.Draw(TextureManager.WallRight, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
+
+            if (frog.isDead)
+            {
+                endGame(spriteBatch);
+                gameEnded = true;
+            }
+            else
+            {
+                String text = "Score: " + frog.gameScore;
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
+            }
         }
 
         public void drawScoreScreen(SpriteBatch spriteBatch, int offset, bool isDead)

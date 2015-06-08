@@ -11,6 +11,7 @@ namespace SeriousGame
         public static bool Music = true;
         public static bool Sound = true;
 
+        public static readonly bool fullscreenPossible = Environment.OSVersion.ToString().Substring(0, 4) != "Unix";
         private static bool fullscreen = false;
         public static bool Fullscreen
         {
@@ -20,8 +21,8 @@ namespace SeriousGame
             }
             set
             {
-                fullscreen = value;
-                ScreenManager.Game.setFullScreen(value);
+                fullscreen = (fullscreenPossible && value);
+                ScreenManager.Game.setFullScreen(fullscreen);
             }
         }
     }
