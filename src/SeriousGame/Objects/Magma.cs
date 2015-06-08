@@ -54,7 +54,7 @@ namespace SeriousGame
 
             for (int i = 0; i < Math.Ceiling(iterations); i++)
             {
-                spriteBatch.Draw(_magmaTexture, new Vector2(JumpScreen.Padding, bottomScreen + offset - magmaHeight + _magmaTexture.Height * i));
+                spriteBatch.Draw(_magmaTexture, new Vector2(JumpScreen.Padding-5, bottomScreen + offset - magmaHeight + _magmaTexture.Height * i));
             }
         }
     }
