@@ -41,8 +41,8 @@ namespace SeriousGame
 
         private void addObstacles()
         {
-            int question = 0;
-            for (int i = 1000; i > gameHeight * -1; i -= 1000)
+            int question = -2;
+            for (int i = 1000; i > gameHeight * -1; i -= 2000)
             {
                 question++;
                 obstacles.Add(new Obstacle(Color.Red, new Vector2(50, i), question));
@@ -84,14 +84,46 @@ namespace SeriousGame
             }
 
             // Check if Frog touches obstacle
-//            foreach (Obstacle obstacle in obstacles)
-//            {
-//                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
-//                {
-//                    isFrozen = true;
-//                    obstacle.openQuestion();
-//                }
-//            }
+            foreach (Obstacle obstacle in obstacles)
+            {
+                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
+                {
+                    if (!obstacle.isDone())
+                    {
+                        isFrozen = true;
+                        obstacle.openQuestion();
+                        Boolean answer;
+                        if (InputManager.IsPressing(Keys.A))
+                        {
+                            answer = obstacle.checkAnswer(1);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                        else if (InputManager.IsPressing(Keys.B))
+                        {
+                            answer = obstacle.checkAnswer(2);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                        else if (InputManager.IsPressing(Keys.C))
+                        {
+                            answer = obstacle.checkAnswer(3);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                        else if (InputManager.IsPressing(Keys.D))
+                        {
+                            answer = obstacle.checkAnswer(4);
+                            Console.WriteLine(answer);
+                            obstacle.finishedQuestion();
+                            checkAnswer(answer);
+                        }
+                    }
+                }
+            }
 
             // If user is pressing Left, go left. Same for Right.
             if (!isFrozen && !frog.isDead && InputManager.IsPressing(Keys.Left, false))
@@ -152,15 +184,8 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-//            foreach (Obstacle obstacle in obstacles)
-//            {
-//                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
-//                {
-//                    obstacle.DrawQuestion(spriteBatch);
-//                }
-//            }
 
-			// Draw platforms
+            // Draw platforms
             foreach (Platform platform in platforms) {
                 if (platform.IsInViewport(offset))
                 {
@@ -169,15 +194,19 @@ namespace SeriousGame
             }
 
             // Draw obstacles
-//            foreach (Obstacle obstacle in obstacles)
-//            {
-//                if (obstacle.IsInViewport(offset))
-//                {
-//                    obstacle.Draw(spriteBatch, offset);
-//                }
-//            }
+            foreach (Obstacle obstacle in obstacles)
+            {
+                if (obstacle.IsInViewport(offset) && !obstacle.isDone())
+                {
+                    obstacle.Draw(spriteBatch, offset);
+                    if (frog.isJumpingOnObstacle(obstacle))
+                    {
+                        obstacle.DrawQuestion(spriteBatch);
+                    }
+                }
+            }
 
-            // Draw flies
+			// Draw flies
             foreach (Fly fly in flies)
             {
                 if (fly.IsInViewport(offset))
@@ -235,6 +264,21 @@ namespace SeriousGame
             }
             String playerName = frog.playerName;
             return playerName;
+        }
+
+        public void checkAnswer (Boolean answer)
+        {
+            if (answer == false)
+            {
+                frog.addScore(-1000);
+                isFrozen = false;
+            }
+            else
+            {
+                frog.addScore(1000);
+                isFrozen = false;
+            }
+            frog.Jump();
         }
     }
 }

@@ -18,14 +18,16 @@ namespace SeriousGame
         private Vector2 _speedlr;
         public bool isDescending { get; private set; }
         public int gameScore { get; private set; }
-        public bool isDead { get; private set; } = false;
-        public String playerName { get; private set; } = " ";
+        public bool isDead { get; private set; }
+        public String playerName { get; private set; }
 
         public Frog (Vector2 charPos, int spd)
 		{
 			_frogTexture = TextureManager.Frog;
 			_frogPosition = charPos;
 			_speedlr = new Vector2 (10, 0);
+            playerName = "";
+            isDead = false;
             Jump();
 		}
 
@@ -46,7 +48,7 @@ namespace SeriousGame
 
         public void removeCharFromName ()
         {
-            if (playerName.Length > 1)
+            if (playerName.Length > 0)
                 playerName = playerName.Remove(playerName.Length - 1);
         }
 

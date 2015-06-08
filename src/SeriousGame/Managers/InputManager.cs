@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,18 @@ namespace SeriousGame
                 return false;
             }
 
+            // Convert the mouse position to a Rectangle, so it can be checked for intersection
+            Rectangle mousePosition = new Rectangle(mouseState.Position.X, mouseState.Position.Y, 1, 1);
+
+            // On fullscreen, fix the mouse position
+            if (SettingsManager.Fullscreen)
+            {
+                mousePosition.X = mousePosition.X / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * (int)ScreenManager.Dimensions.X;
+                mousePosition.Y = mousePosition.Y / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * (int)ScreenManager.Dimensions.Y;
+            }
+
             // If a retangle is given to check for intersection, check
-            if (on != new Rectangle() && !on.Intersects(new Rectangle(mouseState.Position.X, mouseState.Position.Y, 1, 1)))
+            if (on != new Rectangle() && !on.Intersects(mousePosition))
             {
                 return false;
             }

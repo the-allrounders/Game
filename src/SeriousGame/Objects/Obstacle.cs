@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using SeriousGame.Objects;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace SeriousGame
         private SpriteFont      _font;
         private SpriteFont      _fontBold;
         private PopUp           _popUp;
+        private Boolean         _done = false;
 
         public Obstacle (Color color, Vector2 position, int question)
         {
@@ -66,7 +68,21 @@ namespace SeriousGame
             {
                 _popUp.Draw(spritebatch);
             }
-            
+        }
+
+        public Boolean checkAnswer(int answer)
+        {
+            return _popUp.chooceAnswer(answer);
+        }
+
+        public Boolean isDone()
+        {
+            return _done;
+        }
+
+        public void finishedQuestion()
+        {
+            _done = true;
         }
     }
 }
