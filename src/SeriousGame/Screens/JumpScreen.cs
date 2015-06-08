@@ -15,8 +15,8 @@ namespace SeriousGame
         private readonly List<Platform> platforms = Platform.generateList(gameHeight);
         private readonly List<Obstacle> obstacles = Obstacle.GenerateList(gameHeight);
         private readonly List<Fly> flies = Fly.GenerateList(gameHeight);
-        private Frog frog;
-        private Magma magma;
+        private readonly Frog frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
+        private readonly Magma magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
         private bool isFrozen;
         private bool gameEnded;
         private bool buttonIsSaveButton = true;
@@ -24,61 +24,6 @@ namespace SeriousGame
         private int score;
 
         public static int Padding = 200;
-
-        public override void Load()
-        {
-            frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
-            magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
-        }
-
-        public void endGame(SpriteBatch spriteBatch)
-        {
-            if (frog.isDead)
-            {
-                DrawScoreScreen(spriteBatch, offset, true);
-            }
-            else
-            {
-                string text = "Score: " + score;
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
-            }
-            if (gameEnded)
-            {
-                if (InputManager.IsPressing(Keys.Enter) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 40, (int)ScreenManager.Dimensions.Y / 2, 100, 20)))
-                {
-                    if (buttonIsSaveButton)
-                    {
-                        const string pathOfFile = "../../../leaderboard.txt";
-
-                        string[] values = File.ReadAllLines(pathOfFile);
-                        List<string> scores = new List<string>();
-                        bool added = false;
-                        foreach (string t in values)
-                        {
-                            string[] sc = t.Split(',');
-                            if (!added && score > Convert.ToInt32(sc[1]))
-                            {
-                                scores.Add(frog.playerName + ", " + score);
-                                added = true;
-                            }
-                            scores.Add(t);
-                        }
-                        if (!added)
-                            scores.Add(frog.playerName + ", " + score);
-                        File.WriteAllLines(pathOfFile, scores);
-                        buttonIsSaveButton = false;
-                    }
-                    else
-                    {
-                        ScreenManager.CurrentScreen = new LeaderboardScreen();
-                    }
-                }
-                else if (InputManager.IsPressing(Keys.Space) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 45, (int)ScreenManager.Dimensions.Y / 2 + 35, 100, 20)))
-                {
-                    ScreenManager.CurrentScreen = new JumpScreen();
-                }
-            }
-        }
 
         public override void Update(GameTime gameTime)
         {
@@ -155,19 +100,56 @@ namespace SeriousGame
                 flies.RemoveAt(i);
             }
 
-            // Check if frog is touching Magma
-            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingFrog(frog))
-            {
-                frog.Die();
-                gameEnded = true;
-            }
-            else if (!isFrozen)
+            if (!isFrozen && !gameEnded)
             {
                 // Apply gravity to Frog
                 frog.ApplyGravity(gameTime);
 
                 // Make the magma rise
                 magma.Rise(offset);
+            }
+
+            //Check if frog is touching Magma
+            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingFrog(frog))
+            {
+                frog.Die();
+                gameEnded = true;
+
+                if (InputManager.IsPressing(Keys.Enter) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 40, (int)ScreenManager.Dimensions.Y / 2, 100, 20)))
+                {
+                    if (buttonIsSaveButton)
+                    {
+                        const string pathOfFile = "../../../leaderboard.txt";
+
+                        string[] values = File.ReadAllLines(pathOfFile);
+                        List<string> scores = new List<string>();
+                        bool added = false;
+                        foreach (string t in values)
+                        {
+                            string[] sc = t.Split(',');
+                            if (!added && score > Convert.ToInt32(sc[1]))
+                            {
+                                scores.Add(frog.playerName + ", " + score);
+                                added = true;
+                            }
+                            scores.Add(t);
+                        }
+                        if (!added)
+                            scores.Add(frog.playerName + ", " + score);
+                        File.WriteAllLines(pathOfFile, scores);
+                        buttonIsSaveButton = false;
+                    }
+                    else
+                    {
+                        ScreenManager.CurrentScreen = new LeaderboardScreen();
+                    }
+                }
+                else if (InputManager.IsPressing(Keys.Space) ||
+                         InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 45,
+                             (int)ScreenManager.Dimensions.Y / 2 + 35, 100, 20)))
+                {
+                    ScreenManager.CurrentScreen = new JumpScreen();
+                }
             }
         }
 
@@ -181,7 +163,8 @@ namespace SeriousGame
             }
 
             // Draw obstacles
-            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.isDone()))
+            foreach (
+                Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.isDone()))
             {
                 obstacle.Draw(spriteBatch, offset);
                 if (frog.isJumpingOnObstacle(obstacle))
@@ -203,18 +186,22 @@ namespace SeriousGame
             magma.Draw(spriteBatch, offset);
 
             // Draw walls
-            spriteBatch.Draw(TextureManager.WallLeft, new Vector2(0, offset * -1 + offset));
-            spriteBatch.Draw(TextureManager.WallRight, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
+            spriteBatch.Draw(TextureManager.WallLeft, new Vector2(0, offset*-1 + offset));
+            spriteBatch.Draw(TextureManager.WallRight,
+                new Vector2(ScreenManager.Dimensions.X - Padding, offset*-1 + offset));
 
+            // Draw scorescreen of frog is dead
             if (frog.isDead)
             {
-                endGame(spriteBatch);
-                gameEnded = true;
+                DrawScoreScreen(spriteBatch, offset, true);
             }
+
+            // If the frog is alive, draw the score
             else
             {
                 string text = "Score: " + score;
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20),
+                    Color.White);
             }
         }
 
