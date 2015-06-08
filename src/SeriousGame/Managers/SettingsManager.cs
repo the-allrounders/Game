@@ -19,7 +19,7 @@ namespace SeriousGame
             set
             {
                 fullscreen = (fullscreenPossible && value);
-                ScreenManager.Game.setFullScreen(fullscreen);
+                ScreenManager.Game.Fullscreen = fullscreen;
             }
         }
     }

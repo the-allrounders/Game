@@ -17,12 +17,12 @@ namespace SeriousGame
             _speedIncrease = 0;
         }
 
-        public bool IsTouchingMagma(Frog frog)
+        public bool IsTouchingFrog(Frog frog)
         {
             return frog.BoundingBox.Bottom > _magmaPosition.Y;
         }
 
-        public void Update(GameTime gameTime, int offset)
+        public void Rise(int offset)
         {
             _speedIncrease += 0.01f;
             if (_speedIncrease > 2)

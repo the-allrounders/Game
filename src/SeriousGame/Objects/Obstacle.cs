@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SeriousGame.Objects;
@@ -79,6 +80,18 @@ namespace SeriousGame
         public void finishedQuestion()
         {
             _done = true;
+        }
+
+        public static List<Obstacle> GenerateList(int gameHeight)
+        {
+            int question = -2;
+            List<Obstacle> platforms = new List<Obstacle>();
+            for (int i = 1000; i > gameHeight * -1; i -= 2000)
+            {
+                question++;
+                platforms.Add(new Obstacle(Color.Red, new Vector2(50, i), question));
+            }
+            return platforms;
         }
     }
 }

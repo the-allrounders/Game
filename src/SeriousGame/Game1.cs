@@ -8,7 +8,7 @@ namespace SeriousGame
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
+        readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public Game1()
@@ -29,15 +29,22 @@ namespace SeriousGame
         {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Dimensions.Y;
-            setFullScreen(SettingsManager.Fullscreen);
+            Fullscreen = SettingsManager.Fullscreen;
 
             base.Initialize();
         }
 
-        public void setFullScreen(bool fullscreen)
+        /// <summary>
+        /// Sets the IsFullScreen property to the Game graphics.
+        /// Only use SettingsManager.Fullscreen to make sure this is saved in the game!
+        /// </summary>
+        public bool Fullscreen
         {
-            graphics.IsFullScreen = fullscreen;
-            graphics.ApplyChanges();
+            set
+            {
+                graphics.IsFullScreen = value;
+                graphics.ApplyChanges();
+            }
         }
 
         /// <summary>

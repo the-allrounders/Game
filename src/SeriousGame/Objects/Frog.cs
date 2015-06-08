@@ -13,7 +13,7 @@ namespace SeriousGame
         public bool isDescending { get; private set; }
 
         public bool isDead { get; private set; }
-        public String playerName { get; private set; }
+        public string playerName { get; private set; }
 
         public Frog(Vector2 charPos, int spd)
         {
@@ -25,7 +25,7 @@ namespace SeriousGame
             Jump();
         }
 
-        public void makeDead()
+        public void Die()
         {
             isDead = true;
         }

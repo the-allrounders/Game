@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,15 +11,15 @@ namespace SeriousGame
     class JumpScreen : GameScreen
     {
         private int offset;
-        private int gameHeight = 100000;
-        private List<Platform> platforms = new List<Platform>();
-        private List<Obstacle> obstacles = new List<Obstacle>();
-        private List<Fly> flies = new List<Fly>();
+        private const int gameHeight = 100000;
+        private readonly List<Platform> platforms = Platform.generateList(gameHeight);
+        private readonly List<Obstacle> obstacles = Obstacle.GenerateList(gameHeight);
+        private readonly List<Fly> flies = Fly.GenerateList(gameHeight);
         private Frog frog;
         private Magma magma;
-        private Boolean isFrozen;
+        private bool isFrozen;
         private bool gameEnded;
-        private bool buttonIsSaveButton;
+        private bool buttonIsSaveButton = true;
 
         private int score;
 
@@ -26,61 +27,19 @@ namespace SeriousGame
 
         public override void Load()
         {
-            addPlatforms();
-            addObstacles();
-            addFlies();
             frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
             magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
-            gameEnded = false;
-            buttonIsSaveButton = true;
-        }
-
-        private void addPlatforms()
-        {
-            Random rnd = new Random();
-            for (int i = 600; i > gameHeight * -1; i -= 200)
-            {
-                platforms.Add(new Platform(new Vector2(rnd.Next(Padding, (int)ScreenManager.Dimensions.X - Padding - TextureManager.Platform.Width), i + rnd.Next(-30, 30)), new Vector2(150, 50)));
-            }
-        }
-
-        private void addObstacles()
-        {
-            int question = -2;
-            for (int i = 1000; i > gameHeight * -1; i -= 2000)
-            {
-                question++;
-                obstacles.Add(new Obstacle(Color.Red, new Vector2(50, i), question));
-            }
-        }
-
-        private void addFlies()
-        {
-            Random rnd = new Random();
-            for (int i = 300; i > gameHeight * -1; i -= TextureManager.Fly.Height + 200)
-            {
-                int fliesThisLine = rnd.Next(-1, 4);
-                for (int n = 0; n < fliesThisLine; n++)
-                {
-                    int distance = (int)((ScreenManager.Dimensions.X - (Padding * 2)) / fliesThisLine * n) + Padding + rnd.Next(-30, 30);
-                    if (distance < Padding)
-                        distance = Padding;
-                    else if (distance > ScreenManager.Dimensions.X - Padding)
-                        distance = (int)ScreenManager.Dimensions.X - Padding - TextureManager.Fly.Width;
-                    flies.Add(new Fly(new Vector2(distance, i + rnd.Next(-50, 50)), 100));
-                }
-            }
         }
 
         public void endGame(SpriteBatch spriteBatch)
         {
             if (frog.isDead)
             {
-                drawScoreScreen(spriteBatch, offset, true);
+                DrawScoreScreen(spriteBatch, offset, true);
             }
             else
             {
-                String text = "Score: " + score;
+                string text = "Score: " + score;
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
             }
             if (gameEnded)
@@ -89,20 +48,20 @@ namespace SeriousGame
                 {
                     if (buttonIsSaveButton)
                     {
-                        String pathOfFile = "../../../leaderboard.txt";
+                        const string pathOfFile = "../../../leaderboard.txt";
 
                         string[] values = File.ReadAllLines(pathOfFile);
                         List<string> scores = new List<string>();
                         bool added = false;
-                        for (int i = 0; i < values.Length; i++)
+                        foreach (string t in values)
                         {
-                            string[] sc = values[i].Split(',');
+                            string[] sc = t.Split(',');
                             if (!added && score > Convert.ToInt32(sc[1]))
                             {
                                 scores.Add(frog.playerName + ", " + score);
                                 added = true;
                             }
-                            scores.Add(values[i]);
+                            scores.Add(t);
                         }
                         if (!added)
                             scores.Add(frog.playerName + ", " + score);
@@ -130,44 +89,32 @@ namespace SeriousGame
             }
 
             // Check if Frog touches obstacle
-            foreach (Obstacle obstacle in obstacles)
+            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle) && !obstacle.isDone()))
             {
-                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
+                isFrozen = true;
+                obstacle.openQuestion();
+                if (InputManager.IsPressing(Keys.A) || InputManager.IsPressing(Keys.B) ||
+                    InputManager.IsPressing(Keys.C) || InputManager.IsPressing(Keys.D))
                 {
-                    if (!obstacle.isDone())
+                    bool answer = false;
+                    if (InputManager.IsPressing(Keys.A))
                     {
-                        isFrozen = true;
-                        obstacle.openQuestion();
-                        Boolean answer;
-                        if (InputManager.IsPressing(Keys.A))
-                        {
-                            answer = obstacle.checkAnswer(1);
-                            Console.WriteLine(answer);
-                            obstacle.finishedQuestion();
-                            checkAnswer(answer);
-                        }
-                        else if (InputManager.IsPressing(Keys.B))
-                        {
-                            answer = obstacle.checkAnswer(2);
-                            Console.WriteLine(answer);
-                            obstacle.finishedQuestion();
-                            checkAnswer(answer);
-                        }
-                        else if (InputManager.IsPressing(Keys.C))
-                        {
-                            answer = obstacle.checkAnswer(3);
-                            Console.WriteLine(answer);
-                            obstacle.finishedQuestion();
-                            checkAnswer(answer);
-                        }
-                        else if (InputManager.IsPressing(Keys.D))
-                        {
-                            answer = obstacle.checkAnswer(4);
-                            Console.WriteLine(answer);
-                            obstacle.finishedQuestion();
-                            checkAnswer(answer);
-                        }
+                        answer = obstacle.checkAnswer(1);
                     }
+                    else if (InputManager.IsPressing(Keys.B))
+                    {
+                        answer = obstacle.checkAnswer(2);
+                    }
+                    else if (InputManager.IsPressing(Keys.C))
+                    {
+                        answer = obstacle.checkAnswer(3);
+                    }
+                    else if (InputManager.IsPressing(Keys.D))
+                    {
+                        answer = obstacle.checkAnswer(4);
+                    }
+                    obstacle.finishedQuestion();
+                    checkAnswer(answer);
                 }
             }
 
@@ -193,12 +140,9 @@ namespace SeriousGame
             }
 
             // Check if jumping on platform
-            foreach (Platform platform in platforms)
+            if (platforms.Any(platform => platform.IsInViewport(offset) && frog.IsJumpingOn(platform)))
             {
-                if (platform.IsInViewport(offset) && frog.IsJumpingOn(platform))
-                {
-                    frog.Jump();
-                }
+                frog.Jump();
             }
 
             // Check if frog is catching any flies
@@ -206,16 +150,15 @@ namespace SeriousGame
             copyFlies = flies;
             for (int i = 0; i < copyFlies.Count; i++)
             {
-                if (flies[i].IsInViewport(offset) && flies[i].IsCatching(frog))
-                {
-                    score += flies[i].collectableScoreWorth;
-                    flies.RemoveAt(i);
-                }
+                if (!flies[i].IsInViewport(offset) || !flies[i].IsCatching(frog)) continue;
+                score += flies[i].collectableScoreWorth;
+                flies.RemoveAt(i);
             }
 
-            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingMagma(frog))
+            // Check if frog is touching Magma
+            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingFrog(frog))
             {
-                frog.makeDead();
+                frog.Die();
                 gameEnded = true;
             }
             else if (!isFrozen)
@@ -224,7 +167,7 @@ namespace SeriousGame
                 frog.ApplyGravity(gameTime);
 
                 // Make the magma rise
-                magma.Update(gameTime, offset);
+                magma.Rise(offset);
             }
         }
 
@@ -232,34 +175,25 @@ namespace SeriousGame
         {
 
             // Draw platforms
-            foreach (Platform platform in platforms)
+            foreach (Platform platform in platforms.Where(platform => platform.IsInViewport(offset)))
             {
-                if (platform.IsInViewport(offset))
-                {
-                    platform.Draw(spriteBatch, offset);
-                }
+                platform.Draw(spriteBatch, offset);
             }
 
             // Draw obstacles
-            foreach (Obstacle obstacle in obstacles)
+            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.isDone()))
             {
-                if (obstacle.IsInViewport(offset) && !obstacle.isDone())
+                obstacle.Draw(spriteBatch, offset);
+                if (frog.isJumpingOnObstacle(obstacle))
                 {
-                    obstacle.Draw(spriteBatch, offset);
-                    if (frog.isJumpingOnObstacle(obstacle))
-                    {
-                        obstacle.DrawQuestion(spriteBatch);
-                    }
+                    obstacle.DrawQuestion(spriteBatch);
                 }
             }
 
             // Draw flies
-            foreach (Fly fly in flies)
+            foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset)))
             {
-                if (fly.IsInViewport(offset))
-                {
-                    fly.Draw(spriteBatch, offset);
-                }
+                fly.Draw(spriteBatch, offset);
             }
 
             // Draw frog
@@ -279,19 +213,19 @@ namespace SeriousGame
             }
             else
             {
-                String text = "Score: " + score;
+                string text = "Score: " + score;
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20), Color.White);
             }
         }
 
-        public void drawScoreScreen(SpriteBatch spriteBatch, int offset, bool isDead)
+        public void DrawScoreScreen(SpriteBatch spriteBatch, int offset, bool isDead)
         {
-            String winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
-            String loseText = "Helaas, GameOver! Je scoorde " + score + " punten";
-            String text = isDead ? loseText : winText;
+            string winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
+            string loseText = "Helaas, GameOver! Je scoorde " + score + " punten";
+            string text = isDead ? loseText : winText;
             spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 230, ScreenManager.Dimensions.Y / 2 - 100), Color.White);
             spriteBatch.Draw(TextureManager.InputMedium, new Vector2(ScreenManager.Dimensions.X / 2 - 100, ScreenManager.Dimensions.Y / 2 - 50));
-            String playerName = buildPlayerName();
+            string playerName = BuildPlayerName();
             //spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + spriteFont.MeasureString(playerName).X, ScreenManager.Dimensions.Y / 2 - 40));
             spriteBatch.DrawString(FontManager.Verdana, playerName, new Vector2(ScreenManager.Dimensions.X / 2 - 90, ScreenManager.Dimensions.Y / 2 - 40), Color.Black);
             if (buttonIsSaveButton)
@@ -301,7 +235,7 @@ namespace SeriousGame
             spriteBatch.DrawString(FontManager.Verdana, "Opnieuw", new Vector2(ScreenManager.Dimensions.X / 2 - 45, ScreenManager.Dimensions.Y / 2 + 30), Color.White);
         }
 
-        public String buildPlayerName()
+        public string BuildPlayerName()
         {
             if (InputManager.IsPressing(Keys.Back))
             {
@@ -317,11 +251,11 @@ namespace SeriousGame
                     }
                 }
             }
-            String playerName = frog.playerName;
+            string playerName = frog.playerName;
             return playerName;
         }
 
-        public void checkAnswer(Boolean answer)
+        public void checkAnswer(bool answer)
         {
             if (answer == false)
             {
