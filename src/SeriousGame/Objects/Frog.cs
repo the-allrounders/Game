@@ -48,7 +48,7 @@ namespace SeriousGame
 
         public void removeCharFromName ()
         {
-            if (playerName.Length > 1)
+            if (playerName.Length > 0)
                 playerName = playerName.Remove(playerName.Length - 1);
         }
 
