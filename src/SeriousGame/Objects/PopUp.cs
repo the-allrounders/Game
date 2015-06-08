@@ -20,7 +20,7 @@ namespace SeriousGame.Objects
                                                     "A) Ja","B) Nee", "C) Misschien", "D) Als je elleboog op tafel doet misschien"},   
                                             };
         private int[,] _answers = new int[,] {
-                                                {2},
+                                                {3},
                                                 {2},
                                                 {4},
                                                 {1},
@@ -32,16 +32,16 @@ namespace SeriousGame.Objects
         public PopUp(int questionNumber)
         {
             _questionNumber = questionNumber;
-            string asd = "QuestionNumber:" + questionNumber + "  QuestionNumber:" + _questions.Length;
+            string asd = "QuestionNumber:" + questionNumber + "  QuestionNumber:" + _questions.GetLength(0);
             Console.WriteLine(asd);
-            if (questionNumber < _questions.Length)
+            if (questionNumber < _questions.GetLength(0))
             {
                 _choices = _questions[questionNumber, 1] + "   " + _questions[questionNumber, 2] + "   " + _questions[questionNumber, 3] + "   " + _questions[questionNumber, 4];
                 _answer = _answers[_questionNumber, 0];
             }
             else
             {
-                _choices = _questions[0, 1] + _questions[0, 2] + _questions[0, 3] + _questions[0, 4];
+                _choices = _choices = _questions[0, 1] + "   " + _questions[0, 2] + "   " + _questions[0, 3] + "   " + _questions[0, 4];
                 _answer = _answers[0,0];
             }
 
@@ -55,7 +55,7 @@ namespace SeriousGame.Objects
         public void Draw(SpriteBatch spritebatch)
         {
             spritebatch.DrawString(FontManager.Verdana, _choices, new Vector2(200, 40), Color.Black);
-            if (_questions[_questionNumber,0] != null)
+            if (_questionNumber < _questions.GetLength(0))
             {
                 spritebatch.DrawString(FontManager.Verdana, _questions[_questionNumber, 0], new Vector2(200, 20), Color.Black);
             }
