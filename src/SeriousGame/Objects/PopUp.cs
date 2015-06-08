@@ -54,14 +54,14 @@ namespace SeriousGame.Objects
 
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.DrawString(FontManager.Verdana, _choices, new Vector2(200, 40), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, _choices, new Vector2(200, 40), Color.White);
             if (_questionNumber < _questions.GetLength(0))
             {
-                spritebatch.DrawString(FontManager.Verdana, _questions[_questionNumber, 0], new Vector2(200, 20), Color.Black);
+                spritebatch.DrawString(FontManager.Verdana, _questions[_questionNumber, 0], new Vector2(200, 20), Color.White);
             }
             else
             {
-                spritebatch.DrawString(FontManager.Verdana, _questions[0, 0], new Vector2(200, 20), Color.Black);
+                spritebatch.DrawString(FontManager.Verdana, _questions[0, 0], new Vector2(200, 20), Color.White);
                
             }
         }

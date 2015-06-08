@@ -36,9 +36,9 @@ namespace SeriousGame
             {
                 string[] score = values[i].Split(',');
                 String text = (i + 1) + ". " + score[0] + ": " + score[1];
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 150, 100 + (i * 40)), Color.Black);
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 150, 100 + (i * 40)), Color.White);
             }
-            spriteBatch.DrawString(FontManager.Verdana, "Terug", new Vector2(ScreenManager.Dimensions.X / 2 - 35, ScreenManager.Dimensions.Y / 2 + 200), Color.Black);
+            spriteBatch.DrawString(FontManager.Verdana, "Terug", new Vector2(ScreenManager.Dimensions.X / 2 - 35, ScreenManager.Dimensions.Y / 2 + 200), Color.White);
         }
     }
 }
