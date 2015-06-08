@@ -84,14 +84,14 @@ namespace SeriousGame
             }
 
             // Check if Frog touches obstacle
-            foreach (Obstacle obstacle in obstacles)
-            {
-                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
-                {
-                    isFrozen = true;
-                    obstacle.openQuestion();
-                }
-            }
+//            foreach (Obstacle obstacle in obstacles)
+//            {
+//                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
+//                {
+//                    isFrozen = true;
+//                    obstacle.openQuestion();
+//                }
+//            }
 
             // If user is pressing Left, go left. Same for Right.
             if (!isFrozen && !frog.isDead && InputManager.IsPressing(Keys.Left, false))
@@ -152,13 +152,13 @@ namespace SeriousGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Obstacle obstacle in obstacles)
-            {
-                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
-                {
-                    obstacle.DrawQuestion(spriteBatch);
-                }
-            }
+//            foreach (Obstacle obstacle in obstacles)
+//            {
+//                if (obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle))
+//                {
+//                    obstacle.DrawQuestion(spriteBatch);
+//                }
+//            }
 
 			// Draw platforms
             foreach (Platform platform in platforms) {
@@ -169,13 +169,13 @@ namespace SeriousGame
             }
 
             // Draw obstacles
-            foreach (Obstacle obstacle in obstacles)
-            {
-                if (obstacle.IsInViewport(offset))
-                {
-                    obstacle.Draw(spriteBatch, offset);
-                }
-            }
+//            foreach (Obstacle obstacle in obstacles)
+//            {
+//                if (obstacle.IsInViewport(offset))
+//                {
+//                    obstacle.Draw(spriteBatch, offset);
+//                }
+//            }
 
             // Draw flies
             foreach (Fly fly in flies)
@@ -193,8 +193,8 @@ namespace SeriousGame
             magma.Draw(spriteBatch, offset);
 
             // Draw walls
-            spriteBatch.Draw(TextureManager.Wall, new Vector2(0, offset * -1 + offset));
-            spriteBatch.Draw(TextureManager.Wall, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
+            spriteBatch.Draw(TextureManager.Wall1, new Vector2(0, offset * -1 + offset));
+            spriteBatch.Draw(TextureManager.Wall2, new Vector2(ScreenManager.Dimensions.X - Padding, offset * -1 + offset));
 
             if (frog.isDead)
             {
