@@ -26,6 +26,9 @@ namespace SeriousGame.Managers
         public static Texture2D Caret;
 
         public static Texture2D QuestionBox;
+        public static Texture2D Good;
+        public static Texture2D Wrong;
+
 
         public static void Load(ContentManager content)
         {
@@ -45,6 +48,8 @@ namespace SeriousGame.Managers
             InputMedium = content.Load<Texture2D>("JumpScreen/Textures/input_medium");
             Caret = content.Load<Texture2D>("JumpScreen/Textures/caret");
             QuestionBox = content.Load<Texture2D>("JumpScreen/Textures/questionbox");
+            Good = content.Load<Texture2D>("JumpScreen/Textures/goed");
+            Wrong = content.Load<Texture2D>("JumpScreen/Textures/fout");
         }
     }
 }
