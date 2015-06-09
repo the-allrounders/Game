@@ -77,7 +77,10 @@ namespace SeriousGame.Objects
             spriteBatch.Draw(TextureManager.InputMedium,
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
             if (caretVisible)
-                spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + FontManager.Verdana.MeasureString(playerName).X + 1, ScreenManager.Dimensions.Y / 2 - 40));
+            {
+                float caretDistance = playerName == "<name>" ? 0 : FontManager.Verdana.MeasureString(playerName).X;
+                spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + caretDistance + 1, ScreenManager.Dimensions.Y / 2 - 40));
+            }
             Color nameColor = playerName == "<name>" ? Color.Gray : Color.Black;
             spriteBatch.DrawString(FontManager.Verdana, playerName,
                 new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), nameColor);
