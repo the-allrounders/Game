@@ -119,24 +119,7 @@ namespace SeriousGame
                 {
                     if (buttonIsSaveButton)
                     {
-                        const string pathOfFile = "../../../leaderboard.txt";
-
-                        string[] values = File.ReadAllLines(pathOfFile);
-                        List<string> scores = new List<string>();
-                        bool added = false;
-                        foreach (string t in values)
-                        {
-                            string[] sc = t.Split(',');
-                            if (!added && score > Convert.ToInt32(sc[1]))
-                            {
-                                scores.Add(frog.playerName + ", " + score);
-                                added = true;
-                            }
-                            scores.Add(t);
-                        }
-                        if (!added)
-                            scores.Add(frog.playerName + ", " + score);
-                        File.WriteAllLines(pathOfFile, scores);
+                        LeaderboardScreen.SaveScore(frog.playerName, score);
                         buttonIsSaveButton = false;
                     }
                     else
