@@ -24,6 +24,11 @@ namespace SeriousGame.Screens
         private bool gameEnded;
         private Scoreboard scoreboard;
 
+        private bool wrong = false;
+        private bool good = false;
+        private bool waiting = false;
+        private int waitTime;
+
         private int score;
 
         public static int Padding = 200;
@@ -70,6 +75,21 @@ namespace SeriousGame.Screens
                     }
                     obstacle.FinishedQuestion();
                     CheckAnswer(answer);
+                }
+            }
+
+            if(waiting)
+            {
+                waiting = false;
+                waitTime = gameTime.TotalGameTime.Seconds;
+            }
+
+            if(wrong || good)
+            {
+                if (gameTime.TotalGameTime.Seconds >= waitTime + 3)
+                {
+                    wrong = false;
+                    good = false;
                 }
             }
 
@@ -141,6 +161,16 @@ namespace SeriousGame.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //check timer to remove Feedback
+            if (wrong)
+            {
+                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400,300));
+            }
+            else if (good)
+            {
+                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
+            }
+
             // Draw platforms
             foreach (Platform platform in platforms.Where(platform => platform.IsInViewport(offset)))
             {
@@ -197,11 +227,15 @@ namespace SeriousGame.Screens
             {
                 score -= 1000;
                 isFrozen = false;
+                waiting = true;
+                wrong = true;
             }
             else
             {
                 score += 1000;
                 isFrozen = false;
+                waiting = true;
+                good = true;
             }
             frog.Jump();
         }

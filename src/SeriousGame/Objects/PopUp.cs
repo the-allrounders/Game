@@ -30,17 +30,17 @@ namespace SeriousGame.Objects
 				"1) Spleetvulkaan","2) Caldeira","3) Pacificvulkaan", "4) Stratovulkaan"}
 			
                                             };
-        private readonly int[,] answers = {
-												{3},
-												{3},
-                                                {1},
-                                                {4},
-                                                {3},
-												{2},
-												{2},
-												{2},
-												{1},
-												{3}
+        private readonly int[] answers = {
+												3,
+												3,
+                                                1,
+                                                4,
+                                                3,
+												2,
+												2,
+												2,
+												1,
+												3
 
                                                 
         };
@@ -59,7 +59,7 @@ namespace SeriousGame.Objects
                     _choices[a] = questions[_questionNumber, i];
                     a++;
                 }
-                _answer = answers[_questionNumber, 0];
+                _answer = answers[_questionNumber];
             }
         }
 
@@ -78,6 +78,7 @@ namespace SeriousGame.Objects
         {
             if (_answer == answer)
             {
+                Console.WriteLine(_answer +" "+ answer);
                 return true;
             }
             return false;
