@@ -44,50 +44,39 @@ namespace SeriousGame.Objects
 
                                                 
         };
-        private readonly int questionNumber;
-        private readonly string choices;
-        private readonly int answer;
+        private int _questionNumber;
+        private string[] _choices = new string[100];
+        private int _answer;
 
         public PopUp(int questionNumber)
         {
-            this.questionNumber = questionNumber;
-            string asd = "QuestionNumber:" + questionNumber + "  QuestionNumber:" + questions.GetLength(0);
-            Console.WriteLine(asd);
+            _questionNumber = questionNumber;
             if (questionNumber < questions.GetLength(0))
             {
-                choices = questions[questionNumber, 1] + "   " + questions[questionNumber, 2] + "   " + questions[questionNumber, 3] + "   " + questions[questionNumber, 4];
-                answer = answers[this.questionNumber, 0];
+                int a = 0;
+                for (int i = 1; i <= 4; i++)
+                {
+                    _choices[a] = questions[_questionNumber, i];
+                    a++;
+                }
+                _answer = answers[_questionNumber, 0];
             }
-            else
-            {
-                choices = choices = questions[0, 1] + "   " + questions[0, 2] + "   " + questions[0, 3] + "   " + questions[0, 4];
-                answer = answers[0, 0];
-            }
-
-        }
-
-        public void Update()
-        {
-
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.DrawString(FontManager.Verdana, choices, new Vector2(200, 40), Color.White);
-            if (questionNumber < questions.GetLength(0))
-            {
-                spritebatch.DrawString(FontManager.Verdana, questions[questionNumber, 0], new Vector2(200, 20), Color.White);
-            }
-            else
-            {
-                spritebatch.DrawString(FontManager.Verdana, questions[0, 0], new Vector2(200, 20), Color.White);
+            spritebatch.Draw(TextureManager.QuestionBox, new Vector2(200, 30));
+            spritebatch.DrawString(FontManager.Verdana, questions[_questionNumber, 0], new Vector2(300, 100), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, _choices[0], new Vector2(300, 200), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, _choices[1], new Vector2(760, 200), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, _choices[2], new Vector2(300, 400), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, _choices[3], new Vector2(760, 400), Color.Black);
 
-            }
         }
 
-        public Boolean ChooceAnswer(int answer)
+        public Boolean chooceAnswer(int answer)
         {
-            if (this.answer == answer)
+            if (_answer == answer)
             {
                 return true;
             }

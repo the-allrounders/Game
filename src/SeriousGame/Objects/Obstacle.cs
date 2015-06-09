@@ -68,7 +68,7 @@ namespace SeriousGame.Objects
 
         public Boolean CheckAnswer(int answer)
         {
-            return popUp.ChooceAnswer(answer);
+            return popUp.chooceAnswer(answer);
         }
 
         public Boolean IsDone()
@@ -81,16 +81,41 @@ namespace SeriousGame.Objects
             done = true;
         }
 
+        static void Shuffle<T>(T[] array)
+        {
+            int n = array.Length;
+            Random random = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                int r = i + (int)(random.NextDouble() * (n - i));
+                T t = array[r];
+                array[r] = array[i];
+                array[i] = t;
+            }
+        }
+
         public static List<Obstacle> GenerateList()
         {
-            int question = -2;
             List<Obstacle> platforms = new List<Obstacle>();
+            int question = 0;
+            int[] questionNumbers = { 0, 1, 2, 3 };
+            Shuffle(questionNumbers);
             for (int i = 1000; i > JumpScreen.GameHeight * -1; i -= 2000)
             {
-                question++;
-                platforms.Add(new Obstacle(new Vector2(50, i), question));
+                Console.WriteLine(question);
+                Obstacle obstacle = new Obstacle(new Vector2(50, i), questionNumbers[question]);
+                platforms.Add(obstacle);
+                if (question < questionNumbers.Length - 1)
+                {
+                    question++;
+                }
+                else
+                {
+                    question = 0;
+                }
             }
             return platforms;
         }
     }
 }
+

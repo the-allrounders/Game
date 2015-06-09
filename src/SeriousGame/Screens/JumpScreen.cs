@@ -150,17 +150,6 @@ namespace SeriousGame.Screens
                 platform.Draw(spriteBatch, offset);
             }
 
-            // Draw obstacles
-            foreach (
-                Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
-            {
-                obstacle.Draw(spriteBatch, offset);
-                if (frog.IsJumpingOnObstacle(obstacle))
-                {
-                    obstacle.DrawQuestion(spriteBatch);
-                }
-            }
-
             // Draw flies
             foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset)))
             {
@@ -172,6 +161,17 @@ namespace SeriousGame.Screens
 
             // Draw magma
             magma.Draw(spriteBatch, offset);
+
+            // Draw obstacles
+            foreach (
+                Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
+            {
+                obstacle.Draw(spriteBatch, offset);
+                if (frog.IsJumpingOnObstacle(obstacle))
+                {
+                    obstacle.DrawQuestion(spriteBatch);
+                }
+            }
 
             // Draw walls
             foreach (Wall wall in walls.Where(wall => wall.IsInViewport(offset)))

@@ -25,6 +25,8 @@ namespace SeriousGame.Managers
         public static Texture2D InputMedium;
         public static Texture2D Caret;
 
+        public static Texture2D QuestionBox;
+
         public static void Load(ContentManager content)
         {
             Splash = content.Load<Texture2D>("SplashScreen/Textures/splash");
@@ -42,6 +44,7 @@ namespace SeriousGame.Managers
             LastWallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_right");
             InputMedium = content.Load<Texture2D>("JumpScreen/Textures/input_medium");
             Caret = content.Load<Texture2D>("JumpScreen/Textures/caret");
+            QuestionBox = content.Load<Texture2D>("JumpScreen/Textures/questionbox");
         }
     }
 }
