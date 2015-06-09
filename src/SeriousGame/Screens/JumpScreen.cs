@@ -12,7 +12,7 @@ namespace SeriousGame.Screens
     class JumpScreen : GameScreen
     {
         private int offset;
-        private const int gameHeight = 100000;
+        private const int gameHeight = 10000;
         private readonly List<Platform> platforms = Platform.GenerateList(gameHeight);
         private readonly List<Obstacle> obstacles = Obstacle.GenerateList(gameHeight);
         private readonly List<Fly> flies = Fly.GenerateList(gameHeight);
@@ -20,7 +20,7 @@ namespace SeriousGame.Screens
         private readonly Magma magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
         private bool isFrozen;
         private bool gameEnded;
-        private bool buttonIsSaveButton = true;
+        private Scoreboard scoreboard;
 
         private int score;
 
@@ -65,11 +65,11 @@ namespace SeriousGame.Screens
             }
 
             // If user is pressing Left, go left. Same for Right.
-            if (!isFrozen && !frog.IsDead && InputManager.IsPressing(Keys.Left, false))
+            if (!isFrozen && !gameEnded && InputManager.IsPressing(Keys.Left, false))
             {
                 frog.Left();
             }
-            if (!isFrozen && !frog.IsDead && InputManager.IsPressing(Keys.Right, false))
+            if (!isFrozen && !gameEnded && InputManager.IsPressing(Keys.Right, false))
             {
                 frog.Right();
             }
@@ -110,36 +110,31 @@ namespace SeriousGame.Screens
                 magma.Rise(offset);
             }
 
-            //Check if frog is touching Magma
-            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || magma.IsTouchingFrog(frog))
+            if (!gameEnded)
             {
-                frog.Die();
-                gameEnded = true;
+                //Check if frog is touching Magma
+                if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||
+                    magma.IsTouchingFrog(frog))
+                {
+                    frog.Die();
+                    gameEnded = true;
+                    scoreboard = new Scoreboard(score, frog.IsDead);
+                }
 
-                if (InputManager.IsPressing(Keys.Enter) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 40, (int)ScreenManager.Dimensions.Y / 2, 100, 20)))
+                if (offset > gameHeight)
                 {
-                    if (buttonIsSaveButton)
-                    {
-                        LeaderboardScreen.SaveScore(frog.PlayerName, score);
-                        buttonIsSaveButton = false;
-                    }
-                    else
-                    {
-                        ScreenManager.CurrentScreen = new LeaderboardScreen();
-                    }
+                    gameEnded = true;
+                    scoreboard = new Scoreboard(score, frog.IsDead);
                 }
-                else if (InputManager.IsPressing(Keys.Space) ||
-                         InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 45,
-                             (int)ScreenManager.Dimensions.Y / 2 + 35, 100, 20)))
-                {
-                    ScreenManager.CurrentScreen = new JumpScreen();
-                }
+            }
+            else
+            {
+                scoreboard.Update(frog);
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-
             // Draw platforms
             foreach (Platform platform in platforms.Where(platform => platform.IsInViewport(offset)))
             {
@@ -175,9 +170,9 @@ namespace SeriousGame.Screens
                 new Vector2(ScreenManager.Dimensions.X - Padding, offset*-1 + offset));
 
             // Draw scorescreen of frog is dead
-            if (frog.IsDead)
+            if (gameEnded)
             {
-                DrawScoreScreen(spriteBatch, offset, true);
+                scoreboard.Draw(spriteBatch, offset, frog.PlayerName);
             }
 
             // If the frog is alive, draw the score
@@ -187,43 +182,6 @@ namespace SeriousGame.Screens
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20),
                     Color.White);
             }
-        }
-
-        public void DrawScoreScreen(SpriteBatch spriteBatch, int offset, bool isDead)
-        {
-            string winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
-            string loseText = "Helaas, GameOver! Je scoorde " + score + " punten";
-            string text = isDead ? loseText : winText;
-            spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 230, ScreenManager.Dimensions.Y / 2 - 100), Color.White);
-            spriteBatch.Draw(TextureManager.InputMedium, new Vector2(ScreenManager.Dimensions.X / 2 - 100, ScreenManager.Dimensions.Y / 2 - 50));
-            string playerName = BuildPlayerName();
-            //spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + spriteFont.MeasureString(playerName).X, ScreenManager.Dimensions.Y / 2 - 40));
-            spriteBatch.DrawString(FontManager.Verdana, playerName, new Vector2(ScreenManager.Dimensions.X / 2 - 90, ScreenManager.Dimensions.Y / 2 - 40), Color.Black);
-            if (buttonIsSaveButton)
-                spriteBatch.DrawString(FontManager.Verdana, "Opslaan", new Vector2(ScreenManager.Dimensions.X / 2 - 40, ScreenManager.Dimensions.Y / 2), Color.White);
-            else
-                spriteBatch.DrawString(FontManager.Verdana, "Leaderboard", new Vector2(ScreenManager.Dimensions.X / 2 - 60, ScreenManager.Dimensions.Y / 2), Color.White);
-            spriteBatch.DrawString(FontManager.Verdana, "Opnieuw", new Vector2(ScreenManager.Dimensions.X / 2 - 45, ScreenManager.Dimensions.Y / 2 + 30), Color.White);
-        }
-
-        public string BuildPlayerName()
-        {
-            if (InputManager.IsPressing(Keys.Back))
-            {
-                frog.RemoveCharFromName();
-            }
-            else
-            {
-                for (Keys key = Keys.A; key <= Keys.Z; key++)
-                {
-                    if (InputManager.IsPressing(key))
-                    {
-                        frog.AddCharToName(key);
-                    }
-                }
-            }
-            string playerName = frog.PlayerName;
-            return playerName;
         }
 
         public void CheckAnswer(bool answer)
