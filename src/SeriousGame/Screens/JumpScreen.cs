@@ -86,7 +86,7 @@ namespace SeriousGame.Screens
 
             if(wrong || good)
             {
-                if (gameTime.TotalGameTime.Seconds >= waitTime + 2)
+                if (gameTime.TotalGameTime.Seconds >= waitTime + 3)
                 {
                     wrong = false;
                     good = false;
@@ -161,16 +161,6 @@ namespace SeriousGame.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //check timer to remove Feedback
-            if (wrong)
-            {
-                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400,300));
-            }
-            else if (good)
-            {
-                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
-            }
-
             // Draw platforms
             foreach (Platform platform in platforms.Where(platform => platform.IsInViewport(offset)))
             {
@@ -188,6 +178,16 @@ namespace SeriousGame.Screens
 
             // Draw magma
             magma.Draw(spriteBatch, offset);
+
+            //check timer to remove Feedback
+            if (wrong)
+            {
+                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400, 300));
+            }
+            else if (good)
+            {
+                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
+            }
 
             // Draw obstacles
             foreach (
