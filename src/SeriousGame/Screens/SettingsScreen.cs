@@ -11,7 +11,7 @@ namespace SeriousGame.Screens
         {
             SongManager.Play(Songs.SuperMarioIce);
         }
-        
+
         public override void Update(GameTime gameTime)
         {
             // If ESC button is pressed or if back button is clicked
@@ -21,45 +21,45 @@ namespace SeriousGame.Screens
             }
 
             // If difficulty is clicked
-            else if (InputManager.IsClicking(new Rectangle(340, 115, 550, 100)))
+            else if (InputManager.IsClicking(new Rectangle(300, 60, 500, 75)))
             {
                 SettingsManager.Difficulty += 1;
                 if (SettingsManager.Difficulty == 4)
                     SettingsManager.Difficulty = 1;
             }
 
+            else if (InputManager.IsClicking(new Rectangle(820, 96, 50, 67)))
+            {
+                SettingsManager.Difficulty = 1;
+            }
+
+            else if (InputManager.IsClicking(new Rectangle(870, 96, 53, 67)))
+            {
+                SettingsManager.Difficulty = 2;
+            }
+
+            else if (InputManager.IsClicking(new Rectangle(922, 96, 50, 67)))
+            {
+                SettingsManager.Difficulty = 3;
+            }
+
             // If music is clicked
-            else if (InputManager.IsClicking(new Rectangle(340, 300, 550, 110)))
+            else if (InputManager.IsClicking(new Rectangle(300, 214, 700, 70)))
             {
                 SettingsManager.Music = !SettingsManager.Music;
             }
 
             // If sound is clicked
-            else if (InputManager.IsClicking(new Rectangle(340, 460, 550, 100)))
+            else if (InputManager.IsClicking(new Rectangle(300, 369, 700, 70)))
             {
                 SettingsManager.Sound = !SettingsManager.Sound;
             }
 
             // If fullscreen is clicked
-            else if (InputManager.IsClicking(new Rectangle(340, 610, 650, 100)))
+            else if (InputManager.IsClicking(new Rectangle(300, 523, 700, 70)))
             {
                 SettingsManager.Fullscreen = !SettingsManager.Fullscreen;
             }
-        }
-
-        private void DrawSetting(SpriteBatch spriteBatch, string text, Vector2 position)
-        {
-            spriteBatch.DrawString(
-                FontManager.Verdana,
-                text,
-                position,
-                Color.Black,
-                new float(),
-                new Vector2(),
-                4,
-                new SpriteEffects(),
-                new float()
-            );
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -68,16 +68,48 @@ namespace SeriousGame.Screens
             spriteBatch.Draw(TextureManager.Settings, new Vector2(0, 0));
 
             // Draw difficulty
-            DrawSetting(spriteBatch, SettingsManager.Difficulty.ToString(), new Vector2(702, 128));
+            if (SettingsManager.Difficulty == 1)
+            {
+                spriteBatch.Draw(TextureManager.SettingsLevel1, new Vector2(822, 68));
+            }
+            else if (SettingsManager.Difficulty == 2)
+            {
+                spriteBatch.Draw(TextureManager.SettingsLevel2, new Vector2(822, 68));
+            }
+            else
+            {
+                spriteBatch.Draw(TextureManager.SettingsLevel3, new Vector2(822, 68));
+            }
 
             // Draw music
-            DrawSetting(spriteBatch, SettingsManager.Music ? "on" : "off", new Vector2(702, 300));
+            if (SettingsManager.Music)
+            {
+                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 214));
+            }
+            else
+            {
+                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 214));
+            }
 
             // Draw sound
-            DrawSetting(spriteBatch, SettingsManager.Sound ? "on" : "off", new Vector2(702, 470));
+            if (SettingsManager.Sound)
+            {
+                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 369));
+            }
+            else
+            {
+                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 369));
+            }
 
             // Draw fullscreen
-            DrawSetting(spriteBatch, SettingsManager.Fullscreen ? "on" : "off", new Vector2(810, 625));
+            if (SettingsManager.Fullscreen)
+            {
+                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 523));
+            }
+            else
+            {
+                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 523));
+            }
         }
     }
 }

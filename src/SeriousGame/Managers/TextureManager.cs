@@ -7,7 +7,13 @@ namespace SeriousGame.Managers
     {
         public static Texture2D Splash;
         public static Texture2D Start;
+
         public static Texture2D Settings;
+        public static Texture2D SettingsLevel1;
+        public static Texture2D SettingsLevel2;
+        public static Texture2D SettingsLevel3;
+        public static Texture2D SettingsCheckboxUnchecked;
+        public static Texture2D SettingsCheckboxChecked;
 
         public static Texture2D Fly;
         public static Texture2D Platform;
@@ -35,6 +41,11 @@ namespace SeriousGame.Managers
             Splash = content.Load<Texture2D>("SplashScreen/Textures/splash");
             Start = content.Load<Texture2D>("StartScreen/Textures/start");
             Settings = content.Load<Texture2D>("SettingsScreen/Textures/settings");
+            SettingsLevel1 = content.Load<Texture2D>("SettingsScreen/Textures/level1");
+            SettingsLevel2 = content.Load<Texture2D>("SettingsScreen/Textures/level2");
+            SettingsLevel3 = content.Load<Texture2D>("SettingsScreen/Textures/level3");
+            SettingsCheckboxUnchecked = content.Load<Texture2D>("SettingsScreen/Textures/checkbox");
+            SettingsCheckboxChecked = content.Load<Texture2D>("SettingsScreen/Textures/checkmark");
             Fly = content.Load<Texture2D>("JumpScreen/Textures/fly");
             Platform = content.Load<Texture2D>("JumpScreen/Textures/platform");
             FrogLeft = content.Load<Texture2D>("JumpScreen/Textures/frogflip");
