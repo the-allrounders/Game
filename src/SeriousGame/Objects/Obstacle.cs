@@ -100,9 +100,8 @@ namespace SeriousGame.Objects
             int question = 0;
             int[] questionNumbers = { 0, 1, 2, 3 };
             Shuffle(questionNumbers);
-            for (int i = -1000; i > JumpScreen.GameHeight * -1; i -= JumpScreen.GameHeight * -1 / 10)
+            for (int i = -1000; i > JumpScreen.GameHeight * -1; i -= JumpScreen.GameHeight / 10)
             {
-                Console.WriteLine(question);
                 Obstacle obstacle = new Obstacle(new Vector2(50, i), questionNumbers[question]);
                 platforms.Add(obstacle);
                 if (question < questionNumbers.Length - 1)

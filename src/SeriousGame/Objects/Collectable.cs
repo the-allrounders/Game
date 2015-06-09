@@ -9,12 +9,14 @@ namespace SeriousGame.Objects
         private Vector2 collectablePosition;
         protected Texture2D CollectableTexture;
         public int CollectableScoreWorth { get; protected set; }
+        public bool IsDone;
 
         public Collectable(Vector2 pos, Texture2D txtur, int scrWrth)
         {
             collectablePosition = pos;
             CollectableTexture = txtur;
             CollectableScoreWorth = scrWrth;
+            IsDone = false;
         }
 
         public Rectangle BoundingBox

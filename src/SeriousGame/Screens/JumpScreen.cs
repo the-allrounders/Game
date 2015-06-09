@@ -101,13 +101,10 @@ namespace SeriousGame.Screens
             }
 
             // Check if frog is catching any flies
-            List<Fly> copyFlies = new List<Fly>();
-            copyFlies = flies;
-            for (int i = 0; i < copyFlies.Count; i++)
+            foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset) && fly.IsCatching(frog)))
             {
-                if (!flies[i].IsInViewport(offset) || !flies[i].IsCatching(frog)) continue;
-                score += flies[i].CollectableScoreWorth;
-                flies.RemoveAt(i);
+                score += fly.CollectableScoreWorth;
+                fly.IsDone = true;
             }
 
             if (!isFrozen && !gameEnded)
@@ -151,7 +148,7 @@ namespace SeriousGame.Screens
             }
 
             // Draw flies
-            foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset)))
+            foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset) && !fly.IsDone))
             {
                 fly.Draw(spriteBatch, offset);
             }
