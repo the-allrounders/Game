@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SeriousGame.Managers;
@@ -11,6 +12,7 @@ namespace SeriousGame.Objects
         private int score;
         private bool buttonIsSaveButton = true;
         private bool isDead;
+        private bool caretVisible = true;
 
         public Scoreboard(int scr, bool dead)
         {
@@ -37,7 +39,7 @@ namespace SeriousGame.Objects
             string playerName = frog.PlayerName;
         }
 
-        public void Update(Frog frog)
+        public void Update(Frog frog, GameTime gameTime)
         {
             if (InputManager.IsPressing(Keys.Enter) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 40, (int)ScreenManager.Dimensions.Y / 2, 100, 20)))
             {
@@ -57,7 +59,12 @@ namespace SeriousGame.Objects
             {
                 ScreenManager.CurrentScreen = new JumpScreen();
             }
-            BuildPlayerName(frog);
+            else
+                BuildPlayerName(frog);
+            if (gameTime.TotalGameTime.Milliseconds > 500 && gameTime.TotalGameTime.Milliseconds <= 999)
+                caretVisible = true;
+            else
+                caretVisible = false;
         }
 
         public void Draw(SpriteBatch spriteBatch, int offset, string playerName)
@@ -69,7 +76,8 @@ namespace SeriousGame.Objects
                 new Vector2(ScreenManager.Dimensions.X/2 - 230, ScreenManager.Dimensions.Y/2 - 100), Color.White);
             spriteBatch.Draw(TextureManager.InputMedium,
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
-            //spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + spriteFont.MeasureString(playerName).X, ScreenManager.Dimensions.Y / 2 - 40));
+            if (caretVisible)
+                spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + FontManager.Verdana.MeasureString(playerName).X + 1, ScreenManager.Dimensions.Y / 2 - 40));
             spriteBatch.DrawString(FontManager.Verdana, playerName,
                 new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), Color.Black);
             if (buttonIsSaveButton)

@@ -23,6 +23,7 @@ namespace SeriousGame.Managers
         public static Texture2D LastWallRight;
 
         public static Texture2D InputMedium;
+        public static Texture2D Caret;
 
         public static void Load(ContentManager content)
         {
@@ -40,6 +41,7 @@ namespace SeriousGame.Managers
             LastWallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_left");
             LastWallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_right");
             InputMedium = content.Load<Texture2D>("JumpScreen/Textures/input_medium");
+            Caret = content.Load<Texture2D>("JumpScreen/Textures/caret");
         }
     }
 }

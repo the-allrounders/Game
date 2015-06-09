@@ -235,3 +235,14 @@
 /processorParam:Quality=Best
 /build:JumpScreen/Songs/248998_Supah_Mario_Brothaz.mp3
 
+#begin JumpScreen/Textures/caret.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:JumpScreen/Textures/caret.jpg
+

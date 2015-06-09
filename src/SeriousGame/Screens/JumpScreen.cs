@@ -46,23 +46,25 @@ namespace SeriousGame.Screens
             {
                 isFrozen = true;
                 obstacle.OpenQuestion();
-                if (InputManager.IsPressing(Keys.A) || InputManager.IsPressing(Keys.B) ||
-                    InputManager.IsPressing(Keys.C) || InputManager.IsPressing(Keys.D))
+                if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.D2) ||
+                    InputManager.IsPressing(Keys.D3) || InputManager.IsPressing(Keys.D4) ||
+                    InputManager.IsPressing(Keys.NumPad1) || InputManager.IsPressing(Keys.NumPad2) ||
+                    InputManager.IsPressing(Keys.NumPad3) || InputManager.IsPressing(Keys.NumPad4))
                 {
                     bool answer = false;
-                    if (InputManager.IsPressing(Keys.A))
+                    if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.NumPad1))
                     {
                         answer = obstacle.CheckAnswer(1);
                     }
-                    else if (InputManager.IsPressing(Keys.B))
+                    else if(InputManager.IsPressing(Keys.D2) || InputManager.IsPressing(Keys.NumPad2))
                     {
                         answer = obstacle.CheckAnswer(2);
                     }
-                    else if (InputManager.IsPressing(Keys.C))
+                    else if (InputManager.IsPressing(Keys.D3) || InputManager.IsPressing(Keys.NumPad3))
                     {
                         answer = obstacle.CheckAnswer(3);
                     }
-                    else if (InputManager.IsPressing(Keys.D))
+                    else if (InputManager.IsPressing(Keys.D4) || InputManager.IsPressing(Keys.NumPad4))
                     {
                         answer = obstacle.CheckAnswer(4);
                     }
@@ -72,11 +74,11 @@ namespace SeriousGame.Screens
             }
 
             // If user is pressing Left, go left. Same for Right.
-            if (!isFrozen && !gameEnded && InputManager.IsPressing(Keys.Left, false))
+            if (!isFrozen && !gameEnded && (InputManager.IsPressing(Keys.Left, false) || !gameEnded && InputManager.IsPressing(Keys.A, false)))
             {
                 frog.Left();
             }
-            if (!isFrozen && !gameEnded && InputManager.IsPressing(Keys.Right, false))
+            if (!isFrozen && (!gameEnded && InputManager.IsPressing(Keys.Right, false) || !gameEnded && InputManager.IsPressing(Keys.D, false)))
             {
                 frog.Right();
             }
@@ -136,7 +138,7 @@ namespace SeriousGame.Screens
             }
             else
             {
-                scoreboard.Update(frog);
+                scoreboard.Update(frog, gameTime);
             }
         }
 
