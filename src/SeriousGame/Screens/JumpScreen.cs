@@ -86,7 +86,7 @@ namespace SeriousGame.Screens
 
             if(wrong || good)
             {
-                if (gameTime.TotalGameTime.Seconds >= waitTime + 3)
+                if (gameTime.TotalGameTime.Seconds >= waitTime + 2)
                 {
                     wrong = false;
                     good = false;

@@ -66,7 +66,7 @@ namespace SeriousGame.Objects
         public void Draw(SpriteBatch spritebatch)
         {
             spritebatch.Draw(TextureManager.QuestionBox, new Vector2(200, 30));
-            spritebatch.DrawString(FontManager.Verdana, questions[_questionNumber, 0], new Vector2(300, 100), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, questions[_questionNumber, 0], new Vector2(250, 100), Color.Black);
             spritebatch.DrawString(FontManager.Verdana, _choices[0], new Vector2(300, 200), Color.Black);
             spritebatch.DrawString(FontManager.Verdana, _choices[1], new Vector2(760, 200), Color.Black);
             spritebatch.DrawString(FontManager.Verdana, _choices[2], new Vector2(300, 400), Color.Black);
