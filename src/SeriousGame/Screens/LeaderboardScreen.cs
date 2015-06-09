@@ -50,7 +50,7 @@ namespace SeriousGame.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < values.Length && i < 11; i++)
+            for (int i = 0; i < values.Length && i < 10; i++)
             {
                 string[] score = values[i].Split(',');
                 string text = (i + 1) + ". " + score[0] + ": " + score[1];
