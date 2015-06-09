@@ -23,7 +23,7 @@ namespace SeriousGame.Objects
 			{"Afgekoelde lava is", 
 				"1) Vruchtbaar", "2) Warm", "3) Eetbaar", "4) Vloeibaar"},  
 			{"Welk land heeft de meeste vulkanen?", 
-				"1) Italië", "2) Indonesië", "3) Nieuw-Zeeland", "4) Nederland"},
+				"1) Italie", "2) Indonesie", "3) Nieuw-Zeeland", "4) Nederland"},
 			{"Hoe heet het gat aan de top van een vulkaan?", 
 				"1) De krater", "2) De kraterpijp", "3) De mond", "De kuil"},
 			{"Wat is geen soort vulkaan?", 
