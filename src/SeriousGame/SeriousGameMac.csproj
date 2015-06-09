@@ -85,6 +85,10 @@
     <None Include="leaderboard.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Content\music_super_mario_ice_world.wma" />
+    <None Include="Content\music_super_mario_ice_world.xnb" />
+    <None Include="Content\music_super_mario.wma" />
+    <None Include="Content\music_super_mario.xnb" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="Objects\Magma.cs" />
     <Compile Include="Objects\PopUp.cs" />
     <Compile Include="Screens\LeaderboardScreen.cs" />
+    <Compile Include="Managers\SongManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
