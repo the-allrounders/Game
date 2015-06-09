@@ -43,7 +43,13 @@ namespace SeriousGame.Objects
                 PlayerName = PlayerName.Remove(PlayerName.Length - 1);
         }
 
-        public Rectangle BoundingBox => new Rectangle((int)frogPosition.X, (int)frogPosition.Y, frogTexture.Width, frogTexture.Height);
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle((int)frogPosition.X, (int)frogPosition.Y, frogTexture.Width, frogTexture.Height);
+            }
+        }
 
         public bool IsJumpingOnObstacle(Obstacle obstacle)
         {

@@ -20,23 +20,21 @@ namespace SeriousGame.Managers
         public static Texture2D WallLeft;
         public static Texture2D WallRight;
         public static Texture2D InputMedium;
-        public static Texture2D Caret;
 
         public static void Load(ContentManager content)
         {
-            Splash = content.Load<Texture2D>("splash");
-            Start = content.Load<Texture2D>("start");
-            Settings = content.Load<Texture2D>("settings");
-            Fly = content.Load<Texture2D>("fly");
-            Platform = content.Load<Texture2D>("platform");
-            FrogLeft = content.Load<Texture2D>("frogflip");
-			FrogRight = content.Load<Texture2D>("frog");
-            Magma = content.Load<Texture2D>("magma");
-            Obstacle = content.Load<Texture2D>("obstacle");
-            WallLeft = content.Load<Texture2D>("wall_left");
-            WallRight = content.Load<Texture2D>("wall_right");
-            InputMedium = content.Load<Texture2D>("input_medium");
-            Caret = content.Load<Texture2D>("caret");
+            Splash = content.Load<Texture2D>("SplashScreen/Textures/splash");
+            Start = content.Load<Texture2D>("StartScreen/Textures/start");
+            Settings = content.Load<Texture2D>("SettingsScreen/Textures/settings");
+            Fly = content.Load<Texture2D>("JumpScreen/Textures/fly");
+            Platform = content.Load<Texture2D>("JumpScreen/Textures/platform");
+            FrogLeft = content.Load<Texture2D>("JumpScreen/Textures/frogflip");
+            FrogRight = content.Load<Texture2D>("JumpScreen/Textures/frog");
+            Magma = content.Load<Texture2D>("JumpScreen/Textures/magma");
+            Obstacle = content.Load<Texture2D>("JumpScreen/Textures/obstacle");
+            WallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_left");
+            WallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_right");
+            InputMedium = content.Load<Texture2D>("JumpScreen/Textures/input_medium");
         }
     }
 }
