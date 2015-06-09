@@ -8,7 +8,7 @@ namespace SeriousGame.Objects
 {
     public class Frog
     {
-        private readonly Texture2D frogTexture;
+        private Texture2D frogTexture;
         private Vector2 frogPosition;
         private readonly Vector2 speedlr;
         public bool IsDescending { get; private set; }
@@ -18,7 +18,7 @@ namespace SeriousGame.Objects
 
         public Frog(Vector2 charPos, int spd)
         {
-            frogTexture = TextureManager.Frog;
+            frogTexture = TextureManager.FrogRight;
             frogPosition = charPos;
             speedlr = new Vector2(10, 0);
             PlayerName = "<name>";
@@ -55,6 +55,7 @@ namespace SeriousGame.Objects
         /// </summary>
         /// <param name="platform">The platform the frog is possibily jumping on</param>
         /// <returns>True if the frog is jumping on the platform</returns>
+
         public bool IsJumpingOn(Platform platform)
         {
             return IsDescending && BoundingBox.Intersects(platform.BoundingBox) && BoundingBox.Bottom <= platform.BoundingBox.Top + 30;
@@ -103,6 +104,7 @@ namespace SeriousGame.Objects
             {
                 frogPosition -= speedlr;
             }
+			frogTexture = TextureManager.FrogLeft;
         }
 
         /// <summary>
@@ -114,6 +116,7 @@ namespace SeriousGame.Objects
             {
                 frogPosition += speedlr;
             }
+			frogTexture = TextureManager.FrogRight;
         }
 
         public void Draw(SpriteBatch spriteBatch, int offset)

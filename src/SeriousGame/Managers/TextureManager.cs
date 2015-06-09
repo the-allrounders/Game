@@ -11,7 +11,8 @@ namespace SeriousGame.Managers
 
         public static Texture2D Fly;
         public static Texture2D Platform;
-        public static Texture2D Frog;
+        public static Texture2D FrogLeft;
+		public static Texture2D FrogRight;
         public static Texture2D Magma;
 
         public static Texture2D Obstacle;
@@ -28,7 +29,8 @@ namespace SeriousGame.Managers
             Settings = content.Load<Texture2D>("settings");
             Fly = content.Load<Texture2D>("fly");
             Platform = content.Load<Texture2D>("platform");
-            Frog = content.Load<Texture2D>("frog");
+            FrogLeft = content.Load<Texture2D>("frogflip");
+			FrogRight = content.Load<Texture2D>("frog");
             Magma = content.Load<Texture2D>("magma");
             Obstacle = content.Load<Texture2D>("obstacle");
             WallLeft = content.Load<Texture2D>("wall_left");

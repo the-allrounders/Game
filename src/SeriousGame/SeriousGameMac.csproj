@@ -169,5 +169,6 @@
   <ItemGroup>
     <BundleResource Include="Content\wall_left.png" />
     <BundleResource Include="Content\wall_right.png" />
+    <BundleResource Include="Content\frogflip.png" />
   </ItemGroup>
 </Project>
