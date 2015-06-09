@@ -26,6 +26,11 @@ namespace SeriousGame.Screens
 
         public static int Padding = 200;
 
+        public override void Load()
+        {
+            SongManager.Play(Songs.SuperMarioHipHop);
+        }
+
         public override void Update(GameTime gameTime)
         {
             // If user is pressing ESC, return to StartScreen

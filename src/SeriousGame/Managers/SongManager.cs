@@ -10,6 +10,7 @@ namespace SeriousGame.Managers
         None,
         SuperMario,
         SuperMarioIce,
+        SuperMarioHipHop
     }
     
     class SongManager
@@ -24,18 +25,19 @@ namespace SeriousGame.Managers
 
         public static void Load(ContentManager content)
         {
-            /*songs = new Dictionary<Songs, Song>()
+            songs = new Dictionary<Songs, Song>()
             {
-//                {Songs.SuperMario, content.Load<Song>("music_super_mario")},
-//                {Songs.SuperMarioIce, content.Load<Song>("music_super_mario_ice_world")}
+                {Songs.SuperMario, content.Load<Song>("StartScreen/Songs/music_super_mario")},
+                {Songs.SuperMarioIce, content.Load<Song>("SettingsScreen/Songs/music_super_mario_ice_world")},
+                {Songs.SuperMarioHipHop, content.Load<Song>("JumpScreen/Songs/248998_Supah_Mario_Brothaz")}
             };
-            MediaPlayer.IsRepeating = true;*/
+            MediaPlayer.IsRepeating = true;
         }
 
         public static void Play(Songs song, bool startFromBeginning = false)
         {
             if (!startFromBeginning && playing == song) return;
-            //MediaPlayer.Play(songs[song]);
+            MediaPlayer.Play(songs[song]);
             playing = song;
         }
     }

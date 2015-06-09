@@ -229,3 +229,9 @@
 /processorParam:TextureFormat=Color
 /build:JumpScreen/Textures/frogflip.png
 
+#begin JumpScreen/Songs/248998_Supah_Mario_Brothaz.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:JumpScreen/Songs/248998_Supah_Mario_Brothaz.mp3
+
