@@ -14,11 +14,11 @@ namespace SeriousGame.Objects
 
         }
 
-        public static List<Fly> GenerateList(int gameHeight)
+        public static List<Fly> GenerateList()
         {
             Random rnd = new Random();
             List<Fly> flies = new List<Fly>();
-            for (int i = 300; i > gameHeight * -1; i -= TextureManager.Fly.Height + 200)
+            for (int i = 300; i > JumpScreen.gameHeight * -1; i -= TextureManager.Fly.Height + 200)
             {
                 int fliesThisLine = rnd.Next(-1, 4);
                 for (int n = 0; n < fliesThisLine; n++)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SeriousGame.Managers;
+using SeriousGame.Screens;
 
 namespace SeriousGame.Objects
 {
@@ -80,11 +81,11 @@ namespace SeriousGame.Objects
             done = true;
         }
 
-        public static List<Obstacle> GenerateList(int gameHeight)
+        public static List<Obstacle> GenerateList()
         {
             int question = -2;
             List<Obstacle> platforms = new List<Obstacle>();
-            for (int i = 1000; i > gameHeight * -1; i -= 2000)
+            for (int i = 1000; i > JumpScreen.gameHeight * -1; i -= 2000)
             {
                 question++;
                 platforms.Add(new Obstacle(new Vector2(50, i), question));

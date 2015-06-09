@@ -19,6 +19,9 @@ namespace SeriousGame.Managers
 
         public static Texture2D WallLeft;
         public static Texture2D WallRight;
+        public static Texture2D LastWallLeft;
+        public static Texture2D LastWallRight;
+
         public static Texture2D InputMedium;
 
         public static void Load(ContentManager content)
@@ -34,6 +37,8 @@ namespace SeriousGame.Managers
             Obstacle = content.Load<Texture2D>("JumpScreen/Textures/obstacle");
             WallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_left");
             WallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_right");
+            LastWallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_left");
+            LastWallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_right");
             InputMedium = content.Load<Texture2D>("JumpScreen/Textures/input_medium");
         }
     }

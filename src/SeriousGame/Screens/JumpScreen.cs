@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,10 +13,11 @@ namespace SeriousGame.Screens
     class JumpScreen : GameScreen
     {
         private int offset;
-        private const int gameHeight = 10000;
-        private readonly List<Platform> platforms = Platform.GenerateList(gameHeight);
-        private readonly List<Obstacle> obstacles = Obstacle.GenerateList(gameHeight);
-        private readonly List<Fly> flies = Fly.GenerateList(gameHeight);
+        public static int gameHeight = 3000;
+        private readonly List<Wall> walls = Wall.GenerateList();
+        private readonly List<Platform> platforms = Platform.GenerateList();
+        private readonly List<Obstacle> obstacles = Obstacle.GenerateList();
+        private readonly List<Fly> flies = Fly.GenerateList();
         private readonly Frog frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.FrogLeft.Width / 2), ScreenManager.Dimensions.Y - TextureManager.FrogLeft.Height), 5);
         private readonly Magma magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
         private bool isFrozen;
@@ -126,7 +128,7 @@ namespace SeriousGame.Screens
                     scoreboard = new Scoreboard(score, frog.IsDead);
                 }
 
-                if (offset > gameHeight)
+                if (offset > gameHeight + 400)
                 {
                     gameEnded = true;
                     scoreboard = new Scoreboard(score, frog.IsDead);
@@ -170,9 +172,10 @@ namespace SeriousGame.Screens
             magma.Draw(spriteBatch, offset);
 
             // Draw walls
-            spriteBatch.Draw(TextureManager.WallLeft, new Vector2(0, offset*-1 + offset));
-            spriteBatch.Draw(TextureManager.WallRight,
-                new Vector2(ScreenManager.Dimensions.X - Padding, offset*-1 + offset));
+            foreach (Wall wall in walls.Where(wall => wall.IsInViewport(offset)))
+            {
+                wall.Draw(spriteBatch, offset);
+            }
 
             // Draw scorescreen of frog is dead
             if (gameEnded)
