@@ -9,13 +9,13 @@ namespace SeriousGame.Objects
     {
         private readonly string[,] questions = {
                                                     {"Hoe heet het heete rode spul dat van onderen komt?", 
-                                                    "A) Mugma","B) Mogma", "C) Magma", "D) Ian"}, 
+                                                    "1) Mugma","2) Mogma", "3) Magma", "4) Ian"}, 
                                                     {"Hoe heet de vader van Bart", 
-                                                    "A) Peter","B) Henk", "C) Harry", "D) Bart"},   
+                                                    "1) Peter","2) Henk", "3) Harry", "4) Bart"},   
                                                     {"het is groen en het kan vliegen", 
-                                                    "A) Appels","B) Voetballen", "C) Wortels", "D) Groene vogels"},   
+                                                    "1) Appels","2) Voetballen", "3) Wortels", "4) Groene vogels"},   
                                                     {"Zijn bananen krom?", 
-                                                    "A) Ja","B) Nee", "C) Misschien", "D) Als je elleboog op tafel doet misschien"}   
+                                                    "1) Ja","2) Nee", "3) Misschien", "4) Als je elleboog op tafel doet misschien"}   
                                             };
         private readonly int[,] answers = {
                                                 {3},

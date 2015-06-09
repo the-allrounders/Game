@@ -33,13 +33,17 @@ namespace SeriousGame.Objects
 
         public void AddCharToName(Keys key)
         {
+            if (PlayerName == "<name>")
+                PlayerName = "";
             if (PlayerName.Length < 12)
                 PlayerName += key;
         }
 
         public void RemoveCharFromName()
         {
-            if (PlayerName.Length > 0)
+            if (PlayerName == "<name>")
+                PlayerName = "";
+            else if (PlayerName.Length > 0)
                 PlayerName = PlayerName.Remove(PlayerName.Length - 1);
         }
 

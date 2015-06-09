@@ -78,8 +78,9 @@ namespace SeriousGame.Objects
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
             if (caretVisible)
                 spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + FontManager.Verdana.MeasureString(playerName).X + 1, ScreenManager.Dimensions.Y / 2 - 40));
+            Color nameColor = playerName == "<name>" ? Color.Gray : Color.Black;
             spriteBatch.DrawString(FontManager.Verdana, playerName,
-                new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), Color.Black);
+                new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), nameColor);
             if (buttonIsSaveButton)
                 spriteBatch.DrawString(FontManager.Verdana, "Opslaan",
                     new Vector2(ScreenManager.Dimensions.X/2 - 40, ScreenManager.Dimensions.Y/2), Color.White);
