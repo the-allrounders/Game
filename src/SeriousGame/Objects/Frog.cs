@@ -1,58 +1,53 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SeriousGame.Managers;
+using SeriousGame.Screens;
 
-namespace SeriousGame
+namespace SeriousGame.Objects
 {
     public class Frog
     {
-        private Texture2D _frogTexture;
-        private Vector2 _frogPosition;
-        private Vector2 _speedlr;
-        public bool isDescending { get; private set; }
+        private readonly Texture2D frogTexture;
+        private Vector2 frogPosition;
+        private readonly Vector2 speedlr;
+        public bool IsDescending { get; private set; }
 
-        public bool isDead { get; private set; }
-        public string playerName { get; private set; }
+        public bool IsDead { get; private set; }
+        public string PlayerName { get; private set; }
 
         public Frog(Vector2 charPos, int spd)
         {
-            _frogTexture = TextureManager.Frog;
-            _frogPosition = charPos;
-            _speedlr = new Vector2(10, 0);
-            playerName = "<name>";
-            isDead = false;
+            frogTexture = TextureManager.Frog;
+            frogPosition = charPos;
+            speedlr = new Vector2(10, 0);
+            PlayerName = "<name>";
+            IsDead = false;
             Jump();
         }
 
         public void Die()
         {
-            isDead = true;
+            IsDead = true;
         }
 
-        public void addCharToName(Keys key)
+        public void AddCharToName(Keys key)
         {
-            if (playerName.Length < 12)
-                playerName += key;
+            if (PlayerName.Length < 12)
+                PlayerName += key;
         }
 
-        public void removeCharFromName()
+        public void RemoveCharFromName()
         {
-            if (playerName.Length > 0)
-                playerName = playerName.Remove(playerName.Length - 1);
+            if (PlayerName.Length > 0)
+                PlayerName = PlayerName.Remove(PlayerName.Length - 1);
         }
 
-        public Rectangle BoundingBox
-        {
-            get
-            {
-                return new Rectangle((int)_frogPosition.X, (int)_frogPosition.Y, _frogTexture.Width, _frogTexture.Height);
-            }
-        }
+        public Rectangle BoundingBox => new Rectangle((int)frogPosition.X, (int)frogPosition.Y, frogTexture.Width, frogTexture.Height);
 
-        public bool isJumpingOnObstacle(Obstacle obstacle)
+        public bool IsJumpingOnObstacle(Obstacle obstacle)
         {
-            return isDescending == false && BoundingBox.Intersects(obstacle.BoundingBox);
+            return IsDescending == false && BoundingBox.Intersects(obstacle.BoundingBox);
         }
 
         /// <summary>
@@ -62,13 +57,13 @@ namespace SeriousGame
         /// <returns>True if the frog is jumping on the platform</returns>
         public bool IsJumpingOn(Platform platform)
         {
-            return isDescending && BoundingBox.Intersects(platform.BoundingBox) && BoundingBox.Bottom <= platform.BoundingBox.Top + 30;
+            return IsDescending && BoundingBox.Intersects(platform.BoundingBox) && BoundingBox.Bottom <= platform.BoundingBox.Top + 30;
         }
 
         float jumpFrom;
         double initialVelocity;
         double time;
-        double gravity = 3000;
+        readonly double gravity = 3000;
 
         /// <summary>
         /// Resets the gravity to default values
@@ -77,7 +72,7 @@ namespace SeriousGame
         {
             initialVelocity = -1640;
             time = 0;
-            jumpFrom = _frogPosition.Y;
+            jumpFrom = frogPosition.Y;
         }
 
         /// <summary>
@@ -93,10 +88,10 @@ namespace SeriousGame
             float newPosition = (float)(initialVelocity * time + gravity * time * time / 2) + jumpFrom;
 
             // Check if is descending
-            isDescending = (_frogPosition.Y < newPosition);
+            IsDescending = (frogPosition.Y < newPosition);
 
             // Apply new position
-            _frogPosition.Y = newPosition;
+            frogPosition.Y = newPosition;
         }
 
         /// <summary>
@@ -104,9 +99,9 @@ namespace SeriousGame
         /// </summary>
         public void Left()
         {
-            if (_frogPosition.X > JumpScreen.Padding)
+            if (frogPosition.X > JumpScreen.Padding)
             {
-                _frogPosition -= _speedlr;
+                frogPosition -= speedlr;
             }
         }
 
@@ -115,15 +110,15 @@ namespace SeriousGame
         /// </summary>
         public void Right()
         {
-            if (_frogPosition.X + _frogTexture.Width < ScreenManager.Dimensions.X - JumpScreen.Padding)
+            if (frogPosition.X + frogTexture.Width < ScreenManager.Dimensions.X - JumpScreen.Padding)
             {
-                _frogPosition += _speedlr;
+                frogPosition += speedlr;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch, int offset)
         {
-            spriteBatch.Draw(_frogTexture, new Vector2(_frogPosition.X, _frogPosition.Y + offset));
+            spriteBatch.Draw(frogTexture, new Vector2(frogPosition.X, frogPosition.Y + offset));
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SeriousGame.Managers;
 
-namespace SeriousGame
+namespace SeriousGame.Screens
 {
     class SplashScreen : GameScreen
     {

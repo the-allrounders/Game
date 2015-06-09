@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using SeriousGame.Managers;
+using SeriousGame.Screens;
 
-namespace SeriousGame
+namespace SeriousGame.Objects
 {
     class Fly : Collectable
     {

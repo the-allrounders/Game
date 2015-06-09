@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeriousGame
+namespace SeriousGame.Managers
 {
     class SettingsManager
     {

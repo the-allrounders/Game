@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SeriousGame.Managers;
+using SeriousGame.Screens;
 
 namespace SeriousGame
 {

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace SeriousGame
+namespace SeriousGame.Managers
 {
     /// <summary>
     /// Can be used troughout the game to check for user input.

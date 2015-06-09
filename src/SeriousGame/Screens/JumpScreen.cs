@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SeriousGame.Managers;
+using SeriousGame.Objects;
 
-namespace SeriousGame
+namespace SeriousGame.Screens
 {
     class JumpScreen : GameScreen
     {
@@ -34,7 +35,7 @@ namespace SeriousGame
             }
 
             // Check if Frog touches obstacle
-            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && frog.isJumpingOnObstacle(obstacle) && !obstacle.isDone()))
+            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && frog.IsJumpingOnObstacle(obstacle) && !obstacle.isDone()))
             {
                 isFrozen = true;
                 obstacle.openQuestion();
@@ -64,11 +65,11 @@ namespace SeriousGame
             }
 
             // If user is pressing Left, go left. Same for Right.
-            if (!isFrozen && !frog.isDead && InputManager.IsPressing(Keys.Left, false))
+            if (!isFrozen && !frog.IsDead && InputManager.IsPressing(Keys.Left, false))
             {
                 frog.Left();
             }
-            if (!isFrozen && !frog.isDead && InputManager.IsPressing(Keys.Right, false))
+            if (!isFrozen && !frog.IsDead && InputManager.IsPressing(Keys.Right, false))
             {
                 frog.Right();
             }
@@ -119,7 +120,7 @@ namespace SeriousGame
                 {
                     if (buttonIsSaveButton)
                     {
-                        LeaderboardScreen.SaveScore(frog.playerName, score);
+                        LeaderboardScreen.SaveScore(frog.PlayerName, score);
                         buttonIsSaveButton = false;
                     }
                     else
@@ -150,7 +151,7 @@ namespace SeriousGame
                 Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.isDone()))
             {
                 obstacle.Draw(spriteBatch, offset);
-                if (frog.isJumpingOnObstacle(obstacle))
+                if (frog.IsJumpingOnObstacle(obstacle))
                 {
                     obstacle.DrawQuestion(spriteBatch);
                 }
@@ -174,7 +175,7 @@ namespace SeriousGame
                 new Vector2(ScreenManager.Dimensions.X - Padding, offset*-1 + offset));
 
             // Draw scorescreen of frog is dead
-            if (frog.isDead)
+            if (frog.IsDead)
             {
                 DrawScoreScreen(spriteBatch, offset, true);
             }
@@ -209,7 +210,7 @@ namespace SeriousGame
         {
             if (InputManager.IsPressing(Keys.Back))
             {
-                frog.removeCharFromName();
+                frog.RemoveCharFromName();
             }
             else
             {
@@ -217,11 +218,11 @@ namespace SeriousGame
                 {
                     if (InputManager.IsPressing(key))
                     {
-                        frog.addCharToName(key);
+                        frog.AddCharToName(key);
                     }
                 }
             }
-            string playerName = frog.playerName;
+            string playerName = frog.PlayerName;
             return playerName;
         }
 

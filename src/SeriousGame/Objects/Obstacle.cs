@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SeriousGame.Objects;
+using SeriousGame.Managers;
 
-namespace SeriousGame
+namespace SeriousGame.Objects
 {
     public class Obstacle
     {

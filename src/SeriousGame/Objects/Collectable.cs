@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SeriousGame.Managers;
 
-namespace SeriousGame
+namespace SeriousGame.Objects
 {
     class Collectable
     {
