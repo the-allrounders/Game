@@ -1,11 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace SeriousGame
 {
     class SettingsScreen : GameScreen
     {
+        public override void Load()
+        {
+            SongManager.Play(Songs.SuperMarioIce);
+        }
+        
         public override void Update(GameTime gameTime)
         {
             // If ESC button is pressed or if back button is clicked

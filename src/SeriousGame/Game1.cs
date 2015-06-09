@@ -58,6 +58,7 @@ namespace SeriousGame
 
             TextureManager.Load(Content);
             FontManager.Load(Content);
+            SongManager.Load(Content);
             ScreenManager.CurrentScreen = new SplashScreen();
         }
 

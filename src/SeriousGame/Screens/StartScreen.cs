@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace SeriousGame
 {
@@ -8,7 +9,7 @@ namespace SeriousGame
     {
         public override void Load()
         {
-            // Startscherm geladen
+            SongManager.Play(Songs.SuperMario);
         }
 
         public override void Update(GameTime gameTime)
