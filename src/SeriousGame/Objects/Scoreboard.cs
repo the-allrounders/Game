@@ -53,8 +53,7 @@ namespace SeriousGame.Objects
                     ScreenManager.CurrentScreen = new LeaderboardScreen();
                 }
             }
-            else if (InputManager.IsPressing(Keys.Space) ||
-                     InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 45,
+            else if (InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 45,
                          (int)ScreenManager.Dimensions.Y / 2 + 35, 100, 20)))
             {
                 ScreenManager.CurrentScreen = new JumpScreen();
