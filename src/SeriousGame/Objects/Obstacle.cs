@@ -8,22 +8,22 @@ namespace SeriousGame.Objects
 {
     public class Obstacle
     {
-        private int _question;
-        private Vector2 _position;
-        private Texture2D _texture;
+        private readonly int question;
+        private Vector2 position;
+        private readonly Texture2D texture;
 
-        private SpriteFont _font;
-        private SpriteFont _fontBold;
-        private PopUp _popUp;
-        private Boolean _done;
+        private SpriteFont font;
+        private SpriteFont fontBold;
+        private PopUp popUp;
+        private Boolean done;
 
         public Obstacle(Vector2 position, int question)
         {
-            _question = question;
-            _position = position;
-            _texture = TextureManager.Obstacle;
-            _font = FontManager.Verdana;
-            _fontBold = FontManager.VerdanaBold;
+            this.question = question;
+            this.position = position;
+            texture = TextureManager.Obstacle;
+            font = FontManager.Verdana;
+            fontBold = FontManager.VerdanaBold;
         }
 
         public bool IsInViewport(int offset)
@@ -40,44 +40,44 @@ namespace SeriousGame.Objects
 
         public void Draw(SpriteBatch spritebatch, int offset)
         {
-            spritebatch.Draw(_texture, new Vector2(190, _position.Y + offset));
+            spritebatch.Draw(texture, new Vector2(190, position.Y + offset));
         }
 
         public Rectangle BoundingBox
         {
             get
             {
-                Rectangle rect = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height); ;
+                Rectangle rect = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); ;
                 return rect;
             }
         }
 
-        public void openQuestion()
+        public void OpenQuestion()
         {
-            _popUp = new PopUp(_question);
+            popUp = new PopUp(question);
         }
 
         public void DrawQuestion(SpriteBatch spritebatch)
         {
-            if (_popUp != null)
+            if (popUp != null)
             {
-                _popUp.Draw(spritebatch);
+                popUp.Draw(spritebatch);
             }
         }
 
-        public Boolean checkAnswer(int answer)
+        public Boolean CheckAnswer(int answer)
         {
-            return _popUp.chooceAnswer(answer);
+            return popUp.ChooceAnswer(answer);
         }
 
-        public Boolean isDone()
+        public Boolean IsDone()
         {
-            return _done;
+            return done;
         }
 
-        public void finishedQuestion()
+        public void FinishedQuestion()
         {
-            _done = true;
+            done = true;
         }
 
         public static List<Obstacle> GenerateList(int gameHeight)

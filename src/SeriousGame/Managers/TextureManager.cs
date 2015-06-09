@@ -21,20 +21,20 @@ namespace SeriousGame.Managers
         public static Texture2D InputMedium;
         public static Texture2D Caret;
 
-        public static void Load(ContentManager Content)
+        public static void Load(ContentManager content)
         {
-            Splash = Content.Load<Texture2D>("splash");
-            Start = Content.Load<Texture2D>("start");
-            Settings = Content.Load<Texture2D>("settings");
-            Fly = Content.Load<Texture2D>("fly");
-            Platform = Content.Load<Texture2D>("platform");
-            Frog = Content.Load<Texture2D>("frog");
-            Magma = Content.Load<Texture2D>("magma");
-            Obstacle = Content.Load<Texture2D>("obstacle");
-            WallLeft = Content.Load<Texture2D>("wall_left");
-            WallRight = Content.Load<Texture2D>("wall_right");
-            InputMedium = Content.Load<Texture2D>("input_medium");
-            Caret = Content.Load<Texture2D>("caret");
+            Splash = content.Load<Texture2D>("splash");
+            Start = content.Load<Texture2D>("start");
+            Settings = content.Load<Texture2D>("settings");
+            Fly = content.Load<Texture2D>("fly");
+            Platform = content.Load<Texture2D>("platform");
+            Frog = content.Load<Texture2D>("frog");
+            Magma = content.Load<Texture2D>("magma");
+            Obstacle = content.Load<Texture2D>("obstacle");
+            WallLeft = content.Load<Texture2D>("wall_left");
+            WallRight = content.Load<Texture2D>("wall_right");
+            InputMedium = content.Load<Texture2D>("input_medium");
+            Caret = content.Load<Texture2D>("caret");
         }
     }
 }

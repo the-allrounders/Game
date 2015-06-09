@@ -9,15 +9,15 @@ namespace SeriousGame.Objects
 {
     public class Platform
     {
-        private Vector2 _platformPosition;
-        private Vector2 _platformSize;
-        private Texture2D _platformTexture;
+        private Vector2 platformPosition;
+        private Vector2 platformSize;
+        private readonly Texture2D platformTexture;
 
         public Platform(Vector2 pos, Vector2 size)
         {
-            _platformPosition = pos;
-            _platformSize = size;
-            _platformTexture = TextureManager.Platform;
+            platformPosition = pos;
+            platformSize = size;
+            platformTexture = TextureManager.Platform;
         }
 
         public bool IsInViewport(int offset)
@@ -32,7 +32,7 @@ namespace SeriousGame.Objects
         {
             get
             {
-                Rectangle rect = new Rectangle((int)_platformPosition.X, (int)_platformPosition.Y, _platformTexture.Width, _platformTexture.Height);
+                Rectangle rect = new Rectangle((int)platformPosition.X, (int)platformPosition.Y, platformTexture.Width, platformTexture.Height);
                 return rect;
             }
         }
@@ -44,10 +44,10 @@ namespace SeriousGame.Objects
 
         public void Draw(SpriteBatch spriteBatch, int offset)
         {
-            spriteBatch.Draw(_platformTexture, new Vector2(_platformPosition.X, _platformPosition.Y + offset));
+            spriteBatch.Draw(platformTexture, new Vector2(platformPosition.X, platformPosition.Y + offset));
         }
 
-        public static List<Platform> generateList(int gameHeight)
+        public static List<Platform> GenerateList(int gameHeight)
         {
             Random rnd = new Random();
             List<Platform> platforms = new List<Platform>();

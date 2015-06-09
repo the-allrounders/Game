@@ -13,7 +13,7 @@ namespace SeriousGame.Screens
     {
         private int offset;
         private const int gameHeight = 100000;
-        private readonly List<Platform> platforms = Platform.generateList(gameHeight);
+        private readonly List<Platform> platforms = Platform.GenerateList(gameHeight);
         private readonly List<Obstacle> obstacles = Obstacle.GenerateList(gameHeight);
         private readonly List<Fly> flies = Fly.GenerateList(gameHeight);
         private readonly Frog frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog.Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog.Height), 5);
@@ -35,32 +35,32 @@ namespace SeriousGame.Screens
             }
 
             // Check if Frog touches obstacle
-            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && frog.IsJumpingOnObstacle(obstacle) && !obstacle.isDone()))
+            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && frog.IsJumpingOnObstacle(obstacle) && !obstacle.IsDone()))
             {
                 isFrozen = true;
-                obstacle.openQuestion();
+                obstacle.OpenQuestion();
                 if (InputManager.IsPressing(Keys.A) || InputManager.IsPressing(Keys.B) ||
                     InputManager.IsPressing(Keys.C) || InputManager.IsPressing(Keys.D))
                 {
                     bool answer = false;
                     if (InputManager.IsPressing(Keys.A))
                     {
-                        answer = obstacle.checkAnswer(1);
+                        answer = obstacle.CheckAnswer(1);
                     }
                     else if (InputManager.IsPressing(Keys.B))
                     {
-                        answer = obstacle.checkAnswer(2);
+                        answer = obstacle.CheckAnswer(2);
                     }
                     else if (InputManager.IsPressing(Keys.C))
                     {
-                        answer = obstacle.checkAnswer(3);
+                        answer = obstacle.CheckAnswer(3);
                     }
                     else if (InputManager.IsPressing(Keys.D))
                     {
-                        answer = obstacle.checkAnswer(4);
+                        answer = obstacle.CheckAnswer(4);
                     }
-                    obstacle.finishedQuestion();
-                    checkAnswer(answer);
+                    obstacle.FinishedQuestion();
+                    CheckAnswer(answer);
                 }
             }
 
@@ -97,7 +97,7 @@ namespace SeriousGame.Screens
             for (int i = 0; i < copyFlies.Count; i++)
             {
                 if (!flies[i].IsInViewport(offset) || !flies[i].IsCatching(frog)) continue;
-                score += flies[i].collectableScoreWorth;
+                score += flies[i].CollectableScoreWorth;
                 flies.RemoveAt(i);
             }
 
@@ -148,7 +148,7 @@ namespace SeriousGame.Screens
 
             // Draw obstacles
             foreach (
-                Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.isDone()))
+                Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
             {
                 obstacle.Draw(spriteBatch, offset);
                 if (frog.IsJumpingOnObstacle(obstacle))
@@ -226,7 +226,7 @@ namespace SeriousGame.Screens
             return playerName;
         }
 
-        public void checkAnswer(bool answer)
+        public void CheckAnswer(bool answer)
         {
             if (answer == false)
             {
