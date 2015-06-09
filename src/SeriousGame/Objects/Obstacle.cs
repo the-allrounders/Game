@@ -85,7 +85,7 @@ namespace SeriousGame.Objects
         {
             int question = -2;
             List<Obstacle> platforms = new List<Obstacle>();
-            for (int i = 1000; i > JumpScreen.gameHeight * -1; i -= 2000)
+            for (int i = 1000; i > JumpScreen.GameHeight * -1; i -= 2000)
             {
                 question++;
                 platforms.Add(new Obstacle(new Vector2(50, i), question));

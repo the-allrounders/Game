@@ -47,20 +47,19 @@ namespace SeriousGame.Objects
 
         public static List<Wall> GenerateList()
         {
+            JumpScreen.GameHeight = 100000;
             List<Wall> walls = new List<Wall>();
             int i;
             int iterations = 0;
-            for (i = 0; i > (JumpScreen.gameHeight - (int)ScreenManager.Dimensions.Y) * -1; i -= (int)ScreenManager.Dimensions.Y)
+            for (i = 0; i > (JumpScreen.GameHeight - (int)ScreenManager.Dimensions.Y) * -1; i -= (int)ScreenManager.Dimensions.Y)
             {
                 walls.Add(new Wall(new Vector2(0, i), TextureManager.WallLeft));
                 walls.Add(new Wall(new Vector2(ScreenManager.Dimensions.X-TextureManager.WallRight.Width, i), TextureManager.WallRight));
                 iterations++;
             }
-            Console.WriteLine(iterations);
             walls.Add(new Wall(new Vector2(0, i), TextureManager.LastWallLeft));
             walls.Add(new Wall(new Vector2(ScreenManager.Dimensions.X - TextureManager.LastWallRight.Width, i), TextureManager.WallRight));
-            JumpScreen.gameHeight = iterations * TextureManager.WallRight.Height;
-            Console.WriteLine(JumpScreen.gameHeight);
+            JumpScreen.GameHeight = iterations * TextureManager.WallRight.Height;
             return walls;
         }
     }

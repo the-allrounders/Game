@@ -13,7 +13,7 @@ namespace SeriousGame.Screens
     class JumpScreen : GameScreen
     {
         private int offset;
-        public static int gameHeight = 3000;
+        public static int GameHeight;
         private readonly List<Wall> walls = Wall.GenerateList();
         private readonly List<Platform> platforms = Platform.GenerateList();
         private readonly List<Obstacle> obstacles = Obstacle.GenerateList();
@@ -130,7 +130,7 @@ namespace SeriousGame.Screens
                     scoreboard = new Scoreboard(score, frog.IsDead);
                 }
 
-                if (offset > gameHeight + 400)
+                if (offset > GameHeight + 400)
                 {
                     gameEnded = true;
                     scoreboard = new Scoreboard(score, frog.IsDead);
