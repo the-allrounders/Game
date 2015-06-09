@@ -54,8 +54,8 @@ namespace SeriousGame
             // On fullscreen, fix the mouse position
             if (SettingsManager.Fullscreen)
             {
-                mousePosition.X = mousePosition.X / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * (int)ScreenManager.Dimensions.X;
-                mousePosition.Y = mousePosition.Y / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * (int)ScreenManager.Dimensions.Y;
+                mousePosition.X = (int)((float)mousePosition.X / (float)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * ScreenManager.Dimensions.X);
+                mousePosition.Y = (int)((float)mousePosition.Y / (float)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * ScreenManager.Dimensions.Y);
             }
 
             // If a retangle is given to check for intersection, check
