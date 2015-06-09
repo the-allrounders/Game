@@ -23,7 +23,7 @@ namespace SeriousGame.Objects
                 int fliesThisLine = rnd.Next(-1, 3);
                 for (int n = 0; n < fliesThisLine; n++)
                 {
-                    int distance = (int)((ScreenManager.Dimensions.X - (JumpScreen.Padding * 2)) / fliesThisLine * n) + JumpScreen.Padding + 100 + rnd.Next(-30, 30);
+                    int distance = (int)((ScreenManager.Dimensions.X - (JumpScreen.Padding * 2)) / fliesThisLine * n) + JumpScreen.Padding + 100 + rnd.Next(-100, 100);
                     if (distance < JumpScreen.Padding)
                         distance = JumpScreen.Padding;
                     else if (distance > ScreenManager.Dimensions.X - JumpScreen.Padding)
