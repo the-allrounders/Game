@@ -8,24 +8,24 @@ namespace SeriousGame.Objects
     class PopUp
     {
         private readonly string[,] questions = {
-			{"Hoe noemt men vloeibaar gesteente dat zich onder het aardoppervlak bevindt?", 
+			{"Hoe wordt vloeibaar gesteente genoemd dat zich onder het aardoppervlak bevindt?", 
 				"1) Lava","2) Karma", "3) Magma", "4) Vloeibaar gesteente"},
 			{"Hoe wordt de wolk genoemd die te zien is tijdens een vulkaanuitbarsting?", 
 				"1) Vuurwolk", "2) Rookwolk", "3) Aswolk", "4) Regenwolk"},
-			{"Hoe noemt men een vulkaan dat op het moment niet actief is maar wel terug actief kan worden?", 
+			{"Hoe heet een vulkaan die op het moment niet actief is maar wel terug actief kan worden?", 
                 "1) Slapende vulkaan","2) Inactieve vulkaan", "3) Rustende vulkaan", "4) Snurkende vulkaan"}, 
 			{"Hoe worden vulkanen genoemd die zich onder het wateroppervlak bevinden?", 
                 "1) Stratovulkanen","2) Oceanische vulkanen", "3) Schildvulkanen", "4) Submarine vulkanen"},   
 			{"Wat is de grootste actieve vulkaan in Europa?", 
                "1) Vesuvius","2) Stromboli", "3) Etna", "4) Vulcano"},   
-			{"Hoe noemt men een vulkaan die is uitgedooft?", 
+			{"Hoe noemt men een vulkaan die is uitgedoofd?", 
 				"1) Arme vulkaan","2) Dode vulkaan", "3) Levenloze vulkaan", "4) Een slapende vulkaan"},  
 			{"Afgekoelde lava is", 
 				"1) Vruchtbaar", "2) Warm", "3) Eetbaar", "4) Vloeibaar"},  
 			{"Welk land heeft de meeste vulkanen?", 
 				"1) Italie", "2) Indonesie", "3) Nieuw-Zeeland", "4) Nederland"},
 			{"Hoe heet het gat aan de top van een vulkaan?", 
-				"1) De krater", "2) De kraterpijp", "3) De mond", "De kuil"},
+				"1) De krater", "2) De kraterpijp", "3) De mond", "4) De kuil"},
 			{"Wat is geen soort vulkaan?", 
 				"1) Spleetvulkaan","2) Caldeira","3) Pacificvulkaan", "4) Stratovulkaan"}
 			
