@@ -69,7 +69,7 @@ namespace SeriousGame.Objects
         public void Draw(SpriteBatch spriteBatch, int offset, string playerName)
         {
             string winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
-            string loseText = "Helaas, GameOver! Je scoorde " + score + " punten";
+            string loseText = "Helaas, game over! Je scoorde " + score + " punten";
             string text = isDead ? loseText : winText;
             spriteBatch.DrawString(FontManager.Verdana, text,
                 new Vector2(ScreenManager.Dimensions.X/2 - 230, ScreenManager.Dimensions.Y/2 - 100), Color.White);
@@ -77,17 +77,17 @@ namespace SeriousGame.Objects
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
             if (caretVisible)
             {
-                float caretDistance = playerName == "<name>" ? 0 : FontManager.Verdana.MeasureString(playerName).X;
+                float caretDistance = playerName == "<naam>" ? 0 : FontManager.Verdana.MeasureString(playerName).X;
                 spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + caretDistance + 1, ScreenManager.Dimensions.Y / 2 - 40));
             }
-            Color nameColor = playerName == "<name>" ? Color.Gray : Color.Black;
+            Color nameColor = playerName == "<naam>" ? Color.Gray : Color.Black;
             spriteBatch.DrawString(FontManager.Verdana, playerName,
                 new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), nameColor);
             if (buttonIsSaveButton)
                 spriteBatch.DrawString(FontManager.Verdana, "Opslaan",
                     new Vector2(ScreenManager.Dimensions.X/2 - 40, ScreenManager.Dimensions.Y/2), Color.White);
             else
-                spriteBatch.DrawString(FontManager.Verdana, "Leaderboard",
+                spriteBatch.DrawString(FontManager.Verdana, "Ranglijst",
                     new Vector2(ScreenManager.Dimensions.X/2 - 60, ScreenManager.Dimensions.Y/2), Color.White);
             spriteBatch.DrawString(FontManager.Verdana, "Opnieuw",
                 new Vector2(ScreenManager.Dimensions.X/2 - 45, ScreenManager.Dimensions.Y/2 + 30), Color.White);

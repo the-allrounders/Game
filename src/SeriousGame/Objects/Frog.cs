@@ -21,7 +21,7 @@ namespace SeriousGame.Objects
             frogTexture = TextureManager.FrogRight;
             frogPosition = charPos;
             speedlr = new Vector2(10, 0);
-            PlayerName = "<name>";
+            PlayerName = "<naam>";
             IsDead = false;
             Jump();
         }
@@ -33,7 +33,7 @@ namespace SeriousGame.Objects
 
         public void AddCharToName(Keys key)
         {
-            if (PlayerName == "<name>")
+            if (PlayerName == "<naam>")
                 PlayerName = "";
             if (PlayerName.Length < 12)
                 PlayerName += key;
@@ -41,7 +41,7 @@ namespace SeriousGame.Objects
 
         public void RemoveCharFromName()
         {
-            if (PlayerName == "<name>")
+            if (PlayerName == "<naam>")
                 PlayerName = "";
             else if (PlayerName.Length > 0)
                 PlayerName = PlayerName.Remove(PlayerName.Length - 1);
