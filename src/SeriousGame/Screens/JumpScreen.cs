@@ -121,7 +121,7 @@ namespace SeriousGame.Screens
             }
 
             // Check if frog is catching any flies
-            foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset) && fly.IsCatching(frog)))
+            foreach (Fly fly in flies.Where(fly => !fly.IsDone && fly.IsInViewport(offset) && fly.IsCatching(frog)))
             {
                 score += fly.CollectableScoreWorth;
                 SoundManager.Play(Sounds.Coin);
