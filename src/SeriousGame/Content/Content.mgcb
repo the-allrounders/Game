@@ -268,3 +268,9 @@
 /processorParam:TextureFormat=Color
 /build:JumpScreen/Textures/goed.png
 
+#begin JumpScreen/Sounds/nsmb_coin.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:JumpScreen/Sounds/nsmb_coin.wav
+

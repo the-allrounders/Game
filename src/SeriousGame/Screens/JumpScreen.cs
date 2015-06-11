@@ -124,6 +124,7 @@ namespace SeriousGame.Screens
             foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset) && fly.IsCatching(frog)))
             {
                 score += fly.CollectableScoreWorth;
+                SoundManager.Play(Sounds.Coin);
                 fly.IsDone = true;
             }
 

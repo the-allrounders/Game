@@ -44,6 +44,7 @@
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\SettingsManager.cs" />
     <Compile Include="Managers\SongManager.cs" />
+    <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="Objects\Collectable.cs" />
     <Compile Include="Objects\Fly.cs" />
     <Compile Include="Objects\Frog.cs" />
