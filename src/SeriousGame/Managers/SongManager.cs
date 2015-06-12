@@ -47,6 +47,11 @@ namespace SeriousGame.Managers
 
         public static void Play(Songs song, bool startFromBeginning = false)
         {
+            if (song == Songs.None)
+            {
+                Stop();
+                return;
+            }
             if (!startFromBeginning && playing == song) return;
             playing = song;
 
@@ -58,6 +63,7 @@ namespace SeriousGame.Managers
 
         public static void Stop()
         {
+            playing = Songs.None;
             MediaPlayer.Stop();
         }
     }
