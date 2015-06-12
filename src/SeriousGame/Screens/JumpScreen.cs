@@ -122,12 +122,16 @@ namespace SeriousGame.Screens
 
             // Check if jumping on platform
             if (platforms.Any(platform => platform.IsInViewport(offset) && frog.IsJumpingOn(platform)))
+            {
                 frog.Jump();
+                SoundManager.Play(Sounds.Jump);
+            }
 
             // Check if frog is catching any flies
-            foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset) && fly.IsCatching(frog)))
+            foreach (Fly fly in flies.Where(fly => !fly.IsDone && fly.IsInViewport(offset) && fly.IsCatching(frog)))
             {
                 score += fly.CollectableScoreWorth;
+                SoundManager.Play(Sounds.Coin);
                 fly.IsDone = true;
             }
 
@@ -144,22 +148,23 @@ namespace SeriousGame.Screens
             {
                 scoreboard.Update(frog, gameTime);
                 return;
-            }
-            
-            //Check if frog is touching Magma
-            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||
-                magma.IsTouchingFrog(frog))
-            {
-                frog.Die();
-                gameEnded = true;
-                scoreboard = new Scoreboard(score, frog.IsDead);
-            }
+}
+                //Check if frog is touching Magma
+                if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||
+                    magma.IsTouchingFrog(frog))
+                {
+                    frog.Die();
+                    gameEnded = true;
+                    SoundManager.Play(Sounds.Death);
+                    SongManager.Stop();
+                    scoreboard = new Scoreboard(score, frog.IsDead);
+                }
 
-            if (offset > GameHeight + 400)
-            {
-                gameEnded = true;
-                scoreboard = new Scoreboard(score, frog.IsDead);
-            }
+                if (offset > GameHeight + 400)
+                {
+                    gameEnded = true;
+                    scoreboard = new Scoreboard(score, frog.IsDead);
+                }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

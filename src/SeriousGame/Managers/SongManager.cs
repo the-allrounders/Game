@@ -18,9 +18,20 @@ namespace SeriousGame.Managers
         private static Dictionary<Songs, Song> songs;
         private static Songs playing;
 
+        private static bool muted;
         public static bool Muted
         {
-            set { MediaPlayer.IsMuted = value; }
+            //set { MediaPlayer.IsMuted = value; } MONOGAME BUG WORKAROUND
+            get { return muted; }
+            set
+            {
+                muted = value;
+                if (muted)
+                    MediaPlayer.Stop();
+                else
+                    Play(playing);
+            }
+
         }
 
         public static void Load(ContentManager content)
@@ -37,8 +48,17 @@ namespace SeriousGame.Managers
         public static void Play(Songs song, bool startFromBeginning = false)
         {
             if (!startFromBeginning && playing == song) return;
-            MediaPlayer.Play(songs[song]);
             playing = song;
+
+            if (!muted)
+            {
+                MediaPlayer.Play(songs[song]);
+            }
+        }
+
+        public static void Stop()
+        {
+            MediaPlayer.Stop();
         }
     }
 }

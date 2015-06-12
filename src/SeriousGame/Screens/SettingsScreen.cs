@@ -26,20 +26,25 @@ namespace SeriousGame.Screens
                 SettingsManager.Difficulty += 1;
                 if (SettingsManager.Difficulty == 4)
                     SettingsManager.Difficulty = 1;
+                SoundManager.Play(Sounds.Hammer);
             }
 
             else if (InputManager.IsClicking(new Rectangle(820, 96, 50, 67)))
             {
+                if (SettingsManager.Difficulty != 1) SoundManager.Play(Sounds.Hammer);
                 SettingsManager.Difficulty = 1;
+                
             }
 
             else if (InputManager.IsClicking(new Rectangle(870, 96, 53, 67)))
             {
+                if (SettingsManager.Difficulty != 2) SoundManager.Play(Sounds.Hammer);
                 SettingsManager.Difficulty = 2;
             }
 
             else if (InputManager.IsClicking(new Rectangle(922, 96, 50, 67)))
             {
+                if (SettingsManager.Difficulty != 3) SoundManager.Play(Sounds.Hammer);
                 SettingsManager.Difficulty = 3;
             }
 
@@ -47,18 +52,21 @@ namespace SeriousGame.Screens
             else if (InputManager.IsClicking(new Rectangle(300, 214, 700, 70)))
             {
                 SettingsManager.Music = !SettingsManager.Music;
+                SoundManager.Play(Sounds.Hammer);
             }
 
             // If sound is clicked
             else if (InputManager.IsClicking(new Rectangle(300, 369, 700, 70)))
             {
                 SettingsManager.Sound = !SettingsManager.Sound;
+                SoundManager.Play(Sounds.Hammer);
             }
 
             // If fullscreen is clicked
             else if (InputManager.IsClicking(new Rectangle(300, 523, 700, 70)))
             {
                 SettingsManager.Fullscreen = !SettingsManager.Fullscreen;
+                SoundManager.Play(Sounds.Hammer);
             }
         }
 

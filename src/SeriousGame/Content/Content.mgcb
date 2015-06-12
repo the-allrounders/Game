@@ -268,3 +268,27 @@
 /processorParam:TextureFormat=Color
 /build:JumpScreen/Textures/goed.png
 
+#begin JumpScreen/Sounds/nsmb_coin.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:JumpScreen/Sounds/nsmb_coin.wav
+
+#begin JumpScreen/Sounds/nsmb_jump.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:JumpScreen/Sounds/nsmb_jump.wav
+
+#begin SettingsScreen/Sounds/nsmb_hammer_throw.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SettingsScreen/Sounds/nsmb_hammer_throw.wav
+
+#begin JumpScreen/Sounds/nsmb_death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:JumpScreen/Sounds/nsmb_death.wav
+

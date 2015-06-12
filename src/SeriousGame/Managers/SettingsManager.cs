@@ -6,7 +6,7 @@ namespace SeriousGame.Managers
     {
         public static int Difficulty = 1;
 
-        public static bool music = true;
+        private static bool music = true;
         public static bool Music
         {
             get { return music; }
