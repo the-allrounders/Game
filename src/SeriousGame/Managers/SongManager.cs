@@ -55,5 +55,10 @@ namespace SeriousGame.Managers
                 MediaPlayer.Play(songs[song]);
             }
         }
+
+        public static void Stop()
+        {
+            MediaPlayer.Stop();
+        }
     }
 }

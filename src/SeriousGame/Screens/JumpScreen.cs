@@ -118,6 +118,7 @@ namespace SeriousGame.Screens
             if (platforms.Any(platform => platform.IsInViewport(offset) && frog.IsJumpingOn(platform)))
             {
                 frog.Jump();
+                SoundManager.Play(Sounds.Jump);
             }
 
             // Check if frog is catching any flies
@@ -145,6 +146,8 @@ namespace SeriousGame.Screens
                 {
                     frog.Die();
                     gameEnded = true;
+                    SoundManager.Play(Sounds.Death);
+                    SongManager.Stop();
                     scoreboard = new Scoreboard(score, frog.IsDead);
                 }
 

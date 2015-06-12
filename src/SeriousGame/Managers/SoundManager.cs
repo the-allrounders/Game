@@ -9,7 +9,10 @@ namespace SeriousGame.Managers
 {
     public enum Sounds
     {
-        Coin
+        Coin,
+        Jump,
+        Death,
+        Hammer,
     }
     
     class SoundManager
@@ -20,7 +23,10 @@ namespace SeriousGame.Managers
         {
             sounds = new Dictionary<Sounds, SoundEffect>()
             {
-                {Sounds.Coin, content.Load<SoundEffect>("JumpScreen/Sounds/nsmb_coin")}
+                {Sounds.Coin, content.Load<SoundEffect>("JumpScreen/Sounds/nsmb_coin")},
+                {Sounds.Hammer, content.Load<SoundEffect>("SettingsScreen/Sounds/nsmb_hammer_throw")},
+                {Sounds.Death, content.Load<SoundEffect>("JumpScreen/Sounds/nsmb_death")},
+                {Sounds.Jump, content.Load<SoundEffect>("JumpScreen/Sounds/nsmb_jump")}
             };
         }
 
