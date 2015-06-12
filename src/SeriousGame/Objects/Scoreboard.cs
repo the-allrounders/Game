@@ -85,12 +85,12 @@ namespace SeriousGame.Objects
                 new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), nameColor);
             if (buttonIsSaveButton)
                 spriteBatch.DrawString(FontManager.Verdana, "Opslaan",
-                    new Vector2(ScreenManager.Dimensions.X/2 - 40, ScreenManager.Dimensions.Y/2), Color.White);
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opslaan").X / 2, ScreenManager.Dimensions.Y/2), Color.White);
             else
                 spriteBatch.DrawString(FontManager.Verdana, "Ranglijst",
-                    new Vector2(ScreenManager.Dimensions.X/2 - 60, ScreenManager.Dimensions.Y/2), Color.White);
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Ranglijst").X / 2, ScreenManager.Dimensions.Y/2), Color.White);
             spriteBatch.DrawString(FontManager.Verdana, "Opnieuw",
-                new Vector2(ScreenManager.Dimensions.X/2 - 45, ScreenManager.Dimensions.Y/2 + 30), Color.White);
+                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opnieuw").X / 2, ScreenManager.Dimensions.Y / 2 + 30), Color.White);
         }
     }
 }

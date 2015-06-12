@@ -38,6 +38,23 @@ namespace SeriousGame.Screens
             SongManager.Play(Songs.SuperMarioHipHop);
         }
 
+        public void CheckAnswer(bool answer)
+        {
+            if (answer)
+            {
+                score += 1000;
+                good = true;
+            }
+            else
+            {
+                score -= 1000;
+                wrong = true;
+            }
+            isFrozen = false;
+            waiting = true;
+            frog.Jump();
+        }
+
         public override void Update(GameTime gameTime)
         {
             // If user is pressing ESC, return to StartScreen
@@ -51,57 +68,46 @@ namespace SeriousGame.Screens
             {
                 isFrozen = true;
                 obstacle.OpenQuestion();
-                if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.D2) ||
-                    InputManager.IsPressing(Keys.D3) || InputManager.IsPressing(Keys.D4) ||
-                    InputManager.IsPressing(Keys.NumPad1) || InputManager.IsPressing(Keys.NumPad2) ||
-                    InputManager.IsPressing(Keys.NumPad3) || InputManager.IsPressing(Keys.NumPad4))
+                bool answer = false;
+                if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.NumPad1))
                 {
-                    bool answer = false;
-                    if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.NumPad1))
-                    {
-                        answer = obstacle.CheckAnswer(1);
-                    }
-                    else if(InputManager.IsPressing(Keys.D2) || InputManager.IsPressing(Keys.NumPad2))
-                    {
-                        answer = obstacle.CheckAnswer(2);
-                    }
-                    else if (InputManager.IsPressing(Keys.D3) || InputManager.IsPressing(Keys.NumPad3))
-                    {
-                        answer = obstacle.CheckAnswer(3);
-                    }
-                    else if (InputManager.IsPressing(Keys.D4) || InputManager.IsPressing(Keys.NumPad4))
-                    {
-                        answer = obstacle.CheckAnswer(4);
-                    }
-                    obstacle.FinishedQuestion();
-                    CheckAnswer(answer);
+                    answer = obstacle.CheckAnswer(1);
                 }
+                else if (InputManager.IsPressing(Keys.D2) || InputManager.IsPressing(Keys.NumPad2))
+                {
+                    answer = obstacle.CheckAnswer(2);
+                }
+                else if (InputManager.IsPressing(Keys.D3) || InputManager.IsPressing(Keys.NumPad3))
+                {
+                    answer = obstacle.CheckAnswer(3);
+                }
+                else if (InputManager.IsPressing(Keys.D4) || InputManager.IsPressing(Keys.NumPad4))
+                {
+                    answer = obstacle.CheckAnswer(4);
+                }
+                else
+                    continue;
+                obstacle.FinishedQuestion();
+                CheckAnswer(answer);
             }
 
-            if(waiting)
+            if (waiting)
             {
                 waiting = false;
                 waitTime = gameTime.TotalGameTime.Seconds;
             }
 
-            if(wrong || good)
+            if ((wrong || good) && gameTime.TotalGameTime.Seconds >= waitTime + 3)
             {
-                if (gameTime.TotalGameTime.Seconds >= waitTime + 3)
-                {
-                    wrong = false;
-                    good = false;
-                }
+                wrong = false;
+                good = false;
             }
 
             // If user is pressing Left, go left. Same for Right.
             if (!isFrozen && !gameEnded && (InputManager.IsPressing(Keys.Left, false) || !gameEnded && InputManager.IsPressing(Keys.A, false)))
-            {
                 frog.Left();
-            }
-            if (!isFrozen && (!gameEnded && InputManager.IsPressing(Keys.Right, false) || !gameEnded && InputManager.IsPressing(Keys.D, false)))
-            {
+            else if (!isFrozen && (!gameEnded && InputManager.IsPressing(Keys.Right, false) || !gameEnded && InputManager.IsPressing(Keys.D, false)))
                 frog.Right();
-            }
 
             // Calculate new offset
             int newOffset = (int)ScreenManager.Dimensions.Y - frog.BoundingBox.Bottom - 500;
@@ -116,9 +122,7 @@ namespace SeriousGame.Screens
 
             // Check if jumping on platform
             if (platforms.Any(platform => platform.IsInViewport(offset) && frog.IsJumpingOn(platform)))
-            {
                 frog.Jump();
-            }
 
             // Check if frog is catching any flies
             foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset) && fly.IsCatching(frog)))
@@ -136,26 +140,25 @@ namespace SeriousGame.Screens
                 magma.Rise(offset);
             }
 
-            if (!gameEnded)
-            {
-                //Check if frog is touching Magma
-                if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||
-                    magma.IsTouchingFrog(frog))
-                {
-                    frog.Die();
-                    gameEnded = true;
-                    scoreboard = new Scoreboard(score, frog.IsDead);
-                }
-
-                if (offset > GameHeight + 400)
-                {
-                    gameEnded = true;
-                    scoreboard = new Scoreboard(score, frog.IsDead);
-                }
-            }
-            else
+            if (gameEnded)
             {
                 scoreboard.Update(frog, gameTime);
+                return;
+            }
+            
+            //Check if frog is touching Magma
+            if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||
+                magma.IsTouchingFrog(frog))
+            {
+                frog.Die();
+                gameEnded = true;
+                scoreboard = new Scoreboard(score, frog.IsDead);
+            }
+
+            if (offset > GameHeight + 400)
+            {
+                gameEnded = true;
+                scoreboard = new Scoreboard(score, frog.IsDead);
             }
         }
 
@@ -181,13 +184,9 @@ namespace SeriousGame.Screens
 
             //check timer to remove Feedback
             if (wrong)
-            {
                 spriteBatch.Draw(TextureManager.Wrong, new Vector2(400, 300));
-            }
             else if (good)
-            {
                 spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
-            }
 
             // Draw obstacles
             foreach (
@@ -195,9 +194,7 @@ namespace SeriousGame.Screens
             {
                 obstacle.Draw(spriteBatch, offset);
                 if (frog.IsJumpingOnObstacle(obstacle))
-                {
                     obstacle.DrawQuestion(spriteBatch);
-                }
             }
 
             // Draw walls
@@ -219,25 +216,6 @@ namespace SeriousGame.Screens
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20),
                     Color.White);
             }
-        }
-
-        public void CheckAnswer(bool answer)
-        {
-            if (answer == false)
-            {
-                score -= 1000;
-                isFrozen = false;
-                waiting = true;
-                wrong = true;
-            }
-            else
-            {
-                score += 1000;
-                isFrozen = false;
-                waiting = true;
-                good = true;
-            }
-            frog.Jump();
         }
     }
 }
