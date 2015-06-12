@@ -17,7 +17,7 @@ namespace SeriousGame.Screens
         private readonly List<Wall> walls = Wall.GenerateList();
         private readonly List<Platform> platforms = Platform.GenerateList();
         private readonly List<Obstacle> obstacles = Obstacle.GenerateList();
-        private readonly List<Fly> flies = Fly.GenerateList();
+        private readonly List<Collectable> collectables = Fly.GenerateList();
         private readonly Frog frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.FrogLeft.Width / 2), ScreenManager.Dimensions.Y - TextureManager.FrogLeft.Height), 5);
         private readonly Magma magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
         private bool isFrozen;
@@ -127,12 +127,12 @@ namespace SeriousGame.Screens
                 SoundManager.Play(Sounds.Jump);
             }
 
-            // Check if frog is catching any flies
-            foreach (Fly fly in flies.Where(fly => !fly.IsDone && fly.IsInViewport(offset) && fly.IsCatching(frog)))
+            // Check if frog is catching any collectables
+            foreach (Collectable collectable in collectables.Where(collectable => !collectable.IsDone && collectable.IsInViewport(offset) && collectable.IsCatching(frog)))
             {
-                score += fly.CollectableScoreWorth;
+                score += collectable.CollectableScoreWorth;
                 SoundManager.Play(Sounds.Coin);
-                fly.IsDone = true;
+                collectable.IsDone = true;
             }
 
             if (!isFrozen && !gameEnded)
@@ -175,10 +175,10 @@ namespace SeriousGame.Screens
                 platform.Draw(spriteBatch, offset);
             }
 
-            // Draw flies
-            foreach (Fly fly in flies.Where(fly => fly.IsInViewport(offset) && !fly.IsDone))
+            // Draw collectables
+            foreach (Collectable collectable in collectables.Where(collectable => collectable.IsInViewport(offset) && !collectable.IsDone))
             {
-                fly.Draw(spriteBatch, offset);
+                collectable.Draw(spriteBatch, offset);
             }
 
             // Draw frog
