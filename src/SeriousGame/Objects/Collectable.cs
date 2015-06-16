@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SeriousGame.Managers;
 
@@ -13,7 +14,7 @@ namespace SeriousGame.Objects
         private int height;
         private int width;
         private int frames;
-        private int currentFrame;
+        private int currentFrame = 1;
         private int animationSpeed;
         private int animationCounter;
         private bool revert = false;
@@ -34,7 +35,7 @@ namespace SeriousGame.Objects
         {
             get
             {
-                Rectangle rect = new Rectangle((int)collectablePosition.X, (int)collectablePosition.Y, CollectableTexture.Width, CollectableTexture.Height);
+                Rectangle rect = new Rectangle((int)collectablePosition.X, (int)collectablePosition.Y, width, height);
                 return rect;
             }
         }
@@ -44,7 +45,7 @@ namespace SeriousGame.Objects
             get
             {
                 return new Rectangle(
-                    (width+2) * currentFrame,
+                    ((width+2) * currentFrame) - width,
                     0,
                     width,
                     height
@@ -68,14 +69,24 @@ namespace SeriousGame.Objects
         public void Update(GameTime gameTime, int offset)
         {
             animationCounter++;
-
+            Random rnd = new Random();
             if (animationCounter % animationSpeed == 0)
             {
                 // Ga telkens een frame verder
                 if (revert)
+                {
                     currentFrame--;
+                    //collectablePosition.X -= 3;
+                    //collectablePosition.Y -= 3;
+                }
                 else
+                {
                     currentFrame++;
+                    //collectablePosition.X += 3;
+                    //collectablePosition.Y += 3;
+                }
+                collectablePosition.X += rnd.Next(-4, 4);
+                collectablePosition.Y += rnd.Next(-4, 4);
             }
 
             // Als laatste frame in de animatie bereikt is
@@ -83,7 +94,7 @@ namespace SeriousGame.Objects
             {
                 revert = true;
             }
-            else if (currentFrame == 2)
+            else if (currentFrame == 1)
             {
                 revert = false;
             }

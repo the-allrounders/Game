@@ -147,7 +147,7 @@ namespace SeriousGame.Screens
                 frog.ApplyGravity(gameTime);
 
                 // Make the magma rise
-                //magma.Rise(offset);
+                magma.Rise(offset);
 
                 //Check if frog is touching Magma
                 if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||

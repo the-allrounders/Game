@@ -93,7 +93,7 @@ namespace SeriousGame.Objects
         public void ApplyGravity(GameTime gameTime)
         {
             // Update t variable with new time
-            time = time + gameTime.ElapsedGameTime.TotalSeconds;
+            time += gameTime.ElapsedGameTime.TotalSeconds;
 
             // Calculate new position
             float newPosition = (float)(initialVelocity * time + gravity * time * time / 2) + jumpFrom;
