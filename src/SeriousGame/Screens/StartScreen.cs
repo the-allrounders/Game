@@ -22,10 +22,15 @@ namespace SeriousGame.Screens
             {
                 ScreenManager.CurrentScreen = new SettingsScreen();
             }
+            else if (InputManager.IsPressing(Keys.C))
+            {
+                ScreenManager.CurrentScreen = new Creditsscreen();
+            }
             else if (InputManager.IsPressing(Keys.Escape))
             {
                 ScreenManager.Game.Exit();
             }
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
