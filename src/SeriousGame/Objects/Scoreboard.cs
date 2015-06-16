@@ -72,7 +72,7 @@ namespace SeriousGame.Objects
             string loseText = "Helaas, game over! Je scoorde " + score + " punten";
             string text = isDead ? loseText : winText;
             spriteBatch.DrawString(FontManager.Verdana, text,
-                new Vector2(ScreenManager.Dimensions.X/2 - 230, ScreenManager.Dimensions.Y/2 - 100), Color.White);
+                 new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.Verdana.MeasureString(text).X / 2, ScreenManager.Dimensions.Y / 2 - 100), Color.White);
             spriteBatch.Draw(TextureManager.InputMedium,
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
             if (caretVisible)

@@ -24,7 +24,7 @@ namespace SeriousGame.Screens
             }
             else if (InputManager.IsPressing(Keys.C))
             {
-                ScreenManager.CurrentScreen = new Creditsscreen();
+                ScreenManager.CurrentScreen = new CreditsScreen();
             }
             else if (InputManager.IsPressing(Keys.Escape))
             {
