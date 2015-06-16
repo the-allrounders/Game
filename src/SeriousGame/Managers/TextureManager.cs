@@ -46,7 +46,7 @@ namespace SeriousGame.Managers
             SettingsLevel3 = content.Load<Texture2D>("SettingsScreen/Textures/level3");
             SettingsCheckboxUnchecked = content.Load<Texture2D>("SettingsScreen/Textures/checkbox");
             SettingsCheckboxChecked = content.Load<Texture2D>("SettingsScreen/Textures/checkmark");
-            Fly = content.Load<Texture2D>("JumpScreen/Textures/fly");
+            Fly = content.Load<Texture2D>("JumpScreen/Textures/FlySpriteSheet");
             Platform = content.Load<Texture2D>("JumpScreen/Textures/platform");
             FrogLeft = content.Load<Texture2D>("JumpScreen/Textures/frogflip");
             FrogRight = content.Load<Texture2D>("JumpScreen/Textures/frog");

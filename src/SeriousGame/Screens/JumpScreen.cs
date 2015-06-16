@@ -132,18 +132,22 @@ namespace SeriousGame.Screens
                 }
 
                 // Check if frog is catching any collectables
-                foreach (Collectable collectable in collectables.Where(collectable => !collectable.IsDone && collectable.IsInViewport(offset) && collectable.IsCatching(frog)))
+                foreach (Collectable collectable in collectables.Where(collectable => !collectable.IsDone && collectable.IsInViewport(offset)))
                 {
-                    score += collectable.CollectableScoreWorth;
-                    SoundManager.Play(Sounds.Coin);
-                    collectable.IsDone = true;
+                    collectable.Update(gameTime, offset);
+                    if (collectable.IsCatching(frog))
+                    {
+                        score += collectable.CollectableScoreWorth;
+                        SoundManager.Play(Sounds.Coin);
+                        collectable.IsDone = true;
+                    }
                 }
 
                 // Apply gravity to Frog
                 frog.ApplyGravity(gameTime);
 
                 // Make the magma rise
-                magma.Rise(offset);
+                //magma.Rise(offset);
 
                 //Check if frog is touching Magma
                 if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||

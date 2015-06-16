@@ -8,8 +8,8 @@ namespace SeriousGame.Objects
 {
     class Fly : Collectable
     {
-        public Fly(Vector2 pos, int scrWrth)
-            : base(pos, TextureManager.Fly, scrWrth)
+        public Fly(Vector2 pos, int scrWrth, int width, int height, int frames, int animationSpeed)
+            : base(pos, TextureManager.Fly, scrWrth, width, height, frames, animationSpeed)
         {
 
         }
@@ -28,7 +28,7 @@ namespace SeriousGame.Objects
                         distance = JumpScreen.Padding;
                     else if (distance > ScreenManager.Dimensions.X - JumpScreen.Padding)
                         distance = (int)ScreenManager.Dimensions.X - JumpScreen.Padding - TextureManager.Fly.Width;
-                    flies.Add(new Fly(new Vector2(distance, i + rnd.Next(-100, 100)), 100));
+                    flies.Add(new Fly(new Vector2(distance, i + rnd.Next(-100, 100)), 100, 48, 41, 3, 10));
                 }
             }
             return flies;
