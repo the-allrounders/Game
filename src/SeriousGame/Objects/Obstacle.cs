@@ -41,14 +41,14 @@ namespace SeriousGame.Objects
 
         public void Draw(SpriteBatch spritebatch, int offset)
         {
-            spritebatch.Draw(texture, new Vector2(190, position.Y + offset));
+            spritebatch.Draw(texture, new Vector2(JumpScreen.Padding, position.Y + offset));
         }
 
         public Rectangle BoundingBox
         {
             get
             {
-                Rectangle rect = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); ;
+                Rectangle rect = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
                 return rect;
             }
         }
@@ -102,7 +102,7 @@ namespace SeriousGame.Objects
             Shuffle(questionNumbers);
             for (int i = -1000; i > JumpScreen.GameHeight * -1; i -= JumpScreen.GameHeight / 10)
             {
-                Obstacle obstacle = new Obstacle(new Vector2(50, i), questionNumbers[question]);
+                Obstacle obstacle = new Obstacle(new Vector2(JumpScreen.Padding, i), questionNumbers[question]);
                 platforms.Add(obstacle);
                 if (question < questionNumbers.Length - 1)
                 {
