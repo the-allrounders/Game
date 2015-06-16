@@ -15,6 +15,20 @@ namespace SeriousGame.Managers
         private static MouseState oldMouseState;
         private static MouseState mouseState;
 
+        private static Rectangle MousePosition
+        {
+            get
+            {
+                Rectangle mp = new Rectangle(mouseState.Position.X, mouseState.Position.Y, 1, 1);
+                if (SettingsManager.Fullscreen)
+                {
+                    mp.X = (int)((float)mp.X / (float)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * ScreenManager.Dimensions.X);
+                    mp.Y = (int)((float)mp.Y / (float)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * ScreenManager.Dimensions.Y);
+                }
+                return mp;
+            }
+        }
+
         /// <summary>
         /// Must be run at the beginning of every Update cycle, to get the new states.
         /// </summary>
@@ -27,6 +41,17 @@ namespace SeriousGame.Managers
             // Getting the new states
             keyboardState = Keyboard.GetState();
             mouseState = Mouse.GetState();
+        }
+
+
+        /// <summary>
+        /// Checks if the user is hovering over a rectangle.
+        /// </summary>
+        /// <param name="on">The rectangle that must be hovered over</param>
+        public static bool IsHovering(Rectangle over)
+        {
+            // Check if the user is hovering over the rectangle
+            return over.Intersects(MousePosition);
         }
 
         /// <summary>
@@ -48,18 +73,8 @@ namespace SeriousGame.Managers
                 return false;
             }
 
-            // Convert the mouse position to a Rectangle, so it can be checked for intersection
-            Rectangle mousePosition = new Rectangle(mouseState.Position.X, mouseState.Position.Y, 1, 1);
-
-            // On fullscreen, fix the mouse position
-            if (SettingsManager.Fullscreen)
-            {
-                mousePosition.X = (int)((float)mousePosition.X / (float)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * ScreenManager.Dimensions.X);
-                mousePosition.Y = (int)((float)mousePosition.Y / (float)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * ScreenManager.Dimensions.Y);
-            }
-
             // If a retangle is given to check for intersection, check
-            if (on != new Rectangle() && !on.Intersects(mousePosition))
+            if (on != new Rectangle() && !on.Intersects(MousePosition))
             {
                 return false;
             }
