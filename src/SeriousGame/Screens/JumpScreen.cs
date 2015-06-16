@@ -87,7 +87,6 @@ namespace SeriousGame.Screens
                         score -= 1000;
                         wrong = true;
                     }
-                    isFrozen = false;
                     touchingObstacle = null;
                     waitTime = gameTime.TotalGameTime.Seconds;
                     frog.Jump();
