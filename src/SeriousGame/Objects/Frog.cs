@@ -35,16 +35,23 @@ namespace SeriousGame.Objects
         {
             if (PlayerName == "<naam>")
                 PlayerName = "";
-            if (PlayerName.Length < 12)
-                PlayerName += key;
+            if (PlayerName.Length < 11)
+            {
+                if (key == Keys.Space)
+                    PlayerName += " ";
+                else
+                    PlayerName += key;
+            }
         }
 
         public void RemoveCharFromName()
         {
             if (PlayerName == "<naam>")
-                PlayerName = "";
-            else if (PlayerName.Length > 0)
+                return;
+            if (PlayerName.Length > 0)
                 PlayerName = PlayerName.Remove(PlayerName.Length - 1);
+            if (PlayerName.Length == 0)
+                PlayerName = "<naam>";
         }
 
         public Rectangle BoundingBox

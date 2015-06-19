@@ -26,6 +26,8 @@ namespace SeriousGame.Objects
             {
                 frog.RemoveCharFromName();
             }
+            else if (InputManager.IsPressing(Keys.Space))
+                frog.AddCharToName(Keys.Space);
             else
             {
                 for (Keys key = Keys.A; key <= Keys.Z; key++)
