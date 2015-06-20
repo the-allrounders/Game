@@ -26,13 +26,29 @@ namespace SeriousGame.Objects
 
         public void Rise(int offset)
         {
+            float maxSpeed = 2f;
+            int magmaMargin = 0;
+            switch (SettingsManager.Difficulty)
+            {
+                case 1:
+                    maxSpeed = 1f;
+                    magmaMargin = 50;
+                    break;
+                case 2:
+                    maxSpeed = 2f;
+                    magmaMargin = 20;
+                    break;
+                case 3:
+                    maxSpeed = 3f;
+                    break;
+            }
             speedIncrease += 0.01f;
-            if (speedIncrease > 2)
-                speedIncrease = 2;
+            if (speedIncrease > maxSpeed)
+                speedIncrease = maxSpeed;
             magmaPosition.Y -= 1 + speedIncrease;
             int bottomScreen = offset * -1 + (int)ScreenManager.Dimensions.Y;
-            if ((bottomScreen - magmaPosition.Y) * -1 > 0)
-                magmaPosition.Y = bottomScreen;
+            if ((bottomScreen + magmaMargin - magmaPosition.Y) * -1 > 0)
+                magmaPosition.Y = bottomScreen + magmaMargin;
         }
 
         public void Draw(SpriteBatch spriteBatch, int offset)
