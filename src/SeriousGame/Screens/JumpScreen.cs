@@ -44,7 +44,9 @@ namespace SeriousGame.Screens
             // If user is pressing ESC, return to StartScreen
             if (InputManager.IsPressing(Keys.Escape))
             {
+                ScreenManager.IsMouseVisible = true;
                 ScreenManager.CurrentScreen = new StartScreen();
+                return;
             }
 
             #endregion
@@ -102,11 +104,7 @@ namespace SeriousGame.Screens
 
             #endregion
 
-            if (!gameEnded)
-                ScreenManager.IsMouseVisible = false;
-            else
-                ScreenManager.IsMouseVisible = true;
-
+            ScreenManager.IsMouseVisible = gameEnded;
 
             if (!gameEnded && touchingObstacle == null)
             {

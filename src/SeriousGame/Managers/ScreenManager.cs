@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SeriousGame.Screens;
 
@@ -20,6 +21,7 @@ namespace SeriousGame.Managers
             set
             {
                 if (currentScreen != null) currentScreen.Unload();
+                IsMouseVisible = true;
                 value.Load();
                 currentScreen = value;
             }
