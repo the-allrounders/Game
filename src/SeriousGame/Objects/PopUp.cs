@@ -95,11 +95,11 @@ namespace SeriousGame.Objects
             return false;
         }
 
-        public void DrawFeedback(int answer, SpriteBatch spritebatch)
+        public void DrawFeedback(int answer, SpriteBatch spriteBatch)
         {
-            spritebatch.Draw(TextureManager.QuestionBox, new Vector2(380, 300));
-            spritebatch.DrawString(FontManager.Verdana, FontManager.WrapText(questions[_questionNumber, 5], FontManager.Verdana, 400), new Vector2(420, 320), Color.Black);
-            spritebatch.DrawString(FontManager.Verdana, "Druk op spatie om weer verder te gaan", new Vector2(420, 620), Color.Black);
+            spriteBatch.Draw(TextureManager.QuestionBox, new Vector2(380, 300));
+            spriteBatch.DrawString(FontManager.Verdana, FontManager.WrapText(questions[_questionNumber, 5], FontManager.Verdana, 400), new Vector2(420, 320), Color.Black);
+            spriteBatch.DrawString(FontManager.Verdana, "Druk op spatie om weer verder te gaan", new Vector2(420, 620), Color.Black);
         }
     }
 }

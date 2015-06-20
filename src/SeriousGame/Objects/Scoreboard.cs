@@ -72,12 +72,13 @@ namespace SeriousGame.Objects
 
         public void Draw(SpriteBatch spriteBatch, int offset, string playerName)
         {
+            spriteBatch.Draw(TextureManager.QuestionBox, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.QuestionBox.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.QuestionBox.Height / 2));
             string winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
             string loseText = "Helaas, game over! Je scoorde " + score + " punten";
             string text = isDead ? loseText : winText;
             spriteBatch.DrawString(FontManager.Verdana, text,
                 new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString(text).X/2,
-                    ScreenManager.Dimensions.Y/2 - 100), Color.White);
+                    ScreenManager.Dimensions.Y/2 - 100), Color.Black);
             spriteBatch.Draw(TextureManager.InputMedium,
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
             if (caretVisible)
@@ -92,14 +93,14 @@ namespace SeriousGame.Objects
             if (buttonIsSaveButton)
                 spriteBatch.DrawString(FontManager.Verdana, "Opslaan",
                     new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opslaan").X/2,
-                        ScreenManager.Dimensions.Y/2), Color.White);
+                        ScreenManager.Dimensions.Y/2), Color.Black);
             else
                 spriteBatch.DrawString(FontManager.Verdana, "Ranglijst",
                     new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Ranglijst").X/2,
-                        ScreenManager.Dimensions.Y/2), Color.White);
+                        ScreenManager.Dimensions.Y/2), Color.Black);
             spriteBatch.DrawString(FontManager.Verdana, "Opnieuw",
                 new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opnieuw").X/2,
-                    ScreenManager.Dimensions.Y/2 + 30), Color.White);
+                    ScreenManager.Dimensions.Y/2 + 30), Color.Black);
         }
     }
 }
