@@ -88,6 +88,7 @@ namespace SeriousGame.Screens
                     {
                         score -= 1000;
                         wrong = true;
+                        frog.Lives--;
                     }
                     touchingObstacle = null;
                     waitTime = gameTime.TotalGameTime.Seconds;
@@ -152,9 +153,14 @@ namespace SeriousGame.Screens
                 // Make the magma rise
                 magma.Rise(offset);
 
-                //Check if frog is touching Magma
-                if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 ||
-                    magma.IsTouchingFrog(frog))
+                if (magma.IsTouchingFrog(frog))
+                {
+                    frog.Jump();
+                    frog.Lives--;
+                }
+
+                //Check if frog is out of screen
+                if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || frog.Lives == 0)
                 {
                     frog.Die();
                     gameEnded = true;
@@ -239,13 +245,16 @@ namespace SeriousGame.Screens
             {
                 scoreboard.Draw(spriteBatch, offset, frog.PlayerName);
             }
-
             // If the frog is alive, draw the score
             else
             {
                 string text = "Score: " + score;
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - 200, 20),
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 10, 20),
                     Color.White);
+                for (int i = 1; i <= frog.Lives; i++)
+                {
+                    spriteBatch.Draw(TextureManager.Heart, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 20 - TextureManager.Heart.Width * i, 5));
+                }
             }
         }
     }

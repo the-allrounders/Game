@@ -20,8 +20,7 @@ namespace SeriousGame.Managers
         public static Texture2D FrogLeft;
 		public static Texture2D FrogRight;
         public static Texture2D Magma;
-
-        public static Texture2D Obstacle;
+        public static Texture2D Heart;
 
         public static Texture2D WallLeft;
         public static Texture2D WallRight;
@@ -31,6 +30,7 @@ namespace SeriousGame.Managers
         public static Texture2D InputMedium;
         public static Texture2D Caret;
 
+        public static Texture2D Obstacle;
         public static Texture2D QuestionBox;
         public static Texture2D Good;
         public static Texture2D Wrong;
@@ -61,6 +61,7 @@ namespace SeriousGame.Managers
             QuestionBox = content.Load<Texture2D>("JumpScreen/Textures/questionbox");
             Good = content.Load<Texture2D>("JumpScreen/Textures/goed");
             Wrong = content.Load<Texture2D>("JumpScreen/Textures/fout");
+            Heart = content.Load<Texture2D>("JumpScreen/Textures/heart");
         }
     }
 }

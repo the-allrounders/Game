@@ -12,6 +12,7 @@ namespace SeriousGame.Objects
         private Vector2 frogPosition;
         private readonly Vector2 speedlr;
         public bool IsDescending { get; private set; }
+        public int Lives;
 
         public bool IsDead { get; private set; }
         public string PlayerName { get; private set; }
@@ -22,7 +23,7 @@ namespace SeriousGame.Objects
             frogPosition = charPos;
             speedlr = new Vector2(10, 0);
             PlayerName = "<naam>";
-            IsDead = false;
+            Lives = 3;
             Jump();
         }
 
