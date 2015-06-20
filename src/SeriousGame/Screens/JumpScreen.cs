@@ -115,7 +115,7 @@ namespace SeriousGame.Screens
                     frog.Jump();
                 }
             }
-            else
+            else if (!gameEnded || gameEnded && frog.IsDead)
                 // Make the magma rise
                 magma.Rise(offset);
 
@@ -236,15 +236,6 @@ namespace SeriousGame.Screens
             // Draw frog
             frog.Draw(spriteBatch, offset);
 
-            // Draw magma
-            magma.Draw(spriteBatch, offset);
-
-            // Show feedback
-            if (wrong)
-                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400, 300));
-            else if (good)
-                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
-
             // Draw obstacles
             foreach (
                 Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
@@ -253,6 +244,15 @@ namespace SeriousGame.Screens
                 if (frog.IsJumpingOnObstacle(obstacle))
                     obstacle.DrawQuestion(spriteBatch);
             }
+
+            // Draw magma
+            magma.Draw(spriteBatch, offset);
+
+            // Show feedback
+            if (wrong)
+                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400, 300));
+            else if (good)
+                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
 
             // Draw walls
             foreach (Wall wall in walls.Where(wall => wall.IsInViewport(offset)))
