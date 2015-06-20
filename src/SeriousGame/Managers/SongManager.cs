@@ -57,7 +57,7 @@ namespace SeriousGame.Managers
 
             if (!muted)
             {
-                MediaPlayer.Play(songs[song]);
+                //MediaPlayer.Play(songs[song]);
             }
         }
 

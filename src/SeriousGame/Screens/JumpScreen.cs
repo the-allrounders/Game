@@ -23,6 +23,8 @@ namespace SeriousGame.Screens
         private Obstacle touchingObstacle = null;
         private bool gameEnded;
         private Scoreboard scoreboard;
+        private bool controlInfoVisible = SettingsManager.ShowControlInfo;
+        private bool dontShowControlInfoAgain;
 
         private bool wrong = false;
         private bool good = false;
@@ -46,6 +48,22 @@ namespace SeriousGame.Screens
             {
                 ScreenManager.IsMouseVisible = true;
                 ScreenManager.CurrentScreen = new StartScreen();
+                return;
+            }
+
+            #endregion
+
+            #region Info screen
+
+            if (controlInfoVisible)
+            {
+                if (InputManager.IsPressing(Keys.Enter))
+                {
+                    dontShowControlInfoAgain = !dontShowControlInfoAgain;
+                    SettingsManager.ShowControlInfo = !SettingsManager.ShowControlInfo;
+                }
+                if (InputManager.IsPressing(Keys.Space))
+                    controlInfoVisible = false;
                 return;
             }
 
@@ -257,6 +275,23 @@ namespace SeriousGame.Screens
                 {
                     spriteBatch.Draw(TextureManager.Heart, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 20 - TextureManager.Heart.Width * i, 5));
                 }
+            }
+
+            if (controlInfoVisible)
+            {
+                SpriteFont font = FontManager.Verdana;
+                float lineWidth = 300;
+                string introText = FontManager.WrapText("Om dit spel te spelen gebruik je de pijltjes- of de A & D toetsen", font, lineWidth);
+                //string status = dontShowControlInfoAgain ? "niet " : "";
+                string statusDontShowAgainText = FontManager.WrapText("Als je af gaat krijg je dit bericht " + (dontShowControlInfoAgain ? "niet " : "") + "nog een keer te zien", FontManager.Verdana, lineWidth);
+                string changeStatusText = FontManager.WrapText("(Druk op de enter toets om dit aan te passen)", font, lineWidth);
+                string continueText = FontManager.WrapText("Druk op de spatiebalk om te beginnen", font, lineWidth);
+                int margin = 10;
+                float totalHeight = font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + font.MeasureString(changeStatusText).Y + font.MeasureString(continueText).Y + (margin * 2);
+                spriteBatch.DrawString(font, introText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2)), Color.White);
+                spriteBatch.DrawString(font, statusDontShowAgainText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + margin), Color.White);
+                spriteBatch.DrawString(font, changeStatusText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + margin), Color.White);
+                spriteBatch.DrawString(font, continueText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + totalHeight - font.MeasureString(continueText).Y + margin), Color.White);
             }
         }
     }

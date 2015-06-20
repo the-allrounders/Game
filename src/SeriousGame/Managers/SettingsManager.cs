@@ -6,6 +6,8 @@ namespace SeriousGame.Managers
     {
         public static int Difficulty = 1;
 
+        public static bool ShowControlInfo = true;
+
         private static bool music = true;
         public static bool Music
         {

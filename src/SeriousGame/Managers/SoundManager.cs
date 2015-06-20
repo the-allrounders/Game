@@ -32,7 +32,7 @@ namespace SeriousGame.Managers
 
         public static void Play(Sounds sound)
         {
-            if (SettingsManager.Sound) sounds[sound].Play();
+            //if (SettingsManager.Sound) sounds[sound].Play();
         }
     }
 }
