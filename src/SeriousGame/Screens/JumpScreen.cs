@@ -131,10 +131,9 @@ namespace SeriousGame.Screens
                     Obstacle obstacle in
                         obstacles.Where(
                             obstacle =>
-                                obstacle.IsInViewport(offset) && frog.IsJumpingOnObstacle(obstacle) && !obstacle.IsDone()))
-                {
+                                obstacle.IsInViewport(offset) && frog.IsJumpingOnObstacle(obstacle) &&
+                                !obstacle.IsDone()))
                     touchingObstacle = obstacle;
-                }
 
                 // If user is pressing Left, go left. Same for Right.
                 if (InputManager.IsPressing(Keys.Left, false) || InputManager.IsPressing(Keys.A, false))
