@@ -81,6 +81,11 @@ namespace SeriousGame.Objects
             done = true;
         }
 
+        public void DrawFeedback(int answer, SpriteBatch spritebatch)
+        {
+            popUp.DrawFeedback(answer, spritebatch);
+        }
+
         static void Shuffle<T>(T[] array)
         {
             int n = array.Length;

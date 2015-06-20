@@ -28,6 +28,7 @@ namespace SeriousGame.Screens
 
         private bool wrong = false;
         private bool good = false;
+        private int answer;
         private int waitTime;
 
         private int score;
@@ -75,7 +76,7 @@ namespace SeriousGame.Screens
             if (touchingObstacle != null)
             {
                 touchingObstacle.OpenQuestion();
-                int answer = 0;
+                answer = 0;
                 if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.NumPad1))
                 {
                     answer = 1;
@@ -101,6 +102,7 @@ namespace SeriousGame.Screens
                     {
                         score += 1000;
                         good = true;
+                        touchingObstacle = null;
                         if (SettingsManager.Difficulty != 3 && frog.Lives < 3)
                             frog.Lives++;
                     }
@@ -110,7 +112,6 @@ namespace SeriousGame.Screens
                         wrong = true;
                         frog.Lives--;
                     }
-                    touchingObstacle = null;
                     waitTime = gameTime.TotalGameTime.Seconds;
                     frog.Jump();
                 }
@@ -120,9 +121,8 @@ namespace SeriousGame.Screens
                 magma.Rise(offset);
 
             // Set wrong and good to false after 3 seconds
-            if ((wrong || good) && gameTime.TotalGameTime.Seconds >= waitTime + 3)
+            if ((good) && gameTime.TotalGameTime.Seconds >= waitTime + 3)
             {
-                wrong = false;
                 good = false;
             }
 
@@ -130,6 +130,15 @@ namespace SeriousGame.Screens
 
             ScreenManager.IsMouseVisible = gameEnded;
 
+            if (touchingObstacle != null && wrong == true)
+            {
+                if (InputManager.IsPressing(Keys.Space))
+                {
+                    wrong = false;
+                    touchingObstacle = null;
+                }
+            }
+            
             if (!gameEnded && touchingObstacle == null)
             {
                 #region Game actively running
@@ -241,9 +250,12 @@ namespace SeriousGame.Screens
 
             // Show feedback
             if (wrong)
-                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400, 300));
+            {
+                spriteBatch.Draw(TextureManager.Wrong, new Vector2(430, 100));
+                touchingObstacle.DrawFeedback(answer, spriteBatch);
+            }
             else if (good)
-                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
+                spriteBatch.Draw(TextureManager.Good, new Vector2(430, 300));
 
             // Draw obstacles
             foreach (

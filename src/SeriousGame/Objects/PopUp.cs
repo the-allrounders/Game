@@ -81,6 +81,7 @@ namespace SeriousGame.Objects
             spritebatch.DrawString(FontManager.Verdana, FontManager.WrapText(_choices[1], FontManager.Verdana, 200), new Vector2(440, 330), Color.Black);
             spritebatch.DrawString(FontManager.Verdana, FontManager.WrapText(_choices[2], FontManager.Verdana, 200), new Vector2(440, 380), Color.Black);
             spritebatch.DrawString(FontManager.Verdana, FontManager.WrapText(_choices[3], FontManager.Verdana, 200), new Vector2(440, 430), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, "Beantwoord de vraag met de cijfer toetsen.", new Vector2(440, 500), Color.Black);
 
         }
 
@@ -92,6 +93,13 @@ namespace SeriousGame.Objects
                 return true;
             }
             return false;
+        }
+
+        public void DrawFeedback(int answer, SpriteBatch spritebatch)
+        {
+            spritebatch.Draw(TextureManager.QuestionBox, new Vector2(380, 300));
+            spritebatch.DrawString(FontManager.Verdana, FontManager.WrapText(questions[_questionNumber, 5], FontManager.Verdana, 400), new Vector2(420, 320), Color.Black);
+            spritebatch.DrawString(FontManager.Verdana, "Druk op spatie om weer verder te gaan", new Vector2(420, 620), Color.Black);
         }
     }
 }
