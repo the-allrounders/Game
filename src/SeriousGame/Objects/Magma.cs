@@ -49,6 +49,8 @@ namespace SeriousGame.Objects
             int bottomScreen = offset * -1 + (int)ScreenManager.Dimensions.Y;
             if ((bottomScreen + magmaMargin - magmaPosition.Y) * -1 > 0)
                 magmaPosition.Y = bottomScreen + magmaMargin;
+            else if (magmaPosition.Y < (offset + 72) * -1)
+                magmaPosition.Y = (offset + 72) * -1;
         }
 
         public void Draw(SpriteBatch spriteBatch, int offset)

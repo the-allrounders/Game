@@ -51,6 +51,9 @@ namespace SeriousGame.Screens
 
             #endregion
 
+            // Make the magma rise
+            magma.Rise(offset);
+
             #region Question screen
 
             // Show questionscreen if touching obstacle
@@ -149,9 +152,6 @@ namespace SeriousGame.Screens
 
                 // Apply gravity to Frog
                 frog.ApplyGravity(gameTime);
-
-                // Make the magma rise
-                magma.Rise(offset);
 
                 if (magma.IsTouchingFrog(frog))
                 {
