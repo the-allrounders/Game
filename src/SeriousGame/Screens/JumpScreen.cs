@@ -73,7 +73,7 @@ namespace SeriousGame.Screens
             #region Question screen
 
             // Show questionscreen if touching obstacle
-            if (touchingObstacle != null)
+            if (!wrong && touchingObstacle != null)
             {
                 touchingObstacle.OpenQuestion();
                 answer = 0;
@@ -108,7 +108,7 @@ namespace SeriousGame.Screens
                     frog.Jump();
                 }
             }
-            else if (!gameEnded || gameEnded && frog.IsDead)
+            else if (!wrong && (!gameEnded || gameEnded && frog.IsDead))
                 // Make the magma rise
                 magma.Rise(offset);
 
@@ -122,15 +122,12 @@ namespace SeriousGame.Screens
 
             ScreenManager.IsMouseVisible = gameEnded;
 
-            if (touchingObstacle != null && wrong == true)
+            if (touchingObstacle != null && wrong && InputManager.IsPressing(Keys.Space))
             {
-                if (InputManager.IsPressing(Keys.Space))
-                {
-                    wrong = false;
-                    touchingObstacle = null;
-                }
+                wrong = false;
+                touchingObstacle = null;
             }
-            
+
             if (!gameEnded && touchingObstacle == null)
             {
                 #region Game actively running
@@ -178,7 +175,7 @@ namespace SeriousGame.Screens
                 }
 
                 //Check if frog is out of screen
-                if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || frog.Lives == 0)
+                if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || frog.Lives <= 0)
                 {
                     frog.Die();
                     gameEnded = true;
