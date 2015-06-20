@@ -102,6 +102,11 @@ namespace SeriousGame.Screens
 
             #endregion
 
+            if (!gameEnded)
+                ScreenManager.IsMouseVisible = false;
+            else
+                ScreenManager.IsMouseVisible = true;
+
 
             if (!gameEnded && touchingObstacle == null)
             {

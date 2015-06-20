@@ -34,6 +34,18 @@ namespace SeriousGame.Managers
         /// </summary>
         public static Game1 Game;
 
+        public static bool IsMouseVisible
+        {
+            get
+            {
+                return Game.IsMouseVisible;
+            }
+            set
+            {
+                Game.IsMouseVisible = value;
+            }
+        }
+
         /// <summary>
         /// Forwarder to the Update function of the CurrentScreen.
         /// </summary>
