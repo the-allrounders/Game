@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -42,7 +43,9 @@ namespace SeriousGame.Objects
 
         public void Update(Frog frog, GameTime gameTime)
         {
-            if (InputManager.IsPressing(Keys.Enter) || InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 40, (int)ScreenManager.Dimensions.Y / 2, 100, 20)))
+            if (InputManager.IsPressing(Keys.Enter) ||
+                InputManager.IsClicking(new Rectangle((int) ScreenManager.Dimensions.X/2 - 40,
+                    (int) ScreenManager.Dimensions.Y/2, 100, 20)))
             {
                 if (buttonIsSaveButton)
                 {
@@ -54,8 +57,8 @@ namespace SeriousGame.Objects
                     ScreenManager.CurrentScreen = new LeaderboardScreen();
                 }
             }
-            else if (InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - 45,
-                         (int)ScreenManager.Dimensions.Y / 2 + 35, 100, 20)))
+            else if (InputManager.IsClicking(new Rectangle((int) ScreenManager.Dimensions.X/2 - 45,
+                (int) ScreenManager.Dimensions.Y/2 + 35, 100, 20)))
             {
                 ScreenManager.CurrentScreen = new JumpScreen();
             }
@@ -73,25 +76,30 @@ namespace SeriousGame.Objects
             string loseText = "Helaas, game over! Je scoorde " + score + " punten";
             string text = isDead ? loseText : winText;
             spriteBatch.DrawString(FontManager.Verdana, text,
-                 new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.Verdana.MeasureString(text).X / 2, ScreenManager.Dimensions.Y / 2 - 100), Color.White);
+                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString(text).X/2,
+                    ScreenManager.Dimensions.Y/2 - 100), Color.White);
             spriteBatch.Draw(TextureManager.InputMedium,
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
             if (caretVisible)
             {
                 float caretDistance = playerName == "<naam>" ? 0 : FontManager.Verdana.MeasureString(playerName).X;
-                spriteBatch.Draw(TextureManager.Caret, new Vector2(ScreenManager.Dimensions.X / 2 - 90 + caretDistance + 1, ScreenManager.Dimensions.Y / 2 - 40));
+                spriteBatch.Draw(TextureManager.Caret,
+                    new Vector2(ScreenManager.Dimensions.X/2 - 90 + caretDistance + 1, ScreenManager.Dimensions.Y/2 - 40));
             }
             Color nameColor = playerName == "<naam>" ? Color.Gray : Color.Black;
             spriteBatch.DrawString(FontManager.Verdana, playerName,
                 new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), nameColor);
             if (buttonIsSaveButton)
                 spriteBatch.DrawString(FontManager.Verdana, "Opslaan",
-                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opslaan").X / 2, ScreenManager.Dimensions.Y/2), Color.White);
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opslaan").X/2,
+                        ScreenManager.Dimensions.Y/2), Color.White);
             else
                 spriteBatch.DrawString(FontManager.Verdana, "Ranglijst",
-                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Ranglijst").X / 2, ScreenManager.Dimensions.Y/2), Color.White);
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Ranglijst").X/2,
+                        ScreenManager.Dimensions.Y/2), Color.White);
             spriteBatch.DrawString(FontManager.Verdana, "Opnieuw",
-                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opnieuw").X / 2, ScreenManager.Dimensions.Y / 2 + 30), Color.White);
+                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opnieuw").X/2,
+                    ScreenManager.Dimensions.Y/2 + 30), Color.White);
         }
     }
 }

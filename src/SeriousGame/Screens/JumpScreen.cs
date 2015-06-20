@@ -85,7 +85,6 @@ namespace SeriousGame.Screens
                         good = true;
                         if (SettingsManager.Difficulty != 3 && frog.Lives < 3)
                             frog.Lives++;
-
                     }
                     else
                     {
