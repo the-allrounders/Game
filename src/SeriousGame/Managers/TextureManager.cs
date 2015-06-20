@@ -54,8 +54,8 @@ namespace SeriousGame.Managers
             Obstacle = content.Load<Texture2D>("JumpScreen/Textures/obstacle");
             WallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_left");
             WallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_right");
-            LastWallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_left");
-            LastWallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_right");
+            LastWallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_topleft");
+            LastWallRight = content.Load<Texture2D>("JumpScreen/Textures/wall_topright");
             InputMedium = content.Load<Texture2D>("JumpScreen/Textures/input_medium");
             Caret = content.Load<Texture2D>("JumpScreen/Textures/caret");
             QuestionBox = content.Load<Texture2D>("JumpScreen/Textures/questionbox");
