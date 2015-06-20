@@ -38,7 +38,6 @@ namespace SeriousGame.Objects
                     }
                 }
             }
-            string playerName = frog.PlayerName;
         }
 
         public void Update(Frog frog, GameTime gameTime)

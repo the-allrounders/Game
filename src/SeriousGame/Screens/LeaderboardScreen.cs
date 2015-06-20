@@ -14,13 +14,13 @@ namespace SeriousGame.Screens
 
         public override void Load()
         {
-            const string pathOfFile = "../../../leaderboard.txt";
+            string pathOfFile = "../../../Leaderboards/leaderboard" + SettingsManager.Difficulty + ".txt";
             values = File.ReadAllLines(pathOfFile);
         }
 
         public static void SaveScore(string playerName, int score)
         {
-            const string pathOfFile = "../../../leaderboard.txt";
+            string pathOfFile = "../../../Leaderboards/leaderboard" + SettingsManager.Difficulty + ".txt";
             string[] values = File.ReadAllLines(pathOfFile);
             List<string> scores = new List<string>();
             bool added = false;
