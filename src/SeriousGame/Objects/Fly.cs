@@ -23,12 +23,7 @@ namespace SeriousGame.Objects
                 int fliesThisLine = rnd.Next(-1, 3);
                 for (int n = 0; n < fliesThisLine; n++)
                 {
-                    int distance = (int)((ScreenManager.Dimensions.X - (JumpScreen.Padding * 2)) / fliesThisLine * n) + JumpScreen.Padding + 100 + rnd.Next(-100, 100);
-                    if (distance < JumpScreen.Padding)
-                        distance = JumpScreen.Padding;
-                    else if (distance > ScreenManager.Dimensions.X - JumpScreen.Padding)
-                        distance = (int)ScreenManager.Dimensions.X - JumpScreen.Padding - TextureManager.Fly.Width;
-                    flies.Add(new Fly(new Vector2(distance, i + rnd.Next(-100, 100)), 100, 48, 41, 3, 10));
+                    flies.Add(new Fly(new Vector2(rnd.Next(JumpScreen.Padding, (int)ScreenManager.Dimensions.X - JumpScreen.Padding), i + rnd.Next(-100, 100)), 100, 48, 41, 3, 10));
                 }
             }
             return flies;
