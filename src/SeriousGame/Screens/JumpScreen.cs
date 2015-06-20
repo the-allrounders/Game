@@ -51,9 +51,6 @@ namespace SeriousGame.Screens
 
             #endregion
 
-            // Make the magma rise
-            magma.Rise(offset);
-
             #region Question screen
 
             // Show questionscreen if touching obstacle
@@ -86,6 +83,9 @@ namespace SeriousGame.Screens
                     {
                         score += 1000;
                         good = true;
+                        if (SettingsManager.Difficulty != 3 && frog.Lives < 3)
+                            frog.Lives++;
+
                     }
                     else
                     {
@@ -98,6 +98,9 @@ namespace SeriousGame.Screens
                     frog.Jump();
                 }
             }
+            else
+                // Make the magma rise
+                magma.Rise(offset);
 
             // Set wrong and good to false after 3 seconds
             if ((wrong || good) && gameTime.TotalGameTime.Seconds >= waitTime + 3)

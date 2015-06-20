@@ -23,19 +23,7 @@ namespace SeriousGame.Objects
             frogPosition = charPos;
             speedlr = new Vector2(10, 0);
             PlayerName = "<naam>";
-            Lives = 3;
-            switch (SettingsManager.Difficulty)
-            {
-                case 1:
-                    Lives = 3;
-                    break;
-                case 2:
-                    Lives = 3;
-                    break;
-                case 3:
-                    Lives = 1;
-                    break;
-            }
+            Lives = SettingsManager.Difficulty == 3 ? 1 : 3;
             Jump();
         }
 
