@@ -58,7 +58,7 @@ namespace SeriousGame.Objects
                 iterations++;
             }
             walls.Add(new Wall(new Vector2(0, i), TextureManager.LastWallLeft));
-            walls.Add(new Wall(new Vector2(ScreenManager.Dimensions.X - TextureManager.LastWallRight.Width, i), TextureManager.WallRight));
+            walls.Add(new Wall(new Vector2(ScreenManager.Dimensions.X - TextureManager.LastWallRight.Width, i), TextureManager.LastWallRight));
             JumpScreen.GameHeight = iterations * TextureManager.WallRight.Height;
             return walls;
         }
