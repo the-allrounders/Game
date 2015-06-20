@@ -78,21 +78,13 @@ namespace SeriousGame.Screens
                 touchingObstacle.OpenQuestion();
                 answer = 0;
                 if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.NumPad1))
-                {
                     answer = 1;
-                }
                 else if (InputManager.IsPressing(Keys.D2) || InputManager.IsPressing(Keys.NumPad2))
-                {
                     answer = 2;
-                }
                 else if (InputManager.IsPressing(Keys.D3) || InputManager.IsPressing(Keys.NumPad3))
-                {
                     answer = 3;
-                }
                 else if (InputManager.IsPressing(Keys.D4) || InputManager.IsPressing(Keys.NumPad4))
-                {
                     answer = 4;
-                }
 
                 if (answer != 0)
                 {
@@ -116,7 +108,7 @@ namespace SeriousGame.Screens
                     frog.Jump();
                 }
             }
-            else
+            else if (!gameEnded || gameEnded && frog.IsDead)
                 // Make the magma rise
                 magma.Rise(offset);
 
@@ -148,10 +140,9 @@ namespace SeriousGame.Screens
                     Obstacle obstacle in
                         obstacles.Where(
                             obstacle =>
-                                obstacle.IsInViewport(offset) && frog.IsJumpingOnObstacle(obstacle) && !obstacle.IsDone()))
-                {
+                                obstacle.IsInViewport(offset) && frog.IsJumpingOnObstacle(obstacle) &&
+                                !obstacle.IsDone()))
                     touchingObstacle = obstacle;
-                }
 
                 // If user is pressing Left, go left. Same for Right.
                 if (InputManager.IsPressing(Keys.Left, false) || InputManager.IsPressing(Keys.A, false))
@@ -171,12 +162,10 @@ namespace SeriousGame.Screens
                 foreach (Collectable collectable in collectables.Where(collectable => !collectable.IsDone && collectable.IsInViewport(offset)))
                 {
                     collectable.Update(gameTime, offset);
-                    if (collectable.IsCatching(frog))
-                    {
-                        score += collectable.CollectableScoreWorth;
-                        SoundManager.Play(Sounds.Coin);
-                        collectable.IsDone = true;
-                    }
+                    if (!collectable.IsCatching(frog)) continue;
+                    score += collectable.CollectableScoreWorth;
+                    SoundManager.Play(Sounds.Coin);
+                    collectable.IsDone = true;
                 }
 
                 // Apply gravity to Frog
@@ -220,10 +209,10 @@ namespace SeriousGame.Screens
             }
 
             #region Scoreboard
+
             if (gameEnded)
-            {
                 scoreboard.Update(frog, gameTime);
-            }
+
             #endregion
 
         }
@@ -232,15 +221,13 @@ namespace SeriousGame.Screens
         {
             // Draw platforms
             foreach (Platform platform in platforms.Where(platform => platform.IsInViewport(offset)))
-            {
                 platform.Draw(spriteBatch, offset);
-            }
 
             // Draw collectables
-            foreach (Collectable collectable in collectables.Where(collectable => collectable.IsInViewport(offset) && !collectable.IsDone))
-            {
+            foreach (
+                Collectable collectable in
+                    collectables.Where(collectable => collectable.IsInViewport(offset) && !collectable.IsDone))
                 collectable.Draw(spriteBatch, offset);
-            }
 
             // Draw frog
             frog.Draw(spriteBatch, offset);
@@ -266,17 +253,22 @@ namespace SeriousGame.Screens
                     obstacle.DrawQuestion(spriteBatch);
             }
 
+            // Draw magma
+            magma.Draw(spriteBatch, offset);
+
+            // Show feedback
+            if (wrong)
+                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400, 300));
+            else if (good)
+                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
+
             // Draw walls
             foreach (Wall wall in walls.Where(wall => wall.IsInViewport(offset)))
-            {
                 wall.Draw(spriteBatch, offset);
-            }
 
             // Draw scorescreen of frog is dead
             if (gameEnded)
-            {
                 scoreboard.Draw(spriteBatch, offset, frog.PlayerName);
-            }
             // If the frog is alive, draw the score
             else
             {
@@ -284,9 +276,10 @@ namespace SeriousGame.Screens
                 spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 10, 20),
                     Color.White);
                 for (int i = 1; i <= frog.Lives; i++)
-                {
-                    spriteBatch.Draw(TextureManager.Heart, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 20 - TextureManager.Heart.Width * i, 5));
-                }
+                    spriteBatch.Draw(TextureManager.Heart,
+                        new Vector2(
+                            ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 20 -
+                            TextureManager.Heart.Width*i, 5));
             }
 
             if (controlInfoVisible)
