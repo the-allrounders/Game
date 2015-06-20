@@ -228,7 +228,14 @@ namespace SeriousGame.Screens
                 Collectable collectable in
                     collectables.Where(collectable => collectable.IsInViewport(offset) && !collectable.IsDone))
                 collectable.Draw(spriteBatch, offset);
-
+            // Draw obstacles
+            foreach (
+                Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
+            {
+                obstacle.Draw(spriteBatch, offset);
+                if (frog.IsJumpingOnObstacle(obstacle))
+                    obstacle.DrawQuestion(spriteBatch);
+            }
             // Draw frog
             frog.Draw(spriteBatch, offset);
 
@@ -244,23 +251,7 @@ namespace SeriousGame.Screens
             else if (good)
                 spriteBatch.Draw(TextureManager.Good, new Vector2(430, 300));
 
-            // Draw obstacles
-            foreach (
-                Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
-            {
-                obstacle.Draw(spriteBatch, offset);
-                if (frog.IsJumpingOnObstacle(obstacle))
-                    obstacle.DrawQuestion(spriteBatch);
-            }
-
-            // Draw magma
-            magma.Draw(spriteBatch, offset);
-
-            // Show feedback
-            if (wrong)
-                spriteBatch.Draw(TextureManager.Wrong, new Vector2(400, 300));
-            else if (good)
-                spriteBatch.Draw(TextureManager.Good, new Vector2(400, 300));
+           
 
             // Draw walls
             foreach (Wall wall in walls.Where(wall => wall.IsInViewport(offset)))
