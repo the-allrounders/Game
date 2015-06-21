@@ -225,6 +225,14 @@ namespace SeriousGame.Screens
                 Collectable collectable in
                     collectables.Where(collectable => collectable.IsInViewport(offset) && !collectable.IsDone))
                 collectable.Draw(spriteBatch, offset);
+
+
+            // Draw frog
+            frog.Draw(spriteBatch, offset);
+
+            // Draw magma
+            magma.Draw(spriteBatch, offset);
+
             // Draw obstacles
             foreach (
                 Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
@@ -233,11 +241,6 @@ namespace SeriousGame.Screens
                 if (frog.IsJumpingOnObstacle(obstacle))
                     obstacle.DrawQuestion(spriteBatch);
             }
-            // Draw frog
-            frog.Draw(spriteBatch, offset);
-
-            // Draw magma
-            magma.Draw(spriteBatch, offset);
 
             // Show feedback
             if (wrong)
