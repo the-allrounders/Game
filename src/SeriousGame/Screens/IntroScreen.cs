@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SeriousGame.Managers;
@@ -8,7 +10,7 @@ namespace SeriousGame.Screens
     class IntroScreen : GameScreen
     {
         private int currentBackground = 0;
-        private const int maxBackgroundIndex = 2;
+        private int maxBackgroundIndex = TextureManager.IntroBackground.Count() - 1;
         private Rectangle roleHeight = new Rectangle(0, 0, TextureManager.LetterNoBottom.Width, 100);
         private int timeNewBackground;
         private double timeScreenLoaded;
@@ -43,10 +45,10 @@ namespace SeriousGame.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 rolePosition = new Vector2(500, 0);
+            Vector2 rolePosition = new Vector2(650, 0);
             spriteBatch.Draw(TextureManager.IntroBackground[currentBackground], new Vector2(0, 0));
             spriteBatch.Draw(TextureManager.LetterNoBottom, rolePosition, roleHeight, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(TextureManager.LetterBottom, new Vector2(rolePosition.X, rolePosition.Y + roleHeight.Height - 90));
+            spriteBatch.Draw(TextureManager.LetterBottom, new Vector2(rolePosition.X - 20, rolePosition.Y + roleHeight.Height - 95));
         }
     }
 }
