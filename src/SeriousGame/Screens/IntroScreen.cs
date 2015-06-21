@@ -8,9 +8,10 @@ namespace SeriousGame.Screens
     class IntroScreen : GameScreen
     {
         private int currentBackground = 0;
-        private int maxBackgroundIndex = 2;
+        private const int maxBackgroundIndex = 2;
         private Rectangle roleHeight = new Rectangle(0, 0, TextureManager.LetterNoBottom.Width, 100);
         private int timeNewBackground;
+        private int timeScreenLoaded;
 
         public override void Load()
         {
@@ -25,7 +26,10 @@ namespace SeriousGame.Screens
                 ScreenManager.CurrentScreen = new StartScreen();
 
             if (timeNewBackground == 0)
+            {
                 timeNewBackground = gameTime.TotalGameTime.Seconds;
+                timeScreenLoaded = gameTime.TotalGameTime.Seconds;
+            }
             else if (gameTime.TotalGameTime.Seconds >= timeNewBackground + 5)
             {
                 timeNewBackground = gameTime.TotalGameTime.Seconds;
@@ -33,7 +37,7 @@ namespace SeriousGame.Screens
                 if (currentBackground > maxBackgroundIndex)
                     currentBackground = 0;
             }
-            if (roleHeight.Height < TextureManager.LetterNoBottom.Height)
+            if (gameTime.TotalGameTime.Seconds >= timeScreenLoaded + 1 && roleHeight.Height < TextureManager.LetterNoBottom.Height)
                 roleHeight.Height += 10;
         }
 
