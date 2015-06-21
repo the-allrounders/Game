@@ -11,7 +11,7 @@ namespace SeriousGame.Screens
         private const int maxBackgroundIndex = 2;
         private Rectangle roleHeight = new Rectangle(0, 0, TextureManager.LetterNoBottom.Width, 100);
         private int timeNewBackground;
-        private int timeScreenLoaded;
+        private double timeScreenLoaded;
 
         public override void Load()
         {
@@ -28,7 +28,7 @@ namespace SeriousGame.Screens
             if (timeNewBackground == 0)
             {
                 timeNewBackground = gameTime.TotalGameTime.Seconds;
-                timeScreenLoaded = gameTime.TotalGameTime.Seconds;
+                timeScreenLoaded = gameTime.TotalGameTime.TotalMilliseconds;
             }
             else if (gameTime.TotalGameTime.Seconds >= timeNewBackground + 5)
             {
@@ -37,7 +37,7 @@ namespace SeriousGame.Screens
                 if (currentBackground > maxBackgroundIndex)
                     currentBackground = 0;
             }
-            if (gameTime.TotalGameTime.Seconds >= timeScreenLoaded + 1 && roleHeight.Height < TextureManager.LetterNoBottom.Height)
+            if (gameTime.TotalGameTime.TotalMilliseconds >= timeScreenLoaded + 300 && roleHeight.Height < TextureManager.LetterNoBottom.Height)
                 roleHeight.Height += 10;
         }
 
