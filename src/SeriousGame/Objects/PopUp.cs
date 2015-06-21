@@ -40,7 +40,7 @@ namespace SeriousGame.Objects
                 "De Pacific mag dan een oceaan zijn (in het Nederlands 'de grote/stille oceaan'), een vulkaan is het niet!"}
 			
                                             };
-        private readonly int[] answers = {
+        private readonly int[]  answers = {
 												3,
 												3,
                                                 1,
@@ -54,9 +54,9 @@ namespace SeriousGame.Objects
 
                                                 
         };
-        private int _questionNumber;
-        private string[] _choices = new string[100];
-        private int _answer;
+        private int             _questionNumber;
+        private string[]        _choices = new string[100];
+        private int             _answer;
 
         public PopUp(int questionNumber)
         {
