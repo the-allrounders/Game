@@ -16,7 +16,7 @@ namespace SeriousGame.Screens
         {
             if (InputManager.IsPressing(Keys.Space))
             {
-                ScreenManager.CurrentScreen = new JumpScreen();
+                ScreenManager.CurrentScreen = new IntroScreen();
             }
             else if (InputManager.IsPressing(Keys.S))
             {

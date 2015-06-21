@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using System;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SeriousGame.Managers
@@ -35,6 +36,10 @@ namespace SeriousGame.Managers
         public static Texture2D Good;
         public static Texture2D Wrong;
 
+        public static Texture2D[] IntroBackground = new Texture2D[3];
+        public static Texture2D LetterNoBottom;
+        public static Texture2D LetterBottom;
+
 
         public static void Load(ContentManager content)
         {
@@ -62,6 +67,11 @@ namespace SeriousGame.Managers
             Good = content.Load<Texture2D>("JumpScreen/Textures/goed");
             Wrong = content.Load<Texture2D>("JumpScreen/Textures/fout");
             Heart = content.Load<Texture2D>("JumpScreen/Textures/heart");
+            IntroBackground[0] = content.Load<Texture2D>("IntroScreen/Textures/d1");
+            IntroBackground[1] = content.Load<Texture2D>("IntroScreen/Textures/d2");
+            IntroBackground[2] = content.Load<Texture2D>("IntroScreen/Textures/d3");
+            LetterNoBottom = content.Load<Texture2D>("IntroScreen/Textures/letternobottom");
+            LetterBottom = content.Load<Texture2D>("IntroScreen/Textures/bottomletter");
         }
     }
 }

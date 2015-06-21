@@ -54,6 +54,7 @@
     <Compile Include="Objects\Wall.cs" />
     <Compile Include="Screens\CreditsScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="Screens\JumpScreen.cs" />
     <Compile Include="Objects\Obstacle.cs" />
     <Compile Include="Objects\Platform.cs" />
