@@ -10,7 +10,7 @@ namespace SeriousGame.Screens
     class IntroScreen : GameScreen
     {
         private int currentBackground = 0;
-        private int maxBackgroundIndex = TextureManager.IntroBackground.Count() - 1;
+        private readonly int maxBackgroundIndex = TextureManager.IntroBackground.Count() - 1;
         private Rectangle roleHeight = new Rectangle(0, 0, TextureManager.LetterNoBottom.Width, 100);
         private int timeNewBackground;
         private double timeScreenLoaded;
