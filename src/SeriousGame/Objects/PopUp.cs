@@ -1,13 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SeriousGame.Managers;
 
 namespace SeriousGame.Objects
 {
+    public class Question
+    {
+        public string QuestionString { get; set; }
+        public string RightAnswer { get; set; }
+        public List<string> WrongAnswers { get; set; }
+        public string WrongText { get; set; }
+
+        public List<string> Answers
+        {
+            get
+            {
+                List<string> answers = WrongAnswers;
+                answers.Add(RightAnswer);
+                answers.Shuffle(); // ofzoiets
+                return answers;
+            }
+        }
+    }
+    
     class PopUp
     {
-        private readonly string[,] questions = {
+        private readonly List<Question> questions = new List<Question>
+        {
+            new Question
+            {
+                QuestionString = "Hoe wordt vloeibaar gesteente genoemd dat zich onder het aardoppervlak bevindt?",
+                RightAnswer = "Magma",
+                WrongAnswers = new List<string>{"Lava", "Karma", "Vloeibaar gesteente"},
+                WrongText = "Magma bevindt zich onder het aardoppervlak en lava is wat er uit de vulkaan is gekomen. Het is dus hetzelfde spul, maar dan op een andere plek!"
+            },
+            new Question
+            {
+                QuestionString = "Hoe wordt de wolk genoemd die te zien is tijdens een vulkaanuitbarsting?",
+                RightAnswer = "Aswolk",
+                WrongAnswers = new List<string>{"Vuurwolk", "Rookwolk", "Regenwolk"},
+                WrongText = "Tijdens een vulkaanuitbarsting komt er door de hitte veel as vrij. Alles wat er wordt verbrand door de lava verandert in een grote aswolk."
+            }
+        };
+
+
+
+        private readonly string[,] questionss = {
 			{"Hoe wordt vloeibaar gesteente genoemd dat zich onder het aardoppervlak bevindt?", 
 				"1) Lava","2) Karma", "3) Magma", "4) Vloeibaar gesteente", 
                 "Helaas, het goede antwoord was 'magma'. Magma bevindt zich onder het aardoppervlak en lava is wat er uit de vulkaan is gekomen. Het is dus hetzelfde spul, maar dan op een andere plek!"},
