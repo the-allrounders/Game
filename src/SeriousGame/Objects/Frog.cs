@@ -13,6 +13,9 @@ namespace SeriousGame.Objects
         private readonly Vector2 speedlr;
         public bool IsDescending { get; private set; }
         public int Lives;
+        public bool StealthMode;
+        public double TimeOfStealthMode;
+        public bool IsVisible = true;
 
         public bool IsDead { get; private set; }
         public string PlayerName { get; private set; }
@@ -139,7 +142,10 @@ namespace SeriousGame.Objects
 
         public void Draw(SpriteBatch spriteBatch, int offset)
         {
-            spriteBatch.Draw(frogTexture, new Vector2(frogPosition.X, frogPosition.Y + offset));
+            float frogOpacity = 1;
+            if (!IsVisible)
+                frogOpacity = 0.3f;
+            spriteBatch.Draw(frogTexture, new Vector2(frogPosition.X, frogPosition.Y + offset), Color.White * frogOpacity);
         }
     }
 }

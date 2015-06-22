@@ -170,9 +170,32 @@ namespace SeriousGame.Screens
 
                 if (magma.IsTouchingFrog(frog))
                 {
+                    if (!frog.StealthMode)
+                    {
+                        if (frog.Lives > 1)
+                        {
+                            frog.StealthMode = true;
+                            frog.TimeOfStealthMode = gameTime.TotalGameTime.TotalMilliseconds;
+                        }
+                        frog.Lives--;
+                    }
                     frog.Jump();
-                    frog.Lives--;
                 }
+
+                if (frog.StealthMode)
+                {
+                    if (gameTime.TotalGameTime.TotalMilliseconds < frog.TimeOfStealthMode + 3000)
+                    {
+                        if ((gameTime.TotalGameTime.Milliseconds >= 0 && gameTime.TotalGameTime.Milliseconds < 250) || (gameTime.TotalGameTime.Milliseconds >= 750 && gameTime.TotalGameTime.Milliseconds <= 999))
+                            frog.IsVisible = true;
+                        else
+                            frog.IsVisible = false;
+                    }
+                    else
+                        frog.StealthMode = false;
+                }
+                else
+                    frog.IsVisible = true;
 
                 //Check if frog is out of screen
                 if (frog.BoundingBox.Top + offset - ScreenManager.Dimensions.Y > 0 || frog.Lives <= 0)
@@ -234,7 +257,6 @@ namespace SeriousGame.Screens
                 if (frog.IsJumpingOnObstacle(obstacle))
                     obstacle.DrawQuestion(spriteBatch);
             }
-
 
             // Draw frog
             frog.Draw(spriteBatch, offset);
