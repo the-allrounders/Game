@@ -19,6 +19,7 @@ namespace SeriousGame.Objects
             {
                 List<string> answers = WrongAnswers;
                 answers.Add(RightAnswer);
+                answers = answers.Randomize();
                 return answers;
             }
         }
