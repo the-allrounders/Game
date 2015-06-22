@@ -59,7 +59,8 @@ namespace SeriousGame.Objects
 
         public void DrawQuestion(SpriteBatch spritebatch)
         {
-            popUp?.Draw(spritebatch);
+            if(popUp != null)
+                popUp.Draw(spritebatch);
         }
 
         public bool CheckAnswer(string answer)
