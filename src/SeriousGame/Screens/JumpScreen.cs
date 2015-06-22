@@ -28,7 +28,7 @@ namespace SeriousGame.Screens
 
         private bool wrong = false;
         private bool good = false;
-        private int answer;
+        private string answer;
         private int waitTime;
 
         private int score;
@@ -76,17 +76,17 @@ namespace SeriousGame.Screens
             if (!wrong && touchingObstacle != null)
             {
                 touchingObstacle.OpenQuestion();
-                answer = 0;
+                answer = "";
                 if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.NumPad1))
-                    answer = 1;
+                    answer = touchingObstacle.popUp.questions[touchingObstacle.question].Answers[0];
                 else if (InputManager.IsPressing(Keys.D2) || InputManager.IsPressing(Keys.NumPad2))
-                    answer = 2;
+                    answer = touchingObstacle.popUp.questions[touchingObstacle.question].Answers[1];
                 else if (InputManager.IsPressing(Keys.D3) || InputManager.IsPressing(Keys.NumPad3))
-                    answer = 3;
+                    answer = touchingObstacle.popUp.questions[touchingObstacle.question].Answers[2];
                 else if (InputManager.IsPressing(Keys.D4) || InputManager.IsPressing(Keys.NumPad4))
-                    answer = 4;
+                    answer = touchingObstacle.popUp.questions[touchingObstacle.question].Answers[3];
 
-                if (answer != 0)
+                if (answer != string.Empty)
                 {
                     bool right = touchingObstacle.CheckAnswer(answer);
                     touchingObstacle.FinishedQuestion();

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SeriousGame.Managers;
 using SeriousGame.Screens;
@@ -46,6 +47,19 @@ namespace SeriousGame
             {
                 graphics.IsFullScreen = value;
                 graphics.ApplyChanges();
+            }
+        }
+
+        public static void Shuffle<T>(T[] array)
+        {
+            int n = array.Length;
+            Random random = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                int r = i + (int)(random.NextDouble() * (n - i));
+                T t = array[r];
+                array[r] = array[i];
+                array[i] = t;
             }
         }
 

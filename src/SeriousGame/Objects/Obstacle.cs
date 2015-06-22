@@ -9,14 +9,14 @@ namespace SeriousGame.Objects
 {
     public class Obstacle
     {
-        private readonly int question;
+        public int question { get; private set; }
         private Vector2 position;
         private readonly Texture2D texture;
 
         private SpriteFont font;
         private SpriteFont fontBold;
-        private PopUp popUp;
-        private Boolean done;
+        public PopUp popUp { get; private set; }
+        private bool done;
 
         public Obstacle(Vector2 position, int question)
         {
@@ -59,18 +59,15 @@ namespace SeriousGame.Objects
 
         public void DrawQuestion(SpriteBatch spritebatch)
         {
-            if (popUp != null)
-            {
-                popUp.Draw(spritebatch);
-            }
+            popUp?.Draw(spritebatch);
         }
 
-        public Boolean CheckAnswer(int answer)
+        public bool CheckAnswer(string answer)
         {
-            return popUp.chooceAnswer(answer);
+            return popUp.ChooceAnswer(answer);
         }
 
-        public Boolean IsDone()
+        public bool IsDone()
         {
             return done;
         }
@@ -80,22 +77,9 @@ namespace SeriousGame.Objects
             done = true;
         }
 
-        public void DrawFeedback(int answer, SpriteBatch spritebatch)
+        public void DrawFeedback(string answer, SpriteBatch spritebatch)
         {
             popUp.DrawFeedback(answer, spritebatch);
-        }
-
-        static void Shuffle<T>(T[] array)
-        {
-            int n = array.Length;
-            Random random = new Random();
-            for (int i = 0; i < n; i++)
-            {
-                int r = i + (int)(random.NextDouble() * (n - i));
-                T t = array[r];
-                array[r] = array[i];
-                array[i] = t;
-            }
         }
 
         public static List<Obstacle> GenerateList()
@@ -103,7 +87,7 @@ namespace SeriousGame.Objects
             List<Obstacle> platforms = new List<Obstacle>();
             int question = 0;
             int[] questionNumbers = {0,1,2,3,4,5,6,7,8,9};
-            Shuffle(questionNumbers);
+            Game1.Shuffle(questionNumbers);
             for (int i = JumpScreen.GameHeight / 10 * -1; i > JumpScreen.GameHeight * -1; i -= JumpScreen.GameHeight / 10)
             {
                 platforms.Add(new Obstacle(new Vector2(JumpScreen.Padding, i), questionNumbers[question]));

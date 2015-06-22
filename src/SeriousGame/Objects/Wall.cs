@@ -47,7 +47,7 @@ namespace SeriousGame.Objects
 
         public static List<Wall> GenerateList()
         {
-            JumpScreen.GameHeight = 100000;
+            JumpScreen.GameHeight = 1000;
             List<Wall> walls = new List<Wall>();
             int i;
             int iterations = 0;
