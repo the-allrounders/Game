@@ -311,7 +311,7 @@ namespace SeriousGame.Screens
                 SpriteFont font = FontManager.MarkerFelt12;
                 const float lineWidth = 400;
                 string introText = FontManager.WrapText("Om dit spel te spelen gebruik je de pijltjes- of de A & D toetsen", font, lineWidth);
-                string statusDontShowAgainText = FontManager.WrapText("Als je af gaat krijg je dit bericht " + (dontShowControlInfoAgain ? "niet " : "") + "nog een keer te zien", FontManager.MarkerFelt12, lineWidth);
+                string statusDontShowAgainText = FontManager.WrapText("Als je af gaat krijg je dit bericht " + (dontShowControlInfoAgain ? "niet" : "wel") + " nog een keer te zien", FontManager.MarkerFelt12, lineWidth);
                 string changeStatusText = FontManager.WrapText("(Druk op de enter toets om dit aan te passen)", font, lineWidth);
                 string pauseText = FontManager.WrapText("Druk op de P toets om te pauzeren", font, lineWidth);
                 string continueText = FontManager.WrapText("Druk op de spatiebalk om te beginnen", font, lineWidth);
