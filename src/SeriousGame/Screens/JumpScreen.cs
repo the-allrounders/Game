@@ -29,7 +29,7 @@ namespace SeriousGame.Screens
         private bool wrong = false;
         private bool good = false;
         private string answer;
-        private int waitTime;
+        private double waitTime;
 
         private int score;
 
@@ -103,7 +103,7 @@ namespace SeriousGame.Screens
                         wrong = true;
                         frog.Lives--;
                     }
-                    waitTime = gameTime.TotalGameTime.Seconds;
+                    waitTime = gameTime.TotalGameTime.TotalSeconds;
                     frog.Jump();
                 }
             }
@@ -112,10 +112,8 @@ namespace SeriousGame.Screens
                 magma.Rise(offset);
 
             // Set wrong and good to false after 3 seconds
-            if ((good) && gameTime.TotalGameTime.Seconds >= waitTime + 3)
-            {
+            if (good && gameTime.TotalGameTime.TotalSeconds >= waitTime + 3)
                 good = false;
-            }
 
             #endregion
 
@@ -183,9 +181,9 @@ namespace SeriousGame.Screens
 
                 if (frog.StealthMode)
                 {
-                    if (gameTime.TotalGameTime.TotalMilliseconds < frog.TimeOfStealthMode + 3000)
+                    if (gameTime.TotalGameTime.TotalMilliseconds < frog.TimeOfStealthMode + 1500)
                     {
-                        if ((gameTime.TotalGameTime.Milliseconds >= 0 && gameTime.TotalGameTime.Milliseconds < 250) || (gameTime.TotalGameTime.Milliseconds >= 750 && gameTime.TotalGameTime.Milliseconds <= 999))
+                        if ((gameTime.TotalGameTime.Milliseconds >= 0 && gameTime.TotalGameTime.Milliseconds < 125) || (gameTime.TotalGameTime.Milliseconds >= 250 && gameTime.TotalGameTime.Milliseconds <= 375) || (gameTime.TotalGameTime.Milliseconds >= 500 && gameTime.TotalGameTime.Milliseconds < 625) || (gameTime.TotalGameTime.Milliseconds >= 750 && gameTime.TotalGameTime.Milliseconds <= 875))
                             frog.IsVisible = true;
                         else
                             frog.IsVisible = false;
