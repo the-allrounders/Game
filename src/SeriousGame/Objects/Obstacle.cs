@@ -24,7 +24,7 @@ namespace SeriousGame.Objects
             this.position = position;
             this.popUp = new PopUp(question);
             texture = TextureManager.Obstacle;
-            font = FontManager.Verdana;
+            font = FontManager.MarkerFelt12;
         }
 
         public bool IsInViewport(int offset)

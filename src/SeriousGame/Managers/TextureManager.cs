@@ -39,8 +39,6 @@ namespace SeriousGame.Managers
 
         public static Texture2D Obstacle;
         public static Texture2D QuestionBox;
-        public static Texture2D Good;
-        public static Texture2D Wrong;
 
         public static Texture2D[] IntroBackground = new Texture2D[4];
         public static Texture2D LetterNoBottom;
@@ -76,8 +74,6 @@ namespace SeriousGame.Managers
             InputMedium = content.Load<Texture2D>("JumpScreen/Textures/input_medium");
             Caret = content.Load<Texture2D>("JumpScreen/Textures/caret");
             QuestionBox = content.Load<Texture2D>("JumpScreen/Textures/questionbox");
-            Good = content.Load<Texture2D>("JumpScreen/Textures/goed");
-            Wrong = content.Load<Texture2D>("JumpScreen/Textures/fout");
             Heart = content.Load<Texture2D>("JumpScreen/Textures/heart");
             WonGameBackground = content.Load<Texture2D>("JumpScreen/Textures/endscreen");
             IntroBackground[0] = content.Load<Texture2D>("IntroScreen/Textures/d1");

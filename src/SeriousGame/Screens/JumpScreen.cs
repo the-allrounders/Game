@@ -262,12 +262,22 @@ namespace SeriousGame.Screens
             // Show feedback
             if (wrong)
             {
-                spriteBatch.Draw(TextureManager.Wrong, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.Wrong.Width / 2, 10));
+                spriteBatch.DrawString(
+                    FontManager.MarkerFelt100, 
+                    "FOUT", 
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.MarkerFelt100.MeasureString("FOUT").X/2, 10), 
+                    Color.Red
+                );
                 touchingObstacle.DrawFeedback(answer, spriteBatch);
             }
             else if (good)
-                spriteBatch.Draw(TextureManager.Good, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.Good.Width / 2, 300));
-
+                spriteBatch.DrawString(
+                    FontManager.MarkerFelt100, 
+                    "GOED",
+                    new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt100.MeasureString("GOED").X / 2, 300), 
+                    Color.Green
+                );
+                
            
 
             // Draw walls
@@ -286,7 +296,7 @@ namespace SeriousGame.Screens
             else
             {
                 string text = "Score: " + score;
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 20, TextureManager.Heart.Height + 10),
+                spriteBatch.DrawString(FontManager.MarkerFelt12, text, new Vector2(ScreenManager.Dimensions.X - FontManager.MarkerFelt12.MeasureString(text).X - 20, TextureManager.Heart.Height + 10),
                     Color.White);
                 for (int i = 1; i <= frog.Lives; i++)
                     spriteBatch.Draw(TextureManager.Heart, new Vector2(ScreenManager.Dimensions.X - 5 - TextureManager.Heart.Width * i, 5));
@@ -295,10 +305,10 @@ namespace SeriousGame.Screens
             if (controlInfoVisible)
             {
                 spriteBatch.Draw(TextureManager.QuestionBox, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.QuestionBox.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.QuestionBox.Height / 2));
-                SpriteFont font = FontManager.Verdana;
+                SpriteFont font = FontManager.MarkerFelt12;
                 const float lineWidth = 400;
                 string introText = FontManager.WrapText("Om dit spel te spelen gebruik je de pijltjes- of de A & D toetsen", font, lineWidth);
-                string statusDontShowAgainText = FontManager.WrapText("Als je af gaat krijg je dit bericht " + (dontShowControlInfoAgain ? "niet " : "") + "nog een keer te zien", FontManager.Verdana, lineWidth);
+                string statusDontShowAgainText = FontManager.WrapText("Als je af gaat krijg je dit bericht " + (dontShowControlInfoAgain ? "niet " : "") + "nog een keer te zien", FontManager.MarkerFelt12, lineWidth);
                 string changeStatusText = FontManager.WrapText("(Druk op de enter toets om dit aan te passen)", font, lineWidth);
                 string continueText = FontManager.WrapText("Druk op de spatiebalk om te beginnen", font, lineWidth);
                 const int margin = 10;

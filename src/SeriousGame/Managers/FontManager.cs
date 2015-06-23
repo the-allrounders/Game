@@ -7,11 +7,13 @@ namespace SeriousGame.Managers
 {
     class FontManager
     {
-        public static SpriteFont Verdana;
+        public static SpriteFont MarkerFelt12;
+        public static SpriteFont MarkerFelt100;
 
         public static void Load(ContentManager content)
         {
-            Verdana = content.Load<SpriteFont>("Fonts/Verdana");
+            MarkerFelt12 = content.Load<SpriteFont>("Fonts/MarkerFelt12");
+            MarkerFelt100 = content.Load<SpriteFont>("Fonts/MarkerFelt100");
         }
 
         public static string WrapText(string text, SpriteFont font, float MaxLineWidth)

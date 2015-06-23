@@ -115,21 +115,21 @@ namespace SeriousGame.Objects
         public void Draw(SpriteBatch spritebatch)
         {
             int lineWidth = 400;
-            SpriteFont font = FontManager.Verdana;
-            string question = FontManager.WrapText(questions[questionNumber].QuestionString, FontManager.Verdana, 400);
-            string answer1 = FontManager.WrapText("1) " + questions[questionNumber].Answers[0], FontManager.Verdana, 200);
-            string answer2 = FontManager.WrapText("2) " + questions[questionNumber].Answers[1], FontManager.Verdana, 200);
-            string answer3 = FontManager.WrapText("3) " + questions[questionNumber].Answers[2], FontManager.Verdana, 200);
-            string answer4 = FontManager.WrapText("4) " + questions[questionNumber].Answers[3], FontManager.Verdana, 200);
+            SpriteFont font = FontManager.MarkerFelt12;
+            string question = FontManager.WrapText(questions[questionNumber].QuestionString, FontManager.MarkerFelt12, 400);
+            string answer1 = FontManager.WrapText("1) " + questions[questionNumber].Answers[0], FontManager.MarkerFelt12, 200);
+            string answer2 = FontManager.WrapText("2) " + questions[questionNumber].Answers[1], FontManager.MarkerFelt12, 200);
+            string answer3 = FontManager.WrapText("3) " + questions[questionNumber].Answers[2], FontManager.MarkerFelt12, 200);
+            string answer4 = FontManager.WrapText("4) " + questions[questionNumber].Answers[3], FontManager.MarkerFelt12, 200);
             const int margin = 10;
             float totalHeight = font.MeasureString(question).Y + font.MeasureString(answer1).Y + font.MeasureString(answer2).Y + font.MeasureString(answer3).Y + font.MeasureString(answer4).Y + (margin * 2) +100;
             spritebatch.Draw(TextureManager.QuestionBox, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.QuestionBox.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.QuestionBox.Height / 2));
-            spritebatch.DrawString(FontManager.Verdana, question, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2)), Color.Black);
-            spritebatch.DrawString(FontManager.Verdana, answer1, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin), Color.Black);
-            spritebatch.DrawString(FontManager.Verdana, answer2, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin), Color.Black);
-            spritebatch.DrawString(FontManager.Verdana, answer3, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin + font.MeasureString(answer2).Y + margin), Color.Black);
-            spritebatch.DrawString(FontManager.Verdana, answer4, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin + font.MeasureString(answer2).Y + margin + font.MeasureString(answer3).Y + margin), Color.Black);
-            spritebatch.DrawString(FontManager.Verdana, "Beantwoord de vraag met de cijfer toetsen.", new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin + font.MeasureString(answer2).Y + margin + font.MeasureString(answer3).Y + margin + font.MeasureString(answer4).Y + margin), Color.Black);
+            spritebatch.DrawString(FontManager.MarkerFelt12, question, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2)), Color.Black);
+            spritebatch.DrawString(FontManager.MarkerFelt12, answer1, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin), Color.Black);
+            spritebatch.DrawString(FontManager.MarkerFelt12, answer2, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin), Color.Black);
+            spritebatch.DrawString(FontManager.MarkerFelt12, answer3, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin + font.MeasureString(answer2).Y + margin), Color.Black);
+            spritebatch.DrawString(FontManager.MarkerFelt12, answer4, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin + font.MeasureString(answer2).Y + margin + font.MeasureString(answer3).Y + margin), Color.Black);
+            spritebatch.DrawString(FontManager.MarkerFelt12, "Beantwoord de vraag met de cijfer toetsen.", new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(question).Y + margin + font.MeasureString(answer1).Y + margin + font.MeasureString(answer2).Y + margin + font.MeasureString(answer3).Y + margin + font.MeasureString(answer4).Y + margin), Color.Black);
 
         }
 
@@ -141,13 +141,13 @@ namespace SeriousGame.Objects
         public void DrawFeedback(string answer, SpriteBatch spriteBatch)
         {
             int lineWidth = 400;
-            SpriteFont font = FontManager.Verdana;
-            string feedback = FontManager.WrapText(questions[questionNumber].WrongText,FontManager.Verdana, 400);
+            SpriteFont font = FontManager.MarkerFelt12;
+            string feedback = FontManager.WrapText(questions[questionNumber].WrongText,FontManager.MarkerFelt12, 400);
             const int margin = 10;
             float totalHeight = font.MeasureString(feedback).Y + (margin * 2) + 100;
             spriteBatch.Draw(TextureManager.QuestionBox, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.QuestionBox.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.QuestionBox.Height / 2 ));
-            spriteBatch.DrawString(FontManager.Verdana, feedback, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2)), Color.Black);
-            spriteBatch.DrawString(FontManager.Verdana, "Druk op spatie om weer verder te gaan", new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(feedback).Y + margin + 50), Color.Black);
+            spriteBatch.DrawString(FontManager.MarkerFelt12, feedback, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2)), Color.Black);
+            spriteBatch.DrawString(FontManager.MarkerFelt12, "Druk op spatie om weer verder te gaan", new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(feedback).Y + margin + 50), Color.Black);
         }
     }
 }

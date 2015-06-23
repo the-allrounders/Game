@@ -77,30 +77,30 @@ namespace SeriousGame.Objects
             string winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
             string loseText = "Helaas, game over! Je scoorde " + score + " punten";
             string text = isDead ? loseText : winText;
-            spriteBatch.DrawString(FontManager.Verdana, text,
-                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString(text).X/2,
+            spriteBatch.DrawString(FontManager.MarkerFelt12, text,
+                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.MarkerFelt12.MeasureString(text).X/2,
                     ScreenManager.Dimensions.Y/2 - 100), Color.Black);
             spriteBatch.Draw(TextureManager.InputMedium,
                 new Vector2(ScreenManager.Dimensions.X/2 - 100, ScreenManager.Dimensions.Y/2 - 50));
             if (caretVisible)
             {
-                float caretDistance = playerName == "<naam>" ? 0 : FontManager.Verdana.MeasureString(playerName).X;
+                float caretDistance = playerName == "<naam>" ? 0 : FontManager.MarkerFelt12.MeasureString(playerName).X;
                 spriteBatch.Draw(TextureManager.Caret,
                     new Vector2(ScreenManager.Dimensions.X/2 - 90 + caretDistance + 1, ScreenManager.Dimensions.Y/2 - 40));
             }
             Color nameColor = playerName == "<naam>" ? Color.Gray : Color.Black;
-            spriteBatch.DrawString(FontManager.Verdana, playerName,
+            spriteBatch.DrawString(FontManager.MarkerFelt12, playerName,
                 new Vector2(ScreenManager.Dimensions.X/2 - 90, ScreenManager.Dimensions.Y/2 - 40), nameColor);
             if (buttonIsSaveButton)
-                spriteBatch.DrawString(FontManager.Verdana, "Opslaan",
-                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opslaan").X/2,
+                spriteBatch.DrawString(FontManager.MarkerFelt12, "Opslaan",
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.MarkerFelt12.MeasureString("Opslaan").X/2,
                         ScreenManager.Dimensions.Y/2), Color.Black);
             else
-                spriteBatch.DrawString(FontManager.Verdana, "Ranglijst",
-                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Ranglijst").X/2,
+                spriteBatch.DrawString(FontManager.MarkerFelt12, "Ranglijst",
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.MarkerFelt12.MeasureString("Ranglijst").X/2,
                         ScreenManager.Dimensions.Y/2), Color.Black);
-            spriteBatch.DrawString(FontManager.Verdana, "Opnieuw",
-                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.Verdana.MeasureString("Opnieuw").X/2,
+            spriteBatch.DrawString(FontManager.MarkerFelt12, "Opnieuw",
+                new Vector2(ScreenManager.Dimensions.X/2 - FontManager.MarkerFelt12.MeasureString("Opnieuw").X/2,
                     ScreenManager.Dimensions.Y/2 + 30), Color.Black);
         }
     }

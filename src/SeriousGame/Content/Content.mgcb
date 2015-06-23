@@ -212,23 +212,6 @@
 /processorParam:TextureFormat=Color
 /build:JumpScreen/Textures/wall_right.png
 
-#begin Fonts/Verdana.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:Fonts/Verdana.spritefont
-
-#begin JumpScreen/Textures/frogflip.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:JumpScreen/Textures/frogflip.png
-
 #begin JumpScreen/Songs/248998_Supah_Mario_Brothaz.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -245,28 +228,6 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:JumpScreen/Textures/caret.jpg
-
-#begin JumpScreen/Textures/fout.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:JumpScreen/Textures/fout.png
-
-#begin JumpScreen/Textures/goed.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:JumpScreen/Textures/goed.png
 
 #begin JumpScreen/Sounds/nsmb_coin.wav
 /importer:WavImporter
@@ -500,4 +461,16 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:JumpScreen/Textures/froggirl.png
+
+#begin Fonts/MarkerFelt100.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/MarkerFelt100.spritefont
+
+#begin Fonts/MarkerFelt12.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/MarkerFelt12.spritefont
 

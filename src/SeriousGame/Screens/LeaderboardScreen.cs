@@ -54,9 +54,9 @@ namespace SeriousGame.Screens
             {
                 string[] score = values[i].Split(',');
                 string text = (i + 1) + ". " + score[0] + ": " + score[1];
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X / 2 - 150, 100 + (i * 40)), Color.White);
+                spriteBatch.DrawString(FontManager.MarkerFelt12, text, new Vector2(ScreenManager.Dimensions.X / 2 - 150, 100 + (i * 40)), Color.White);
             }
-            spriteBatch.DrawString(FontManager.Verdana, "Terug", new Vector2(ScreenManager.Dimensions.X / 2 - 35, ScreenManager.Dimensions.Y / 2 + 200), Color.White);
+            spriteBatch.DrawString(FontManager.MarkerFelt12, "Terug", new Vector2(ScreenManager.Dimensions.X / 2 - 35, ScreenManager.Dimensions.Y / 2 + 200), Color.White);
         }
     }
 }

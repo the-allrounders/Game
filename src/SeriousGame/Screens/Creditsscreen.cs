@@ -27,8 +27,8 @@ namespace SeriousGame.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(FontManager.Verdana, "Mogelijk gemaakt door:", new Vector2(300,300), Color.White);
-            spriteBatch.DrawString(FontManager.Verdana, "Bart Langelaan, Ian Wensink, Niels Otten & Lisa Uijtewaal", new Vector2(300, 340), Color.White);
+            spriteBatch.DrawString(FontManager.MarkerFelt12, "Mogelijk gemaakt door:", new Vector2(300,300), Color.White);
+            spriteBatch.DrawString(FontManager.MarkerFelt12, "Bart Langelaan, Ian Wensink, Niels Otten & Lisa Uijtewaal", new Vector2(300, 340), Color.White);
         }
     }
 }
