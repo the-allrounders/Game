@@ -141,7 +141,7 @@ namespace SeriousGame.Objects
         {
             float frogOpacity = 1;
             if (!IsVisible)
-                frogOpacity = 0.3f;
+                frogOpacity = 0.2f;
             spriteBatch.Draw(frogTexture, new Vector2(frogPosition.X, frogPosition.Y + offset), color: Color.White * frogOpacity, effects: spriteEffect);
         }
     }

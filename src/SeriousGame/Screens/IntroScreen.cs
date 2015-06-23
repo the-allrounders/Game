@@ -58,7 +58,6 @@ namespace SeriousGame.Screens
                 double newOpacity = (gameTime.TotalGameTime.TotalMilliseconds - timeNewBackground) / animationDuration;
                 opacityNewBackground = newOpacity;
                 opacityOldBackground = 1 - newOpacity;
-                Console.WriteLine(newOpacity);
             }
                 
         }
