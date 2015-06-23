@@ -25,6 +25,7 @@ namespace SeriousGame.Screens
         private Scoreboard scoreboard;
         private bool controlInfoVisible = SettingsManager.ShowControlInfo;
         private bool dontShowControlInfoAgain;
+        private bool isFrozen = false;
 
         private bool wrong = false;
         private bool good = false;
@@ -51,6 +52,8 @@ namespace SeriousGame.Screens
                 ScreenManager.CurrentScreen = new StartScreen();
                 return;
             }
+            else if (InputManager.IsPressing(Keys.P))
+                isFrozen = !isFrozen;
 
             #endregion
 
@@ -107,7 +110,7 @@ namespace SeriousGame.Screens
                     frog.Jump();
                 }
             }
-            else if (!wrong && (!gameEnded || gameEnded && frog.IsDead))
+            else if (!wrong && (!gameEnded || gameEnded && frog.IsDead) && !isFrozen)
                 // Make the magma rise
                 magma.Rise(offset);
 
@@ -125,7 +128,7 @@ namespace SeriousGame.Screens
                 touchingObstacle = null;
             }
 
-            if (!gameEnded && touchingObstacle == null)
+            if (!gameEnded && touchingObstacle == null && !isFrozen)
             {
                 #region Game actively running
 
@@ -310,14 +313,24 @@ namespace SeriousGame.Screens
                 string introText = FontManager.WrapText("Om dit spel te spelen gebruik je de pijltjes- of de A & D toetsen", font, lineWidth);
                 string statusDontShowAgainText = FontManager.WrapText("Als je af gaat krijg je dit bericht " + (dontShowControlInfoAgain ? "niet " : "") + "nog een keer te zien", FontManager.MarkerFelt12, lineWidth);
                 string changeStatusText = FontManager.WrapText("(Druk op de enter toets om dit aan te passen)", font, lineWidth);
+                string pauseText = FontManager.WrapText("Druk op de P toets om te pauzeren", font, lineWidth);
                 string continueText = FontManager.WrapText("Druk op de spatiebalk om te beginnen", font, lineWidth);
                 const int margin = 10;
-                float totalHeight = font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + font.MeasureString(changeStatusText).Y + font.MeasureString(continueText).Y + (margin * 2);
+                float totalHeight = font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + font.MeasureString(changeStatusText).Y + font.MeasureString(continueText).Y + (margin * 3);
                 spriteBatch.DrawString(font, introText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2)), Color.Black);
                 spriteBatch.DrawString(font, statusDontShowAgainText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + margin), Color.Black);
                 spriteBatch.DrawString(font, changeStatusText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + margin), Color.Black);
-                spriteBatch.DrawString(font, continueText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + totalHeight - font.MeasureString(continueText).Y + margin), Color.Black);
+                spriteBatch.DrawString(font, pauseText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + font.MeasureString(continueText).Y + (margin * 2)), Color.Black);
+                spriteBatch.DrawString(font, continueText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + totalHeight - font.MeasureString(continueText).Y + (margin * 3)), Color.Black);
             }
+
+            if (isFrozen)
+                spriteBatch.DrawString(
+                    FontManager.MarkerFelt100,
+                    "| |",
+                    new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt100.MeasureString("| |").X / 2, ScreenManager.Dimensions.Y / 2 - FontManager.MarkerFelt100.MeasureString("| |").Y / 2),
+                    Color.White
+                );
         }
     }
 }
