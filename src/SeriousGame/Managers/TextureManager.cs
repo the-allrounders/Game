@@ -27,6 +27,7 @@ namespace SeriousGame.Managers
 		public static Texture2D FrogRight;
         public static Texture2D Magma;
         public static Texture2D Heart;
+        public static Texture2D WonGameBackground;
 
         public static Texture2D WallLeft;
         public static Texture2D WallRight;
@@ -76,6 +77,7 @@ namespace SeriousGame.Managers
             Good = content.Load<Texture2D>("JumpScreen/Textures/goed");
             Wrong = content.Load<Texture2D>("JumpScreen/Textures/fout");
             Heart = content.Load<Texture2D>("JumpScreen/Textures/heart");
+            WonGameBackground = content.Load<Texture2D>("JumpScreen/Textures/endscreen");
             IntroBackground[0] = content.Load<Texture2D>("IntroScreen/Textures/d1");
             IntroBackground[1] = content.Load<Texture2D>("IntroScreen/Textures/d2");
             IntroBackground[2] = content.Load<Texture2D>("IntroScreen/Textures/d3");
