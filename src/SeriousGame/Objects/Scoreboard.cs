@@ -14,6 +14,7 @@ namespace SeriousGame.Objects
         private bool buttonIsSaveButton = true;
         private bool isDead;
         private bool caretVisible = true;
+        private float opacity;
 
         public Scoreboard(int scr, bool dead)
         {
@@ -24,9 +25,7 @@ namespace SeriousGame.Objects
         public void BuildPlayerName(Frog frog)
         {
             if (InputManager.IsPressing(Keys.Back))
-            {
                 frog.RemoveCharFromName();
-            }
             else if (InputManager.IsPressing(Keys.Space))
                 frog.AddCharToName(Keys.Space);
             else
@@ -39,6 +38,8 @@ namespace SeriousGame.Objects
                     }
                 }
             }
+            if (!isDead && opacity < 1)
+                opacity += 0.1f;
         }
 
         public void Update(Frog frog, GameTime gameTime)
@@ -53,9 +54,7 @@ namespace SeriousGame.Objects
                     buttonIsSaveButton = false;
                 }
                 else
-                {
                     ScreenManager.CurrentScreen = new LeaderboardScreen();
-                }
             }
             else if (InputManager.IsClicking(new Rectangle((int) ScreenManager.Dimensions.X/2 - 45,
                 (int) ScreenManager.Dimensions.Y/2 + 35, 100, 20)))
@@ -72,6 +71,8 @@ namespace SeriousGame.Objects
 
         public void Draw(SpriteBatch spriteBatch, int offset, string playerName)
         {
+            if (!isDead)
+                spriteBatch.Draw(TextureManager.WonGameBackground, new Vector2(0, 0), Color.White * opacity);
             spriteBatch.Draw(TextureManager.QuestionBox, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.QuestionBox.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.QuestionBox.Height / 2));
             string winText = "Hoera, gewonnen! Je scoorde " + score + " punten";
             string loseText = "Helaas, game over! Je scoorde " + score + " punten";
