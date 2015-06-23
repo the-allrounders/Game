@@ -262,11 +262,11 @@ namespace SeriousGame.Screens
             // Show feedback
             if (wrong)
             {
-                spriteBatch.Draw(TextureManager.Wrong, new Vector2(430, 100));
+                spriteBatch.Draw(TextureManager.Wrong, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.Wrong.Width / 2, 10));
                 touchingObstacle.DrawFeedback(answer, spriteBatch);
             }
             else if (good)
-                spriteBatch.Draw(TextureManager.Good, new Vector2(430, 300));
+                spriteBatch.Draw(TextureManager.Good, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.Good.Width / 2, 300));
 
            
 
