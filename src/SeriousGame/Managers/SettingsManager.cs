@@ -35,5 +35,10 @@ namespace SeriousGame.Managers
                 ScreenManager.Game.Fullscreen = fullscreen;
             }
         }
+        /// <summary>
+        /// 1 = boy
+        /// 2 = girl
+        /// </summary>
+        public static int FrogType = 1;
     }
 }
