@@ -36,9 +36,9 @@ namespace SeriousGame.Managers
             }
         }
         /// <summary>
-        /// 1 = boy
-        /// 2 = girl
+        /// 0 = boy
+        /// 1 = girl
         /// </summary>
-        public static int FrogType = 1;
+        public static int FrogType = 0;
     }
 }

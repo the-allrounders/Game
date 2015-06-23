@@ -49,24 +49,44 @@ namespace SeriousGame.Screens
             }
 
             // If music is clicked
-            else if (InputManager.IsClicking(new Rectangle(300, 214, 700, 70)))
+            else if (InputManager.IsClicking(new Rectangle(300, 180, 700, 70)))
             {
                 SettingsManager.Music = !SettingsManager.Music;
                 SoundManager.Play(Sounds.Hammer);
             }
 
             // If sound is clicked
-            else if (InputManager.IsClicking(new Rectangle(300, 369, 700, 70)))
+            else if (InputManager.IsClicking(new Rectangle(300, 295, 700, 70)))
             {
                 SettingsManager.Sound = !SettingsManager.Sound;
                 SoundManager.Play(Sounds.Hammer);
             }
 
             // If fullscreen is clicked
-            else if (InputManager.IsClicking(new Rectangle(300, 523, 700, 70)))
+            else if (InputManager.IsClicking(new Rectangle(300, 405, 700, 70)))
             {
                 SettingsManager.Fullscreen = !SettingsManager.Fullscreen;
                 SoundManager.Play(Sounds.Hammer);
+            }
+
+            // If difficulty is clicked
+            else if (InputManager.IsClicking(new Rectangle(300, 523, 500, 75)))
+            {
+                if (SettingsManager.FrogType == 0) SettingsManager.FrogType = 1;
+                else SettingsManager.FrogType = 0;
+                SoundManager.Play(Sounds.Hammer);
+            }
+
+            else if (InputManager.IsClicking(new Rectangle(820, 523, 95, 75)))
+            {
+                if (SettingsManager.FrogType != 0) SoundManager.Play(Sounds.Hammer);
+                SettingsManager.FrogType = 0;
+            }
+
+            else if (InputManager.IsClicking(new Rectangle(915, 523, 95, 75)))
+            {
+                if (SettingsManager.FrogType != 1) SoundManager.Play(Sounds.Hammer);
+                SettingsManager.FrogType = 1;
             }
         }
 
@@ -92,32 +112,36 @@ namespace SeriousGame.Screens
             // Draw music
             if (SettingsManager.Music)
             {
-                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 214));
+                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 180));
             }
             else
             {
-                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 214));
+                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 180));
             }
 
             // Draw sound
             if (SettingsManager.Sound)
             {
-                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 369));
+                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 295));
             }
             else
             {
-                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 369));
+                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 295));
             }
 
             // Draw fullscreen
             if (SettingsManager.Fullscreen)
             {
-                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 523));
+                spriteBatch.Draw(TextureManager.SettingsCheckboxChecked, new Vector2(822, 410));
             }
             else
             {
-                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 523));
+                spriteBatch.Draw(TextureManager.SettingsCheckboxUnchecked, new Vector2(822, 410));
             }
+
+            // Draw frogs
+            spriteBatch.Draw(TextureManager.SettingsFrog[0], new Vector2(822, 523), Color.White * (float)(SettingsManager.FrogType == 0 ? 1 : 0.4));
+            spriteBatch.Draw(TextureManager.SettingsFrog[1], new Vector2(920, 523), Color.White * (float)(SettingsManager.FrogType == 1 ? 1 : 0.4));
         }
     }
 }
