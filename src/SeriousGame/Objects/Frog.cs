@@ -16,6 +16,7 @@ namespace SeriousGame.Objects
         public bool StealthMode;
         public double TimeOfStealthMode;
         public bool IsVisible = true;
+        private SpriteEffects spriteEffect = SpriteEffects.FlipHorizontally;
 
         public bool IsDead { get; private set; }
         public string PlayerName { get; private set; }
@@ -122,10 +123,8 @@ namespace SeriousGame.Objects
         public void Left()
         {
             if (frogPosition.X > JumpScreen.Padding)
-            {
                 frogPosition -= speedlr;
-            }
-			frogTexture = TextureManager.FrogLeft;
+            spriteEffect = SpriteEffects.FlipHorizontally;
         }
 
         /// <summary>
@@ -134,10 +133,8 @@ namespace SeriousGame.Objects
         public void Right()
         {
             if (frogPosition.X + frogTexture.Width < ScreenManager.Dimensions.X - JumpScreen.Padding)
-            {
                 frogPosition += speedlr;
-            }
-			frogTexture = TextureManager.FrogRight;
+            spriteEffect = SpriteEffects.None;
         }
 
         public void Draw(SpriteBatch spriteBatch, int offset)
@@ -145,7 +142,7 @@ namespace SeriousGame.Objects
             float frogOpacity = 1;
             if (!IsVisible)
                 frogOpacity = 0.3f;
-            spriteBatch.Draw(frogTexture, new Vector2(frogPosition.X, frogPosition.Y + offset), Color.White * frogOpacity);
+            spriteBatch.Draw(frogTexture, new Vector2(frogPosition.X, frogPosition.Y + offset), color: Color.White * frogOpacity, effects: spriteEffect);
         }
     }
 }

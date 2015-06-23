@@ -18,7 +18,7 @@ namespace SeriousGame.Screens
         private readonly List<Platform> platforms = Platform.GenerateList();
         private readonly List<Obstacle> obstacles = Obstacle.GenerateList();
         private readonly List<Collectable> collectables = Fly.GenerateList();
-        private readonly Frog frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.FrogLeft.Width / 2), ScreenManager.Dimensions.Y - TextureManager.FrogLeft.Height), 5);
+        private readonly Frog frog = new Frog(new Vector2((ScreenManager.Dimensions.X / 2) - (TextureManager.Frog[SettingsManager.FrogType].Width / 2), ScreenManager.Dimensions.Y - TextureManager.Frog[SettingsManager.FrogType].Height), 5);
         private readonly Magma magma = new Magma(new Vector2(0, ScreenManager.Dimensions.Y));
         private Obstacle touchingObstacle = null;
         private bool gameEnded;
