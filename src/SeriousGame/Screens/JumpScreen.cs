@@ -286,13 +286,10 @@ namespace SeriousGame.Screens
             else
             {
                 string text = "Score: " + score;
-                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 10, 20),
+                spriteBatch.DrawString(FontManager.Verdana, text, new Vector2(ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 20, TextureManager.Heart.Height + 10),
                     Color.White);
                 for (int i = 1; i <= frog.Lives; i++)
-                    spriteBatch.Draw(TextureManager.Heart,
-                        new Vector2(
-                            ScreenManager.Dimensions.X - FontManager.Verdana.MeasureString(text).X - 20 -
-                            TextureManager.Heart.Width*i, 5));
+                    spriteBatch.Draw(TextureManager.Heart, new Vector2(ScreenManager.Dimensions.X - 5 - TextureManager.Heart.Width * i, 5));
             }
 
             if (controlInfoVisible)
