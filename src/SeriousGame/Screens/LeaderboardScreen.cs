@@ -50,6 +50,7 @@ namespace SeriousGame.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(TextureManager.CreditsScreen, new Vector2(0, 0));
             for (int i = 0; i < values.Length && i < 10; i++)
             {
                 string[] score = values[i].Split(',');

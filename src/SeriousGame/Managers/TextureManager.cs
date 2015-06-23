@@ -44,6 +44,7 @@ namespace SeriousGame.Managers
         public static Texture2D LetterNoBottom;
         public static Texture2D LetterBottom;
 
+        public static Texture2D CreditsScreen;
 
         public static void Load(ContentManager content)
         {
@@ -82,6 +83,7 @@ namespace SeriousGame.Managers
             IntroBackground[3] = content.Load<Texture2D>("IntroScreen/Textures/d4");
             LetterNoBottom = content.Load<Texture2D>("IntroScreen/Textures/letternobottom");
             LetterBottom = content.Load<Texture2D>("IntroScreen/Textures/bottomletter");
+            CreditsScreen = content.Load<Texture2D>("CreditsScreen/Textures/creditsscreen");
         }
     }
 }
