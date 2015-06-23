@@ -253,8 +253,6 @@ namespace SeriousGame.Screens
                 Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()))
             {
                 obstacle.Draw(spriteBatch, offset);
-                if (frog.IsJumpingOnObstacle(obstacle))
-                    obstacle.DrawQuestion(spriteBatch);
             }
 
             // Draw frog
@@ -277,6 +275,11 @@ namespace SeriousGame.Screens
             // Draw walls
             foreach (Wall wall in walls.Where(wall => wall.IsInViewport(offset)))
                 wall.Draw(spriteBatch, offset);
+
+
+            // Draw question popup
+            foreach (Obstacle obstacle in obstacles.Where(obstacle => obstacle.IsInViewport(offset) && !obstacle.IsDone()).Where(obstacle => frog.IsJumpingOnObstacle(obstacle)))
+                obstacle.DrawQuestion(spriteBatch);
 
             // Draw scorescreen of frog is dead
             if (gameEnded)
