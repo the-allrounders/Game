@@ -18,7 +18,7 @@ namespace SeriousGame.Managers
         private static Dictionary<Songs, Song> songs;
         private static Songs playing;
 
-        private static bool muted;
+        private static bool muted = true;
         public static bool Muted
         {
             //set { MediaPlayer.IsMuted = value; } MONOGAME BUG WORKAROUND
@@ -57,7 +57,7 @@ namespace SeriousGame.Managers
 
             if (!muted)
             {
-                //MediaPlayer.Play(songs[song]);
+                MediaPlayer.Play(songs[song]);
             }
         }
 

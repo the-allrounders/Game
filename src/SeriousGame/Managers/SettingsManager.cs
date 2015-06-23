@@ -8,7 +8,7 @@ namespace SeriousGame.Managers
 
         public static bool ShowControlInfo = true;
 
-        private static bool music = true;
+        private static bool music = false;
         public static bool Music
         {
             get { return music; }
@@ -19,7 +19,7 @@ namespace SeriousGame.Managers
             }
         }
 
-        public static bool Sound = true;
+        public static bool Sound = false;
 
         public static readonly bool FullscreenPossible = Environment.OSVersion.ToString().Substring(0, 4) != "Unix";
         private static bool fullscreen;
