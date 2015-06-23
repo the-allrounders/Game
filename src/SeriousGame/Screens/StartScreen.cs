@@ -9,28 +9,28 @@ namespace SeriousGame.Screens
     {
         private Rectangle startPos = new Rectangle(
             349,
-            49,
+            55,
             TextureManager.StartHover.Width,
             TextureManager.StartHover.Height
         );
 
         private Rectangle creditsPos = new Rectangle(
             466, 
-            413, 
+            419, 
             TextureManager.CreditsHover.Width, 
             TextureManager.CreditsHover.Height
         );
         
         private Rectangle settingsPos = new Rectangle(
             76,
-            466,
+            472,
             TextureManager.SettingsHover.Width,
             TextureManager.SettingsHover.Height
         );
         
         private Rectangle leaderboardPos = new Rectangle(
             632,
-            476,
+            482,
             TextureManager.LeaderboardHover.Width,
             TextureManager.LeaderboardHover.Height
         );
