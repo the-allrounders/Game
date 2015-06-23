@@ -75,7 +75,6 @@ namespace SeriousGame.Screens
             // Show questionscreen if touching obstacle
             if (!wrong && touchingObstacle != null)
             {
-                touchingObstacle.OpenQuestion();
                 answer = "";
                 if (InputManager.IsPressing(Keys.D1) || InputManager.IsPressing(Keys.NumPad1))
                     answer = touchingObstacle.popUp.questions[touchingObstacle.question].Answers[0];

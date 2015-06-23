@@ -13,13 +13,17 @@ namespace SeriousGame.Objects
         public List<string> WrongAnswers { get; set; }
         public string WrongText { get; set; }
 
+        private List<string> answers = new List<string>();
         public List<string> Answers
         {
             get
             {
-                List<string> answers = WrongAnswers;
-                answers.Add(RightAnswer);
-                answers = answers.Randomize();
+                if (answers.Count == 0)
+                {
+                    answers = WrongAnswers;
+                    answers.Add(RightAnswer);
+                    answers = answers.Randomize();
+                }
                 return answers;
             }
         }
@@ -101,23 +105,11 @@ namespace SeriousGame.Objects
             }
         };
 
-        private int questionNumber;
-        private string[] choices = new string[100];
-        private string answer;
+        private readonly int questionNumber;
 
         public PopUp(int questionNumber)
         {
             this.questionNumber = questionNumber;
-            if (questionNumber < questions.Count)
-            {
-                int a = 0;
-                for (int i = 1; i <= 4; i++)
-                {
-                    choices[a] = questions[questionNumber].Answers[i];
-                    a++;
-                }
-                answer = questions[questionNumber].RightAnswer;
-            }
         }
 
         public void Draw(SpriteBatch spritebatch)
@@ -134,12 +126,7 @@ namespace SeriousGame.Objects
 
         public bool ChooceAnswer(string answer)
         {
-            if (this.answer == answer)
-            {
-                Console.WriteLine(this.answer +" "+ answer);
-                return true;
-            }
-            return false;
+            return answer == questions[questionNumber].RightAnswer;
         }
 
         public void DrawFeedback(string answer, SpriteBatch spriteBatch)

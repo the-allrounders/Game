@@ -8,14 +8,18 @@ namespace SeriousGame
     public static class HelperFunctions
     {
         /// <summary>
+        /// A random. Yaj!
+        /// </summary>
+        public static Random Rnd = new Random();
+        
+        /// <summary>
         /// Randomizes a IEnumerable.
         /// Usage: ienumerable.Randomize()
         /// </summary>
         /// <returns>The shuffled ienumerable</returns>
         public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
         {
-            Random rnd = new Random();
-            return source.OrderBy<T, int>((item) => rnd.Next());
+            return source.OrderBy<T, int>((item) => Rnd.Next());
         }
 
         /// <summary>
@@ -25,8 +29,7 @@ namespace SeriousGame
         /// <returns>The shuffled list</returns>
         public static List<T> Randomize<T>(this List<T> source)
         {
-            Random rnd = new Random();
-            return source.OrderBy<T, int>((item) => rnd.Next()).ToList();
+            return source.OrderBy<T, int>((item) => Rnd.Next()).ToList();
         }
     }
 }

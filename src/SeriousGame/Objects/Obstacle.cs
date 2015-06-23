@@ -22,6 +22,7 @@ namespace SeriousGame.Objects
         {
             this.question = question;
             this.position = position;
+            this.popUp = new PopUp(question);
             texture = TextureManager.Obstacle;
             font = FontManager.Verdana;
         }
@@ -50,11 +51,6 @@ namespace SeriousGame.Objects
                 Rectangle rect = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
                 return rect;
             }
-        }
-
-        public void OpenQuestion()
-        {
-            popUp = new PopUp(question);
         }
 
         public void DrawQuestion(SpriteBatch spritebatch)
@@ -87,21 +83,12 @@ namespace SeriousGame.Objects
         {
             List<Obstacle> platforms = new List<Obstacle>();
             int question = 0;
-            int[] questionNumbers = {0,1,2,3,4,5,6,7,8,9};
-            Game1.Shuffle(questionNumbers);
             for (int i = JumpScreen.GameHeight / 10 * -1; i > JumpScreen.GameHeight * -1; i -= JumpScreen.GameHeight / 10)
             {
-                platforms.Add(new Obstacle(new Vector2(JumpScreen.Padding, i), questionNumbers[question]));
-                if (question < questionNumbers.Length - 1)
-                {
-                    question++;
-                }
-                else
-                {
-                    question = 0;
-                }
+                platforms.Add(new Obstacle(new Vector2(JumpScreen.Padding, i), question));
+                question++;
             }
-            return platforms;
+            return platforms.Randomize();
         }
     }
 }
