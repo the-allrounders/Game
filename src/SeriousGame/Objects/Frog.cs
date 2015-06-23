@@ -22,7 +22,7 @@ namespace SeriousGame.Objects
 
         public Frog(Vector2 charPos, int spd)
         {
-            frogTexture = TextureManager.FrogRight;
+            frogTexture = TextureManager.Frog[SettingsManager.FrogType];
             frogPosition = charPos;
             speedlr = new Vector2(10, 0);
             PlayerName = "<naam>";

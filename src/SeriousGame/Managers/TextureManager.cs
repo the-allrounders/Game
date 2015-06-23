@@ -23,8 +23,7 @@ namespace SeriousGame.Managers
 
         public static Texture2D Fly;
         public static Texture2D Platform;
-        public static Texture2D FrogLeft;
-		public static Texture2D FrogRight;
+        public static Texture2D[] Frog = new Texture2D[2];
         public static Texture2D Magma;
         public static Texture2D Heart;
         public static Texture2D WonGameBackground;
@@ -63,8 +62,8 @@ namespace SeriousGame.Managers
             SettingsCheckboxChecked = content.Load<Texture2D>("SettingsScreen/Textures/checkmark");
             Fly = content.Load<Texture2D>("JumpScreen/Textures/FlySpriteSheet");
             Platform = content.Load<Texture2D>("JumpScreen/Textures/platform");
-            FrogLeft = content.Load<Texture2D>("JumpScreen/Textures/frogflip");
-            FrogRight = content.Load<Texture2D>("JumpScreen/Textures/frog");
+            Frog[0] = content.Load<Texture2D>("JumpScreen/Textures/boy");
+            Frog[1] = content.Load<Texture2D>("JumpScreen/Textures/girl");
             Magma = content.Load<Texture2D>("JumpScreen/Textures/magma");
             Obstacle = content.Load<Texture2D>("JumpScreen/Textures/obstacle");
             WallLeft = content.Load<Texture2D>("JumpScreen/Textures/wall_left");
