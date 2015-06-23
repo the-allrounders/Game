@@ -47,7 +47,7 @@ namespace SeriousGame.Managers
         /// <summary>
         /// Checks if the user is hovering over a rectangle.
         /// </summary>
-        /// <param name="on">The rectangle that must be hovered over</param>
+        /// <param name="over">The rectangle that must be hovered over</param>
         public static bool IsHovering(Rectangle over)
         {
             // Check if the user is hovering over the rectangle

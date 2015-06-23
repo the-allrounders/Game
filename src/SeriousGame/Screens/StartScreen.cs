@@ -7,6 +7,34 @@ namespace SeriousGame.Screens
 {
     class StartScreen : GameScreen
     {
+        private Rectangle startPos = new Rectangle(
+            349,
+            49,
+            TextureManager.StartHover.Width,
+            TextureManager.StartHover.Height
+        );
+
+        private Rectangle creditsPos = new Rectangle(
+            466, 
+            413, 
+            TextureManager.CreditsHover.Width, 
+            TextureManager.CreditsHover.Height
+        );
+        
+        private Rectangle settingsPos = new Rectangle(
+            76,
+            466,
+            TextureManager.SettingsHover.Width,
+            TextureManager.SettingsHover.Height
+        );
+        
+        private Rectangle leaderboardPos = new Rectangle(
+            632,
+            476,
+            TextureManager.LeaderboardHover.Width,
+            TextureManager.LeaderboardHover.Height
+        );
+        
         public override void Load()
         {
             SongManager.Play(Songs.SuperMario);
@@ -14,17 +42,21 @@ namespace SeriousGame.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (InputManager.IsPressing(Keys.Space))
+            if (InputManager.IsPressing(Keys.Space) || InputManager.IsClicking(startPos))
             {
                 ScreenManager.CurrentScreen = new IntroScreen();
             }
-            else if (InputManager.IsPressing(Keys.S))
+            else if (InputManager.IsPressing(Keys.S) || InputManager.IsClicking(settingsPos))
             {
                 ScreenManager.CurrentScreen = new SettingsScreen();
             }
-            else if (InputManager.IsPressing(Keys.C))
+            else if (InputManager.IsPressing(Keys.C) || InputManager.IsClicking(creditsPos))
             {
                 ScreenManager.CurrentScreen = new CreditsScreen();
+            }
+            else if (InputManager.IsPressing(Keys.L) || InputManager.IsClicking(leaderboardPos))
+            {
+                ScreenManager.CurrentScreen = new LeaderboardScreen(); 
             }
             else if (InputManager.IsPressing(Keys.Escape))
             {
@@ -36,6 +68,28 @@ namespace SeriousGame.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureManager.Start, new Vector2(0, 0));
+
+            if (InputManager.IsHovering(startPos))
+            {
+                spriteBatch.Draw(TextureManager.StartHover, new Vector2(startPos.X, startPos.Y));
+            }
+
+            if (InputManager.IsHovering(creditsPos))
+            {
+                spriteBatch.Draw(TextureManager.CreditsHover, new Vector2(creditsPos.X, creditsPos.Y));
+            }
+
+            if (InputManager.IsHovering(leaderboardPos))
+            {
+                spriteBatch.Draw(TextureManager.LeaderboardHover, new Vector2(leaderboardPos.X, leaderboardPos.Y));
+            }
+
+            if (InputManager.IsHovering(settingsPos))
+            {
+                spriteBatch.Draw(TextureManager.SettingsHover, new Vector2(settingsPos.X, settingsPos.Y));
+            }
+            
+
         }
     }
 }

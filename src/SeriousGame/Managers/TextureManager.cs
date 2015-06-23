@@ -7,7 +7,12 @@ namespace SeriousGame.Managers
     class TextureManager
     {
         public static Texture2D Splash;
+
         public static Texture2D Start;
+        public static Texture2D StartHover;
+        public static Texture2D CreditsHover;
+        public static Texture2D LeaderboardHover;
+        public static Texture2D SettingsHover;
 
         public static Texture2D Settings;
         public static Texture2D SettingsLevel1;
@@ -45,6 +50,10 @@ namespace SeriousGame.Managers
         {
             Splash = content.Load<Texture2D>("SplashScreen/Textures/splash");
             Start = content.Load<Texture2D>("StartScreen/Textures/start");
+            StartHover = content.Load<Texture2D>("StartScreen/Textures/starthover");
+            CreditsHover = content.Load<Texture2D>("StartScreen/Textures/credits");
+            LeaderboardHover = content.Load<Texture2D>("StartScreen/Textures/leaderbord");
+            SettingsHover = content.Load<Texture2D>("StartScreen/Textures/setting");
             Settings = content.Load<Texture2D>("SettingsScreen/Textures/settings");
             SettingsLevel1 = content.Load<Texture2D>("SettingsScreen/Textures/level1");
             SettingsLevel2 = content.Load<Texture2D>("SettingsScreen/Textures/level2");
