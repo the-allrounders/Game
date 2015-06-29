@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SeriousGame.Managers;
 using SeriousGame.Screens;
+using System.Linq;
 
 namespace SeriousGame.Objects
 {
@@ -82,11 +83,21 @@ namespace SeriousGame.Objects
         public static List<Obstacle> GenerateList()
         {
             List<Obstacle> platforms = new List<Obstacle>();
-            int question = 0;
+            var nums = Enumerable.Range(0, 10).ToArray();
+            var rnd = new Random();
+
+            for (int i = 0; i < nums.Length; ++i)
+            {
+                int randomIndex = rnd.Next(nums.Length);
+                int temp = nums[randomIndex];
+                nums[randomIndex] = nums[i];
+                nums[i] = temp;
+            }
+            int a = 0;
             for (int i = JumpScreen.GameHeight / 10 * -1; i > JumpScreen.GameHeight * -1; i -= JumpScreen.GameHeight / 10)
             {
-                platforms.Add(new Obstacle(new Vector2(JumpScreen.Padding, i), question));
-                question++;
+                platforms.Add(new Obstacle(new Vector2(JumpScreen.Padding, i), nums[a]));
+                a++;
             }
             return platforms.Randomize();
         }
