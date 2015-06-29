@@ -39,6 +39,8 @@ namespace SeriousGame.Managers
 
         public static Texture2D Obstacle;
         public static Texture2D QuestionBox;
+        public static Texture2D ControlInfoArrows;
+        public static Texture2D ControlInfoWASD;
 
         public static Texture2D[] IntroBackground = new Texture2D[4];
         public static Texture2D LetterNoBottom;
@@ -84,6 +86,8 @@ namespace SeriousGame.Managers
             LetterNoBottom = content.Load<Texture2D>("IntroScreen/Textures/letternobottom");
             LetterBottom = content.Load<Texture2D>("IntroScreen/Textures/bottomletter");
             CreditsScreen = content.Load<Texture2D>("CreditsScreen/Textures/creditsscreen");
+            ControlInfoArrows = content.Load<Texture2D>("JumpScreen/Textures/StartScreen1");
+            ControlInfoWASD = content.Load<Texture2D>("JumpScreen/Textures/StartScreen2");
         }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="Objects\Magma.cs" />
     <Compile Include="Objects\PopUp.cs" />
     <Compile Include="Objects\Scoreboard.cs" />
+    <Compile Include="Objects\Timer.cs" />
     <Compile Include="Objects\Wall.cs" />
     <Compile Include="Screens\CreditsScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />

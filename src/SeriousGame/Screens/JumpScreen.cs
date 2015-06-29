@@ -26,6 +26,7 @@ namespace SeriousGame.Screens
         private bool controlInfoVisible = SettingsManager.ShowControlInfo;
         private bool dontShowControlInfoAgain;
         private bool isFrozen = false;
+        private Timer timer;
 
         private bool wrong = false;
         private bool good = false;
@@ -61,13 +62,20 @@ namespace SeriousGame.Screens
 
             if (controlInfoVisible)
             {
+                if (timer == null)
+                    timer = new Timer(3, gameTime.TotalGameTime.Seconds);
                 if (InputManager.IsPressing(Keys.Enter))
                 {
                     dontShowControlInfoAgain = !dontShowControlInfoAgain;
                     SettingsManager.ShowControlInfo = !SettingsManager.ShowControlInfo;
                 }
-                if (InputManager.IsPressing(Keys.Space))
+                if (InputManager.IsPressing(Keys.Space) || !timer.waiting)
+                {
                     controlInfoVisible = false;
+                    return;
+                }
+                Console.WriteLine(gameTime.TotalGameTime.Seconds);
+                timer.Update(gameTime);
                 return;
             }
 
@@ -307,21 +315,11 @@ namespace SeriousGame.Screens
 
             if (controlInfoVisible)
             {
-                spriteBatch.Draw(TextureManager.QuestionBox, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.QuestionBox.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.QuestionBox.Height / 2));
-                SpriteFont font = FontManager.MarkerFelt12;
-                const float lineWidth = 400;
-                string introText = FontManager.WrapText("Om dit spel te spelen gebruik je de pijltjes- of de A & D toetsen", font, lineWidth);
-                string statusDontShowAgainText = FontManager.WrapText("Als je af gaat krijg je dit bericht " + (dontShowControlInfoAgain ? "niet" : "wel") + " nog een keer te zien", FontManager.MarkerFelt12, lineWidth);
-                string changeStatusText = FontManager.WrapText("(Druk op de enter toets om dit aan te passen)", font, lineWidth);
-                string pauseText = FontManager.WrapText("Druk op de P toets om te pauzeren", font, lineWidth);
-                string continueText = FontManager.WrapText("Druk op de spatiebalk om te beginnen", font, lineWidth);
-                const int margin = 10;
-                float totalHeight = font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + font.MeasureString(changeStatusText).Y + font.MeasureString(continueText).Y + (margin * 3);
-                spriteBatch.DrawString(font, introText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2)), Color.Black);
-                spriteBatch.DrawString(font, statusDontShowAgainText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + margin), Color.Black);
-                spriteBatch.DrawString(font, changeStatusText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + margin), Color.Black);
-                spriteBatch.DrawString(font, pauseText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + font.MeasureString(introText).Y + font.MeasureString(statusDontShowAgainText).Y + font.MeasureString(continueText).Y + (margin * 2)), Color.Black);
-                spriteBatch.DrawString(font, continueText, new Vector2(ScreenManager.Dimensions.X / 2 - lineWidth / 2, (ScreenManager.Dimensions.Y / 2 - totalHeight / 2) + totalHeight - font.MeasureString(continueText).Y + (margin * 3)), Color.Black);
+                spriteBatch.Draw(TextureManager.ControlInfoArrows, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.ControlInfoArrows.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.ControlInfoArrows.Height / 2));
+                if (timer != null)
+                {
+                    timer.Draw(spriteBatch);
+                }
             }
 
             if (isFrozen)
