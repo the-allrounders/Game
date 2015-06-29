@@ -62,20 +62,26 @@ namespace SeriousGame.Screens
 
             if (controlInfoVisible)
             {
-                if (timer == null)
-                    timer = new Timer(3, gameTime.TotalGameTime.Seconds);
                 if (InputManager.IsPressing(Keys.Enter))
                 {
                     dontShowControlInfoAgain = !dontShowControlInfoAgain;
                     SettingsManager.ShowControlInfo = !SettingsManager.ShowControlInfo;
                 }
-                if (InputManager.IsPressing(Keys.Space) || !timer.waiting)
+                if (InputManager.IsPressing(Keys.Space))
                 {
-                    controlInfoVisible = false;
-                    return;
+                    if (timer == null)
+                        timer = new Timer(3, gameTime.TotalGameTime.Seconds);
                 }
-                Console.WriteLine(gameTime.TotalGameTime.Seconds);
-                timer.Update(gameTime);
+                if (timer != null)
+                {
+                    timer.Update(gameTime);
+                    if (!timer.waiting)
+                    {
+                        controlInfoVisible = false;
+                        timer = null;
+                        return;
+                    }
+                }
                 return;
             }
 
@@ -103,10 +109,9 @@ namespace SeriousGame.Screens
                     if (right)
                     {
                         score += 1000;
-                        good = true;
-                        touchingObstacle = null;
                         if (SettingsManager.Difficulty != 3 && frog.Lives < 3)
                             frog.Lives++;
+                        good = true;
                     }
                     else
                     {
@@ -130,10 +135,24 @@ namespace SeriousGame.Screens
 
             ScreenManager.IsMouseVisible = gameEnded;
 
-            if (touchingObstacle != null && wrong && InputManager.IsPressing(Keys.Space))
+            if (touchingObstacle != null)
             {
-                wrong = false;
-                touchingObstacle = null;
+                if ((InputManager.IsPressing(Keys.Space) && wrong) || good)
+                {
+                    if (timer == null)
+                        timer = new Timer(3, gameTime.TotalGameTime.Seconds);
+                }
+                if (timer != null)
+                {
+                    timer.Update(gameTime);
+                    if (!timer.waiting)
+                    {
+                        good = false;
+                        wrong = false;
+                        touchingObstacle = null;
+                        timer = null;
+                    }
+                }
             }
 
             if (!gameEnded && touchingObstacle == null && !isFrozen)
@@ -276,7 +295,7 @@ namespace SeriousGame.Screens
                 spriteBatch.DrawString(
                     FontManager.MarkerFelt100, 
                     "FOUT", 
-                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.MarkerFelt100.MeasureString("FOUT").X/2, 10), 
+                    new Vector2(ScreenManager.Dimensions.X/2 - FontManager.MarkerFelt100.MeasureString("FOUT").X/2, 560), 
                     Color.Red
                 );
                 touchingObstacle.DrawFeedback(answer, spriteBatch);
@@ -285,7 +304,7 @@ namespace SeriousGame.Screens
                 spriteBatch.DrawString(
                     FontManager.MarkerFelt100, 
                     "GOED",
-                    new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt100.MeasureString("GOED").X / 2, 300), 
+                    new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt100.MeasureString("GOED").X / 2, ScreenManager.Dimensions.Y / 2 - FontManager.MarkerFelt100.MeasureString("GOED").Y), 
                     Color.Green
                 );
                 
@@ -316,10 +335,11 @@ namespace SeriousGame.Screens
             if (controlInfoVisible)
             {
                 spriteBatch.Draw(TextureManager.ControlInfoArrows, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.ControlInfoArrows.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.ControlInfoArrows.Height / 2));
-                if (timer != null)
-                {
-                    timer.Draw(spriteBatch);
-                }
+            }
+
+            if (timer != null)
+            {
+                timer.Draw(spriteBatch);
             }
 
             if (isFrozen)
