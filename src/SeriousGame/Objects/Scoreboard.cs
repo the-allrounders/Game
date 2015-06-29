@@ -45,8 +45,8 @@ namespace SeriousGame.Objects
         public void Update(Frog frog, GameTime gameTime)
         {
             if (InputManager.IsPressing(Keys.Enter) ||
-                InputManager.IsClicking(new Rectangle((int) ScreenManager.Dimensions.X/2 - 40,
-                    (int) ScreenManager.Dimensions.Y/2, 100, 20)))
+                InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X/2 - (int)FontManager.MarkerFelt12.MeasureString("Opslaan").X/2,
+                        (int)ScreenManager.Dimensions.Y/2, (int)FontManager.MarkerFelt12.MeasureString("Opslaan").X, (int)FontManager.MarkerFelt12.MeasureString("Opslaan").Y)))
             {
                 if (buttonIsSaveButton)
                 {
@@ -56,8 +56,8 @@ namespace SeriousGame.Objects
                 else
                     ScreenManager.CurrentScreen = new LeaderboardScreen();
             }
-            else if (InputManager.IsClicking(new Rectangle((int) ScreenManager.Dimensions.X/2 - 45,
-                (int) ScreenManager.Dimensions.Y/2 + 35, 100, 20)))
+            else if (InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X/2 - (int)FontManager.MarkerFelt12.MeasureString("Opnieuw").X/2,
+                        (int)ScreenManager.Dimensions.Y/2 + 30, (int)FontManager.MarkerFelt12.MeasureString("Opnieuw").X, (int)FontManager.MarkerFelt12.MeasureString("Opnieuw").Y)))
             {
                 ScreenManager.CurrentScreen = new JumpScreen();
             }

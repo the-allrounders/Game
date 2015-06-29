@@ -52,7 +52,7 @@ namespace SeriousGame.Screens
                 ScreenManager.CurrentScreen = new StartScreen();
                 return;
             }
-            else if (InputManager.IsPressing(Keys.P))
+            else if (!gameEnded && InputManager.IsPressing(Keys.P))
                 isFrozen = !isFrozen;
 
             #endregion

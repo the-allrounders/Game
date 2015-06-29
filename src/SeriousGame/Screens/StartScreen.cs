@@ -60,7 +60,7 @@ namespace SeriousGame.Screens
             }
             else if (InputManager.IsPressing(Keys.Escape))
             {
-                ScreenManager.Game.Exit();
+                //ScreenManager.Game.Exit();
             }
             
         }
