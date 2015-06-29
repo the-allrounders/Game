@@ -485,3 +485,25 @@
 /processorParam:TextureFormat=Color
 /build:CreditsScreen/Textures/creditsscreen.png
 
+#begin SettingsScreen/Textures/arrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:SettingsScreen/Textures/arrow.png
+
+#begin SettingsScreen/Textures/arrow1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:SettingsScreen/Textures/arrow1.png
+
