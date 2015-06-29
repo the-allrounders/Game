@@ -27,7 +27,7 @@ namespace SeriousGame.Objects
             frogPosition = charPos;
             speedlr = new Vector2(10, 0);
             PlayerName = "<naam>";
-            Lives = SettingsManager.Difficulty == 3 ? 1 : 3;
+            Lives = 4 - SettingsManager.Difficulty;
             Jump();
         }
 
