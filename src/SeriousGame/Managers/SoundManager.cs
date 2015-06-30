@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SeriousGame.Managers
+namespace Frogano.Managers
 {
     public enum Sounds
     {

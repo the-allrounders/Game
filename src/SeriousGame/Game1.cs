@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SeriousGame.Managers;
-using SeriousGame.Screens;
+using Frogano.Managers;
+using Frogano.Screens;
 
-namespace SeriousGame
+namespace Frogano
 {
     /// <summary>
     /// This is the main type for your game

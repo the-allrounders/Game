@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SeriousGame.Managers;
+using Frogano.Managers;
 
-namespace SeriousGame.Objects
+namespace Frogano.Objects
 {
     class Collectable
     {

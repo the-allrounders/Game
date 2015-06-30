@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 
-namespace SeriousGame.Managers
+namespace Frogano.Managers
 {
 
     public enum Songs

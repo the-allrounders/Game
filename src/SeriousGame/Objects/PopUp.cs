@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SeriousGame.Managers;
+using Frogano.Managers;
 
-namespace SeriousGame.Objects
+namespace Frogano.Objects
 {
     public class Question
     {

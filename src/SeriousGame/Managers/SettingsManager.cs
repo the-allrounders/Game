@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeriousGame.Managers
+namespace Frogano.Managers
 {
     class SettingsManager
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SeriousGame.Managers;
-using SeriousGame.Screens;
+using Frogano.Managers;
+using Frogano.Screens;
 
-namespace SeriousGame.Objects
+namespace Frogano.Objects
 {
     public class Frog
     {

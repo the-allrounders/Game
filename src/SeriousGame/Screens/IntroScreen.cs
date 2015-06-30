@@ -3,9 +3,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SeriousGame.Managers;
+using Frogano.Managers;
 
-namespace SeriousGame.Screens
+namespace Frogano.Screens
 {
     class IntroScreen : GameScreen
     {

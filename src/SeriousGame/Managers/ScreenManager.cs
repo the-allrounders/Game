@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SeriousGame.Screens;
+using Frogano.Screens;
 
-namespace SeriousGame.Managers
+namespace Frogano.Managers
 {
     class ScreenManager
     {

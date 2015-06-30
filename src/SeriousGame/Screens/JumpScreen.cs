@@ -6,10 +6,10 @@ using System.Security.Policy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SeriousGame.Managers;
-using SeriousGame.Objects;
+using Frogano.Managers;
+using Frogano.Objects;
 
-namespace SeriousGame.Screens
+namespace Frogano.Screens
 {
     class JumpScreen : GameScreen
     {

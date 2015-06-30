@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace SeriousGame
+namespace Frogano
 {
 #if WINDOWS || LINUX
     /// <summary>
