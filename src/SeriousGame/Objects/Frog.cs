@@ -16,7 +16,7 @@ namespace Frogano.Objects
         public int Lives
         {
             get { return lives; }
-            set { if(lives <= 4 - SettingsManager.Difficulty) lives = value; }
+            set { if(value <= 4 - SettingsManager.Difficulty) lives = value; }
         }
 
         public bool StealthMode;
