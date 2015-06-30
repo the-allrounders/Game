@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Security.Policy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -334,7 +335,14 @@ namespace SeriousGame.Screens
 
             if (controlInfoVisible)
             {
-                spriteBatch.Draw(TextureManager.ControlInfoArrows, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.ControlInfoArrows.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.ControlInfoArrows.Height / 2));
+                Texture2D controlInfoTexture;
+                GameTime gameTime = ScreenManager.Game.gameTime;
+                if ((gameTime.TotalGameTime.Milliseconds >= 0 && gameTime.TotalGameTime.Milliseconds < 250) || (gameTime.TotalGameTime.Milliseconds >= 500 && gameTime.TotalGameTime.Milliseconds <= 750))
+                    controlInfoTexture = TextureManager.ControlInfoArrows;
+                else
+                    controlInfoTexture = TextureManager.ControlInfoWASD;
+
+                spriteBatch.Draw(controlInfoTexture, new Vector2(ScreenManager.Dimensions.X / 2 - TextureManager.ControlInfoArrows.Width / 2, ScreenManager.Dimensions.Y / 2 - TextureManager.ControlInfoArrows.Height / 2));
             }
 
             if (timer != null)

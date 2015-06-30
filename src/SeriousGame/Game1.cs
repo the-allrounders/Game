@@ -13,6 +13,7 @@ namespace SeriousGame
     {
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public GameTime gameTime { get; private set; }
 
         public Game1()
         {
@@ -86,6 +87,7 @@ namespace SeriousGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            this.gameTime = gameTime;
             InputManager.Update();
             ScreenManager.Update(gameTime);
             base.Update(gameTime);
