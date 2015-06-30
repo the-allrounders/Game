@@ -21,6 +21,7 @@ namespace SeriousGame.Managers
         public static Texture2D SettingsCheckboxUnchecked;
         public static Texture2D SettingsCheckboxChecked;
         public static Texture2D[] SettingsFrog = new Texture2D[2];
+        public static Texture2D[] SettingsArrow = new Texture2D[2];
 
         public static Texture2D Fly;
         public static Texture2D Platform;
@@ -64,6 +65,8 @@ namespace SeriousGame.Managers
             SettingsCheckboxChecked = content.Load<Texture2D>("SettingsScreen/Textures/checkmark");
             SettingsFrog[0] = content.Load<Texture2D>("SettingsScreen/Textures/boy");
             SettingsFrog[1] = content.Load<Texture2D>("SettingsScreen/Textures/girl");
+            SettingsArrow[0] = content.Load<Texture2D>("SettingsScreen/Textures/arrow");
+            SettingsArrow[1] = content.Load<Texture2D>("SettingsScreen/Textures/arrow1");
             Fly = content.Load<Texture2D>("JumpScreen/Textures/FlySpriteSheet");
             Platform = content.Load<Texture2D>("JumpScreen/Textures/platform");
             Frog[0] = content.Load<Texture2D>("JumpScreen/Textures/frog");

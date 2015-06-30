@@ -15,7 +15,7 @@ namespace SeriousGame.Screens
         public override void Update(GameTime gameTime)
         {
             // If ESC button is pressed or if back button is clicked
-            if (InputManager.IsPressing(Keys.Escape) || InputManager.IsClicking(new Rectangle(0, 0, 150, 75)))
+            if (InputManager.IsPressing(Keys.Escape) || InputManager.IsClicking(new Rectangle(24, 14, TextureManager.SettingsArrow[0].Width, TextureManager.SettingsArrow[0].Height)))
             {
                 ScreenManager.CurrentScreen = new StartScreen();
             }
@@ -94,6 +94,14 @@ namespace SeriousGame.Screens
         {
             // Draw settings background
             spriteBatch.Draw(TextureManager.Settings, new Vector2(0, 0));
+
+            // Draw back button
+            spriteBatch.Draw(
+                InputManager.IsHovering(new Rectangle(24, 14, TextureManager.SettingsArrow[0].Width, TextureManager.SettingsArrow[0].Height)) 
+                ? TextureManager.SettingsArrow[1]
+                : TextureManager.SettingsArrow[0],
+                new Vector2(24, 14)
+                );
 
             // Draw difficulty
             if (SettingsManager.Difficulty == 1)
