@@ -140,22 +140,32 @@ namespace Frogano.Screens
 
             if (touchingObstacle != null)
             {
-                if ((InputManager.IsPressing(Keys.Space) && wrong) || good)
+                if (frog.Lives <= 0 && InputManager.IsPressing(Keys.Space))
                 {
-                    if (timer == null)
-                        timer = new Timer(2, gameTime);
                     good = false;
                     wrong = false;
+                    touchingObstacle = null;
                 }
-                if (timer != null)
+                else
                 {
-                    timer.Update(gameTime);
-                    if (!timer.waiting)
+                    if ((InputManager.IsPressing(Keys.Space) && wrong) || good)
                     {
-                        timer = null;
-                        touchingObstacle = null;
+                        if (timer == null)
+                            timer = new Timer(2, gameTime);
+                        good = false;
+                        wrong = false;
+                    }
+                    if (timer != null)
+                    {
+                        timer.Update(gameTime);
+                        if (!timer.waiting)
+                        {
+                            timer = null;
+                            touchingObstacle = null;
+                        }
                     }
                 }
+                
             }
 
             if (timer == null && !gameEnded && touchingObstacle == null && !isFrozen)
