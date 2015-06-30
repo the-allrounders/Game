@@ -54,7 +54,7 @@ namespace SeriousGame.Objects
                     buttonIsSaveButton = false;
                 }
                 else
-                    ScreenManager.CurrentScreen = new LeaderboardScreen();
+                    ScreenManager.CurrentScreen = new LeaderboardScreen(true);
             }
             else if (InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X/2 - (int)FontManager.MarkerFelt12.MeasureString("Opnieuw").X/2,
                         (int)ScreenManager.Dimensions.Y/2 + 30, (int)FontManager.MarkerFelt12.MeasureString("Opnieuw").X, (int)FontManager.MarkerFelt12.MeasureString("Opnieuw").Y)))

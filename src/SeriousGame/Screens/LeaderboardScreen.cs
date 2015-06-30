@@ -10,6 +10,13 @@ namespace SeriousGame.Screens
 {
     class LeaderboardScreen : GameScreen
     {
+        private bool showPlayButton;
+        
+        public LeaderboardScreen(bool showPlayButton = false)
+        {
+            this.showPlayButton = showPlayButton;
+        }
+        
         private string[] values;
 
         public override void Load()
@@ -43,10 +50,24 @@ namespace SeriousGame.Screens
         {
             // If user is pressing ESC, return to StartScreen
             if (InputManager.IsPressing(Keys.Escape) || 
-                InputManager.IsClicking(new Rectangle((int)ScreenManager.Dimensions.X / 2 - (int)FontManager.MarkerFelt12.MeasureString("Terug").X / 2, (int)ScreenManager.Dimensions.Y / 2 + 200, (int)FontManager.MarkerFelt12.MeasureString("Terug").X, (int)FontManager.MarkerFelt12.MeasureString("Terug").Y)) ||
                 InputManager.IsClicking(new Rectangle(24, 14, TextureManager.SettingsArrow[0].Width, TextureManager.SettingsArrow[0].Height)))
             {
                 ScreenManager.CurrentScreen = new StartScreen();
+            }
+
+            // If playagain
+            if (
+                showPlayButton &&
+                InputManager.IsClicking(
+                    new Rectangle(
+                        (int) ScreenManager.Dimensions.X/2 -
+                        (int) FontManager.MarkerFelt12.MeasureString("Speel opnieuw").X/2,
+                        (int) ScreenManager.Dimensions.Y/2 + 200,
+                        (int) FontManager.MarkerFelt12.MeasureString("Speel opnieuw").X,
+                        (int) FontManager.MarkerFelt12.MeasureString("Speel opnieuw").Y))
+                )
+            {
+                ScreenManager.CurrentScreen = new JumpScreen();
             }
         }
 
@@ -59,7 +80,8 @@ namespace SeriousGame.Screens
                 string text = (i + 1) + ". " + score[0] + ": " + score[1];
                 spriteBatch.DrawString(FontManager.MarkerFelt12, text, new Vector2(ScreenManager.Dimensions.X / 2 - 150, 100 + (i * 40)), Color.White);
             }
-            spriteBatch.DrawString(FontManager.MarkerFelt12, "Terug", new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt12.MeasureString("Terug").X / 2, ScreenManager.Dimensions.Y / 2 + 200), Color.White);
+            if(showPlayButton)
+                spriteBatch.DrawString(FontManager.MarkerFelt12, "Speel opnieuw", new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt12.MeasureString("Terug").X / 2, ScreenManager.Dimensions.Y / 2 + 200), Color.White);
             
             // Draw back button
             spriteBatch.Draw(
