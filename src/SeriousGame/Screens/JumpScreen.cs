@@ -70,19 +70,21 @@ namespace SeriousGame.Screens
                 if (InputManager.IsPressing(Keys.Space))
                 {
                     if (timer == null)
-                        timer = new Timer(3, gameTime.TotalGameTime.Seconds);
-                }
-                if (timer != null)
-                {
-                    timer.Update(gameTime);
-                    if (!timer.waiting)
                     {
+                        timer = new Timer(2, gameTime);
                         controlInfoVisible = false;
-                        timer = null;
-                        return;
                     }
                 }
                 return;
+            }
+            if (touchingObstacle == null && timer != null)
+            {
+                timer.Update(gameTime);
+                if (!timer.waiting)
+                {
+                    timer = null;
+                    return;
+                }
             }
 
             #endregion
@@ -123,7 +125,7 @@ namespace SeriousGame.Screens
                     frog.Jump();
                 }
             }
-            else if (!wrong && (!gameEnded || gameEnded && frog.IsDead) && !isFrozen)
+            else if (timer == null && !wrong && (!gameEnded || gameEnded && frog.IsDead) && !isFrozen)
                 // Make the magma rise
                 magma.Rise(offset);
 
@@ -140,22 +142,22 @@ namespace SeriousGame.Screens
                 if ((InputManager.IsPressing(Keys.Space) && wrong) || good)
                 {
                     if (timer == null)
-                        timer = new Timer(3, gameTime.TotalGameTime.Seconds);
+                        timer = new Timer(2, gameTime);
+                    good = false;
+                    wrong = false;
                 }
                 if (timer != null)
                 {
                     timer.Update(gameTime);
                     if (!timer.waiting)
                     {
-                        good = false;
-                        wrong = false;
-                        touchingObstacle = null;
                         timer = null;
+                        touchingObstacle = null;
                     }
                 }
             }
 
-            if (!gameEnded && touchingObstacle == null && !isFrozen)
+            if (timer == null && !gameEnded && touchingObstacle == null && !isFrozen)
             {
                 #region Game actively running
 
@@ -307,8 +309,6 @@ namespace SeriousGame.Screens
                     new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt100.MeasureString("GOED").X / 2, ScreenManager.Dimensions.Y / 2 - FontManager.MarkerFelt100.MeasureString("GOED").Y), 
                     Color.Green
                 );
-                
-           
 
             // Draw walls
             foreach (Wall wall in walls.Where(wall => wall.IsInViewport(offset)))

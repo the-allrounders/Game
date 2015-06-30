@@ -10,34 +10,36 @@ namespace SeriousGame.Objects
 {
     class Timer
     {
-        private int totalTime;
-        private int startGameTime;
+        private int duration;
+        private double startGameTime;
         public bool waiting = true;
-        private int timeWaiting;
+        private double timeWaiting;
 
-        public Timer(int ttltm, int gameTime)
+        public Timer(int dur, GameTime gameTime)
         {
-            totalTime = ttltm;
-            startGameTime = gameTime;
+            duration = dur;
+            startGameTime = gameTime.TotalGameTime.TotalSeconds;
             waiting = true;
-            timeWaiting = ttltm;
+            timeWaiting = dur;
         }
 
         public void Update(GameTime currentGameTime)
         {
-            if ((int)startGameTime + totalTime > (int)currentGameTime.TotalGameTime.Seconds)
-            {
-                timeWaiting = (totalTime + startGameTime) - (int)currentGameTime.TotalGameTime.Seconds;
-            } 
+            if (startGameTime + duration > currentGameTime.TotalGameTime.TotalSeconds)
+                timeWaiting = duration + startGameTime - currentGameTime.TotalGameTime.TotalSeconds;
             else
-            {
                 waiting = false;
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(FontManager.MarkerFelt100, timeWaiting.ToString(), new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt100.MeasureString(timeWaiting.ToString()).X / 2, (ScreenManager.Dimensions.Y / 2 - TextureManager.ControlInfoArrows.Height / 2) - 150), Color.Green);
+            double time = timeWaiting;
+            string text = "";
+            if (time >= duration / 2 && time < duration)
+                text = "Klaar?";
+            else if (time > 0 && time < duration/2)
+                text = "Start!";
+            spriteBatch.DrawString(FontManager.MarkerFelt100, text, new Vector2(ScreenManager.Dimensions.X / 2 - FontManager.MarkerFelt100.MeasureString(text).X / 2, (ScreenManager.Dimensions.Y / 2 - TextureManager.ControlInfoArrows.Height / 2)), Color.Green);
         }
     }
 }
