@@ -8,8 +8,8 @@
     <ProjectGuid>{7E5F3663-70C3-4439-ADBB-A1F97865A8BB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SeriousGame</RootNamespace>
-    <AssemblyName>SeriousGame</AssemblyName>
+    <RootNamespace>Frogano</RootNamespace>
+    <AssemblyName>Frogano</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <MonoGameContentBuilderExe>
@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Windows\Debug\SeriousGame.XML</DocumentationFile>
+    <DocumentationFile>bin\Windows\Debug\Frogano.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
