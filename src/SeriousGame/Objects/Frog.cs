@@ -12,7 +12,13 @@ namespace Frogano.Objects
         private Vector2 frogPosition;
         private readonly Vector2 speedlr;
         public bool IsDescending { get; private set; }
-        public int Lives;
+
+        public int Lives
+        {
+            get { return lives; }
+            set { if(lives <= 4 - SettingsManager.Difficulty) lives = value; }
+        }
+
         public bool StealthMode;
         public double TimeOfStealthMode;
         public bool IsVisible = true;
@@ -87,6 +93,7 @@ namespace Frogano.Objects
         double initialVelocity;
         double time;
         readonly double gravity = 3000;
+        private int lives;
 
         /// <summary>
         /// Resets the gravity to default values
